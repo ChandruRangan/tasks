@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        var ip=prompt("Enter the Date Format like 'YYYY-MM-DD'"+ '');
+        var date= new Date(ip);
+        var day=date.getDay();
+        var days;
+        switch(day){
+            case 0:
+                days='Sunday';
+                break;
+
+            case 1:
+                days='Monday';
+                break;
+                
+            case 2:
+                days='Tuesday';
+                break;    
+
+            case 3:
+                days='Wednesday';
+                break;
+
+            case 4:
+                days='Thursday';
+                break;
+            
+            case 5:
+                days='Friday';
+                break;
+                
+            case 6:
+                days='Saturday';
+                break;
+
+            default:
+                alert('Its Invaild data ');
+                break;
+            }
+
+       alert('Your Birthday Day is : '+ days);
+    </script>
+</body>
+</html>

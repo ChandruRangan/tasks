@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Using Predefined Function
+        /* let name=prompt().split('');
+        name.sort();
+        console.log(name.join('')); */
+
+        //Using User Defined function
+        let name=prompt().split('');
+
+        for(let i=0;i<name.length;i++){
+            for(let j=0;j<name.length;j++){
+                if(name[i]<name[j]){
+                    temp=name[i];
+                    name[i]=name[j];
+                    name[j]=temp;
+                }
+            } 
+        }
+        console.log(name.join(''));
+
+
+
+
+    </script>
+</body>
+</html>
