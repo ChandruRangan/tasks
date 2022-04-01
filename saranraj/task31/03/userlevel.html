@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 10vh;
+        }
+    </style>
+</head>
+<body>
+    <input id="input" type="number">
+    <button onclick="get()" id="btn">Submit </button>
+    <script>
+       
+       let btn = document.getElementById("btn");
+       
+           let input=  document.getElementById("input");
+        function get()   {
+            console.log("clicked")
+            console.log(input.value)
+           switch(input.value){
+               case '1':{ console.log("Low");break;}
+               case '2': {console.log("Mid");break;}
+               case '3': {console.log("Average");break;}
+               case '4': {console.log("Above Average");break;}
+               case '5': {console.log("High");break;}
+              
+
+           }
+       }
+    </script>
+</body>
+</html>
