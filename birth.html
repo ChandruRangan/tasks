@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0%;
+            margin: 0%;
+        }
+        .div{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5vh;
+        }
+        button{
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="div">
+        <h1>Select the date to get the day</h1>
+        <input id="date" type="date">
+        <input id="time" type="time">
+        <button onclick="get()"> Get day</button>
+        <p id="display" onclick="get()"></p>
+
+    </div>
+    <script src="birth.js"></script>
+</body>
+</html>
