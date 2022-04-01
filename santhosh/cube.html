@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Cubic values</title>
+    </head>
+    <body>
+        Enter the value:
+        <input  type="text" name="i" placeholder="Enter your value" id="num">
+        <button onmouseover="display()">Result</button>
+        <p id="show_output"></p>
+        <script>
+            function display(){
+                var i, cube;
+                var i = parseInt(document.getElementById('num').value);
+                cube = i * i * i;
+                document.getElementById('show_output').innerHTML = "The cubic value for " + i + " is: " + cube;
+            }
+        </script>
+    </body>
+</html>
