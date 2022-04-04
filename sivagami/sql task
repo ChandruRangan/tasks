@@ -1,0 +1,138 @@
+        7.Get 10 books which were taken by ‘BCA’ students
+
+
+
+select books.book_name,students.student_course from students,Transactions,books where students.student_id=Transactions.student_id and Transactions.book_id=books.book_id and students.student_course='BCA';
+   book_name   | student_course 
+---------------+----------------
+ The EMELYROSE | BCA
+ ROSE          | BCA
+
+
+
+
+        9.Available books in library under ‘Fantasy’ type
+
+
+
+select * from books where book_type='fantasy';
+ book_id |       book_name       | book_category | isbn_code | book_quantity | book_type | book_entey |   book_author   | volume | takeaway_period 
+---------+-----------------------+---------------+-----------+---------------+-----------+------------+-----------------+--------+-----------------
+ 1       | The pilgrims progress | crime         | 20        |             5 | fantasy   | 2022-03-20 | albertjamesrose | 2      |              50
+ 2       | The EMELYROSE         | ROMANTIC      | 21        |             4 | fantasy   | 2022-04-21 | johnjamessmith  | 2      |              40
+ 4       | terminator            | action        | 24        |             8 | fantasy   | 2022-03-25 | sivi            | 5      |              25
+(3 rows)
+
+
+
+
+       8.Search all books written by author ‘xxxxxx James xxxxx’
+select * from books where book_type='fantasy';
+ book_id |       book_name       | book_category | isbn_code | book_quantity | book_type | book_entey |   book_author   | volume | takeaway_period 
+---------+-----------------------+---------------+-----------+---------------+-----------+------------+-----------------+--------+-----------------
+ 1       | The pilgrims progress | crime         | 20        |             5 | fantasy   | 2022-03-20 | albertjamesrose | 2      |              50
+ 2       | The EMELYROSE         | ROMANTIC      | 21        |             4 | fantasy   | 2022-04-21 | johnjamessmith  | 2      |              40
+ 4       | terminator            | action        | 24        |             8 | fantasy   | 2022-03-25 | sivi            
+| 5      |              25
+(3 rows)
+
+
+
+
+
+        10.Transactions with in the month of February
+
+
+
+siviidb=# select * from Transactions where issued_on<'2022-02-18';
+ trans_id | book_id | student_id | issued_on  | returned_on | fine 
+----------+---------+------------+------------+-------------+------
+ 4        | 4       | 4          | 2022-02-05 | 2022-02-15  |  0.8
+ 5        | 5       | 5          | 2022-02-09 | 2022-02-18  |  0.9
+ 6        | 6       | 6          | 2022-02-07 | 2022-02-16  |    1
+(3 rows)
+
+
+
+
+    1. Get all books which is issued after Mar 20th 2022
+
+
+siviidb=# select * from Transactions where issued_on>'2022-03-20';
+ trans_id | book_id | student_id | issued_on  | returned_on | fine 
+----------+---------+------------+------------+-------------+------
+ 1        | 1       | 1          | 2022-03-25 | 2022-04-25  |  0.5
+ 2        | 2       | 2          | 2022-03-27 | 2022-04-15  |  0.6
+ 3        | 3       | 3          | 2022-03-28 | 2022-04-18  |  0.7
+(3 rows)
+
+inutes ago
+        2.Get all Students list who have taken books but not yet returned.
+ siviidb=# select student_fname from Transactions,students where Transactions.student_id=students.student_id and returned_on is null;
+ student_fname 
+---------------
+ barani
+ prabu
+(2 rows)
+
+
+
+        3.Get live books available in Library ( i.e., except issued books )
+
+
+siviidb=# select books.book_name from books,Transactions where books.book_id=Transactions.book_id and issued_on is null and returned_on is null;
+ book_name  
+------------
+ terminator
+ ROSE
+
+
+
+
+
+       4.Get all reference books issued to students ( i.e., only issued books, but not returned yet )
+
+
+siviidb=# select books.book_name,Transactions.issued_on,books.book_category  from books,Transactions where books.book_id=Transactions.book_id and issued_on is Not null; 
+       book_name       | issued_on  | book_category 
+-----------------------+------------+---------------
+ The pilgrims progress | 2022-03-25 | reference
+ The EMELYROSE         | 2022-03-27 | reference
+(2 rows)
+
+
+       5.Get all books which is with students more than the takeaway_period
+siviidb=#                    
+select books.book_name,books.takeaway_period,Transactions.fine,Transactions.student_id from books,Transactions where books.book_id=Transactions.book_id and Transactions.fine>0; 
+       book_name       | takeaway_period | fine | student_id 
+-----------------------+-----------------+------+------------
+ The pilgrims progress |              50 |  0.5 | 1
+ The EMELYROSE         |              40 |  0.6 | 2
+ terminator            |              25 |  0.8 | 4
+ ROSE                  |              30 |  0.9 | 5
+ ROSE                  |              30 |   30 | 2
+(5 rows)
+
+
+
+
+
+
+
+
+
+         6.Get top 5 books which is circulating more in the Library
+
+
+
+siviidb=# select books.book_name from books,Transactions where books.book_id=Transactions.book_id Group by books.book_name Having count(Transactions.book_id)>1;
+       book_name       
+-----------------------
+ believe in yourself
+ The EMELYROSE
+ The pilgrims progress
+ harry potter
+ war and peace
+ ROSE
+(6 rows)
+

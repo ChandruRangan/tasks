@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>javascript exercise</title>
+    </head>
+    <body>
+        <input type="number" placeholder="enter your number" id="cube">
+        <input type="submit" value="submit" onclick="cube()">
+        <div id="display"></div>
+        <script>
+            function cube(){
+                var a,cubic;
+                a=parseInt(document.getElementById('cube').value);
+                cubic=a*a*a;    
+                // var num=document.getElementById('cube').value;
+                document.getElementById('display').innerHTML="The cube number "+a+" is: "+cubic;
+            }
+        </script>
+    </body>
+</html>

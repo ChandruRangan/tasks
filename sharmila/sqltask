@@ -1,0 +1,104 @@
+ 1.Get all books which is issued after Mar 20th 2022
+
+vsharmidb=# select book_name from books INNER JOIN Transaction ON books.book_id=Transaction.book_id WHERE issues_on >'2022-03-20';
+ book_name 
+-----------
+(0 rows)
+
+
+
+
+2.Available books in library under ‘Fantasy’ type
+
+vsharmidb=# select book_name from books where book_type='fantacy';
+ book_name 
+-----------
+ five
+(1 row)
+
+
+
+3.Search all books written by author ‘xxxxxx James xxxxx’
+
+vsharmidb=# select book_name from books where book_author LIKE '%james%';
+ book_name Mar 20th 2022
+
+-----------
+ five
+(1 row)
+
+
+
+4.Transactions with in the month of February
+Mar 20th 2022
+
+vsharmidb=# select * from Transaction WHERE extracGet all books which is with students more than the takeaway_periodt(month from returned_on)=02;
+ trans_id | book_id | student_id | issues_on  | returned_on | fine 
+----------+---------+------------+------------+-------------+------
+ 1223     | 5678    | 118        | 2022-01-11 | 2022-02-12  | 0.11
+(1 row)
+
+5.Get live books available in Library ( i.e., except issued books  
+
+vsharmidb=# SELECT BookGet all Students list who have taken books but not yet returned._name from books INNER JOIN Transaction ON books.book_id=Transaction.book_id WHERE issues_on isnull;
+ book_name 
+-----------
+ fff
+(1 row)
+
+6.Get top 5 books which is circulating more in the Library
+
+vsharmidb=# SELECT books.book_name from books INNER JOIN transaction ON transaction.book_id=books.book_id GROUP BY books.book_name HAVING COUNT(Transaction.book_id)>1;
+  book_name  
+-------------
+ five ornge
+ rose
+ five orange
+(3 rows)
+
+7.Get 10 books which were taken by ‘BCA’ students
+
+vsharmidb=# select books.book_name,students.student_course from students,Transaction,books where students.student_id=TransactionMar 20th 2022
+.student_id and Transaction.book_id=books.book_id and students.student_course='BCA';
+ book_name | student_course 
+-----------+----------------
+ open boat | BCA
+(1 row)
+
+8.Get all reference books issued to students ( i.e., only issued books, but not returned yet )
+
+vsharmidb=# select book_name from books inner join transaction on books.book_id=transaction.book_id where returned_on is null AND book_name='reference';
+ book_name 
+-----------
+(0 rows)
+
+
+9.Get all books which is with students more than the takeaway_period
+
+vsharmidb=# select books.book_name from books,Transaction where books.book_id=Transaction.book_id and Transaction.fine>0;
+  book_name  
+-------------
+ fff
+ five ornge
+ five ornge
+ five orange
+ five orange
+ five orange
+ five orange
+ rose
+ rose
+ rose
+ rose
+(11 rows)
+
+
+10.Get all Students list who have taken books but not yet returned.
+
+vsharmidb=# select student_fname from students inner join transaction on students.student_id=transaction.student_id where returned_on is null;
+ student_fname 
+---------------
+ hepsi
+ hepsi
+(2 rows)
+
+
