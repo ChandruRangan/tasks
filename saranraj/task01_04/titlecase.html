@@ -28,11 +28,14 @@
 function titlecase(a){
     let b = a.split(' ');
     
+    
 
     for(let i=0; i<b.length;i++){
-        b[i][0].toUpperCase();
+        b[i] = b[i].charAt(0).toUpperCase() + b[i].slice(1);
+        console.log(b);
     }
-    display.innerText=b;
+    let c = b.join(" ");
+    display.innerText=c;
 
 }
 
