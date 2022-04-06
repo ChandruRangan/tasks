@@ -1,5 +1,5 @@
-function binary(a,element){
-    let b= a.sort();
+function binary(b,element){
+    
     let mid =parseInt(b.length/2);
      if(b[mid]===element)
      {
