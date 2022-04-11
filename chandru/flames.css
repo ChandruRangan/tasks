@@ -1,0 +1,20 @@
+#f{
+display: block;
+margin-top:20%;
+margin-left:50%;
+}
+#l{
+    display: block;
+    margin-top:3%;
+    margin-left:50%;
+    }
+    #a{
+        display: block;
+        margin-top:2%;
+        margin-left:50%;
+        border: none;
+        border-bottom: 0px;
+        }
+        p{
+            text-align: center;
+        }
