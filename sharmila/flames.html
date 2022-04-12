@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flames</title>
+</head>
+<body>
+    <input type="text" id="name1" name="name1">
+    <input type="text" id="name2" name="name2">
+    <input type='button' value="CLICK" onclick='flames()'>
+<script>
+
+function replace(string,index,replace){
+    string.subsrtring(0,index) + replace +string. substring(index+1);
+}
+function flames(){
+    var result=document.getElementById("output");
+    var a=name1.getElementByID("name1").value.toLowerCase(); 
+    var b=name2.getElementByID("name2").value.toLowerCase();
+  if(a!=''&&b!='');
+  for(i=0;i<a.length;i++){
+  for(j=0;j<b.length;j++){
+   {
+     if(a[i]==b[j]){
+       a=replace(a,i,'*');
+       b=replace(b,j,'*');
+   }   
+}
+  }
+    var count=0;
+    for(i=0;i<a.length;i++){
+        if([a]!='*'){
+        count++;
+    }
+        }
+        for(i=0;i<b.length;i++){
+        if([b]!='*'){
+        count++;
+        }
+    }
+    if(count>1){
+          var flames='FLAMES';
+        c=0;
+        l=1;
+          for(i=0;flames.length!=1;i++)
+        { 
+            if(count==l)
+            {
+                 if(c>=input.length)
+                 {
+                     c=0;
+                 }
+               flames=replace(flames,c,'');
+                  l=1;
+                }
+               if(c>=input.length)
+               {
+                   c=0;
+               }  
+               c++;
+               l++;
+             }         
+    switch(input)
+    {
+        case 'F':
+              input="friend";
+              breake;
+        case 'L':
+            input="Love";
+            breake;
+        case 'A':
+            input="Affection";
+            breake;
+        case 'M':
+            input="Maariage";
+            breake;
+        case 'E':
+            input="enemy";
+            breake;
+        case 'S':
+             input="sister";
+             breake;
+    }
+}
+        if(count==1)
+           {
+          flames="Sibling";
+           } 
+           if(count==0)
+           {
+          flames="Its Same Name";
+           }
+          result.innerHTML="<b style='color:green;'>"+document.getElementById("name2").value+"</b> is Your <b style='color:blue;'>"+flames+"</b>"; 
+  }
+        {
+                   result.innerHTML="ENTER NAME";
+        }
+    }
+</script>
+</body>
+</html>
