@@ -9,21 +9,25 @@
   <body>
     <h1 id="k"></h1>
     <script>
-      let sam = new Promise(function (pass, fail) {
-        let x = 0;
-        if (x == 0) {
-          pass("ok");
+      function display(a) {
+        val = document.getElementById("k").innerHTML = a;
+      }
+
+      let kar = new Promise((value, error) => {
+        x = 2;
+        if (x == 2) {
+          value("true");
         } else {
-          fail("error");
+          error("false");
         }
       });
 
-      sam.then(
+      kar.then(
         function (value) {
-          document.getElementById("k").innerHTML = value;
+          display(value);
         },
         function (error) {
-          document.getElementById("k").innerHTML = error;
+          display(error);
         }
       );
     </script>
