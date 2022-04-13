@@ -7,23 +7,24 @@
             let name2 = ip2.filter(val => !ip1.includes(val));
           let tl=name1.length+name2.length;
           let flames=['friend','love','affection','marriage','enemy','sister'];
-          
-          let stp=1;
-  for(let x=flames.length; x>1; x--)
-    {
-    let l=((tl%x)+stp)-1;
-    if(l>x)
-    {
+    if(tl==0){
+      alert('You Enter same name on two fields')
+    }
+    else{
+
+    let stp=1;
+      for(let x=flames.length; x>1; x--)
+      {
+        let l=((tl%x)+stp)-1;
+      if(l>x)
+        {
       l=l%x;
-    }
-    if(l==0)
-    {
-      l=flames.length;
-    }
+      }
     flames.splice(l-1,1);
     stp=l;
   }   
-        document.write(flames);
+  document.write(flames);
+}
         </script>
     </body>
 </html>
