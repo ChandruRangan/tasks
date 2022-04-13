@@ -25,6 +25,7 @@ result()
 
 
 
+
 // const query =`select m.s_id,n.name,(java+python+ruby) as total,'Topper' as grade from marks as m inner join students as n on n.s_id=m.s_id where (java+python+ruby)=(select max(java+python+ruby) from marks);`;
 // (async () => {                              //async function
 //     try {
