@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="k"></h1>
+    <script>
+      let sam = new Promise(function (pass, fail) {
+        let x = 0;
+        if (x == 0) {
+          pass("ok");
+        } else {
+          fail("error");
+        }
+      });
+
+      sam.then(
+        function (value) {
+          document.getElementById("k").innerHTML = value;
+        },
+        function (error) {
+          document.getElementById("k").innerHTML = error;
+        }
+      );
+    </script>
+  </body>
+</html>

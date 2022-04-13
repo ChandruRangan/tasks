@@ -1,34 +1,38 @@
-const {Client}=require('pg');
+const { Client } = require("pg");
 
-const k=new Client({
-    user:'karthick',
-    password:'ruthra',
-    host:'localhost',
-    port:'5432',
-    database:'exam'
+const k = new Client({
+  user: "karthick",
+  password: "ruthra",
+  host: "localhost",
+  port: "5432",
+  database: "exam",
 });
 
+function db(dbquery) {
+  return new Promise((value, error) => {
+    k.connect();
+    k.query(dbquery, (err, res) => {
+      if (err) {
+        error(err);
+      } else {
+        console.log("Sucessfully Connected");
+        for (let row of res.rows) {
+          value(row);
+        }
+      }
+      k.end();
+    });
+  });
+}
 
-const psql=`select s.s_id,s.name,
+async function run() {
+  const result = await db(`select s.s_id,s.name,
 (javascript+nodejs+ruby) as Total_marks,
 'Topper' as grade from students as s inner join marks as m 
 on s.s_id=m.s_id where 
-(javascript+nodejs+ruby)=(select max(javascript+nodejs+ruby) from marks);`;
+(javascript+nodejs+ruby)=(select max(javascript+nodejs+ruby) from marks);`);
+  console.log(result);
+  return;
+}
 
-async function sucess(){
-    k.connect();
-    console.log('Sucessfully Connected');
-}
-sucess().then(
-k.query(psql,(err,res)=>{
-if(err){
-    console.log(err);
-}
-else{
-    for(let row of res.rows){
-        console.log(row);     
-    }
-}
-k.end();
-})
-);
+run();

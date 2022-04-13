@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-         function findSmallest(arr , n){
+        /*  function findSmallest(arr , n){
         var res = 1; 
         for (i = 0; i < n && arr[i] <= res; i++)
             res = res + arr[i];
@@ -18,9 +18,38 @@
   
         var k =[1,2,3];
         var l = k.length;
-        document.write(findSmallest(k, l)+"<br/>");
-        
+        document.write(findSmallest(k, l)+"<br/>"); */
 
+
+        let a=[3,2,1].sort((a,b)=>{return a-b});
+        let k=[];
+        for(i=0;i<a.length-1;i++){
+            k[i]=a[0]+a[i+1];
+        }
+        for(i=a.length-1;i>1;i--){
+            k.push(a[i]+a[i-1]);
+        }
+
+        for(i=0;i<a.length;i++){
+            for(j=i+1;j<a.length;j++){
+                for(l=j+1;l<a.length;l++){
+                    k.push(a[i]+a[j]+a[l]);
+                }
+            }
+        }
+        let g=a.concat(k);
+        console.log(g);
+
+     function min(){
+         if(g[0]==1){
+            console.log(g[g.length-1]+1);    
+         }
+         else if(g[0]<g[1]){
+             console.log('1');
+         }
+     }  
+min();
+     
     </script>
 </body>
 </html>
