@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> 
+  <body>
+    <p id="joke"></p>
+    <button id="btn" onclick="fetchJoke()">Tell me a Joke</button>
+    <script src="./joke.js"></script>
+  </head>
+  </body>
+  <script>
+    const joketext = document.getElementById("joke");
+    const url = "https://v2.jokeapi.dev/joke/Programming?type=single";
+    let fetchJoke = () => 
+    {
+     fetch(url)
+    .then((data) => data.json())
+    .then((item) => 
+    {
+      joketext.textContent = `${item.joke}`;
+    });
+};
+  </script>
+</html>

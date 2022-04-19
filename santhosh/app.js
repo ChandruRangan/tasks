@@ -13,8 +13,8 @@ const db = knex({
   client: "pg",
   connection: {
     host: "localhost",
-    user: "karthick",
-    password: "ruthra",
+    user: "postgres",
+    password: "sandy@001",
     database: "jokes",
   },
 });
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
     .get("https://v2.jokeapi.dev/joke/Programming?type=single")
     .then((results) => {
       var joke = results.data.joke;
-      console.log(joke);
+      // console.log(joke);
       res.render("jokes", { joke: joke });
     });
 });
@@ -32,25 +32,18 @@ app.get("/", (req, res) => {
 app.post("/insert", (req, res) => {
   const {joke}=req.body;
   db("jokes")
-    .insert({ programing_jokes: joke })
+    .insert({ fetched_joke: joke })
     .returning("*")
     .then(() => {
       res.redirect("/");
     })
     .catch(err => {
-      res.status(400).json({ message: "unable to insert" });
+      res.status(400).json({ message: "couldn't insert the response" });
     });
 });
 
-app.get("/display", (req, res) => {
-  db.select("*")
-    .from("jokes")
-    .then((data) => {
-      res.render("display", { data: data });
-    })
-    .catch((err) => res.status(400).json(err));
-});
 
 app.listen(port, () => {
   console.log("The running port is http://localhost:" + `${port}`);
 });
+

@@ -15,24 +15,14 @@ const db = knex({
     host: "localhost",
     user: "karthick",
     password: "ruthra",
-    database: "jokes",
+    database: "todolist",
   },
 });
 
-app.get("/", (req, res) => {
-  axios
-    .get("https://v2.jokeapi.dev/joke/Programming?type=single")
-    .then((results) => {
-      var joke = results.data.joke;
-      console.log(joke);
-      res.render("jokes", { joke: joke });
-    });
-});
-
 app.post("/insert", (req, res) => {
-  const {joke}=req.body;
-  db("jokes")
-    .insert({ programing_jokes: joke })
+  const {tasks}=req.body;
+  db("todo")
+    .insert({ task:tasks})
     .returning("*")
     .then(() => {
       res.redirect("/");
@@ -42,14 +32,28 @@ app.post("/insert", (req, res) => {
     });
 });
 
-app.get("/display", (req, res) => {
+app.get("/", (req, res) => {
   db.select("*")
-    .from("jokes")
+    .from("todo")
     .then((data) => {
-      res.render("display", { data: data });
+      res.render("todo", { todos: data });
     })
     .catch((err) => res.status(400).json(err));
 });
+
+app.put("/com", (req, res) => {
+  const { name, id } = req.body;
+  if (name == "todo") {
+    db("todo").where("id", "=", id).update("status", 1).returning("status")
+  .then(task => {res.json(task[0])});
+  } 
+  else {
+  db("todo").where("id", "=", id).update("status", 0)
+  .returning("status")
+  .then(task => {res.json(task[0])});
+  }
+  });
+
 
 app.listen(port, () => {
   console.log("The running port is http://localhost:" + `${port}`);
