@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jokes</title>
+    <style>
+      *{
+        padding: 0%;
+        margin: 0%;
+      }
+      .ctn{
+        width: 90vw;
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10vh;
+        padding: 30px;
+      }
+      #btn{
+        padding: 10px;
+        border-radius: 20px;
+        border: 2px solid darkblue;
+        background-color: aqua;
+        font-size: large;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ctn">
+      <p id="p"></p>
+      <button id="btn">Hit me for a joke</button>
+    </div>
+    <script>
+      const btn = document.getElementById("btn");
+      let p = document.getElementById("p");
+      btn.addEventListener("click", (e) => {
+        console.log("hi")
+          e.preventDefault()
+          var request= new XMLHttpRequest();
+          request.open("POST", "/insert");
+          request.onreadystatechange=function(){
+            if(this.readyState === 4 && this.status === 200) {
+              p.innerText=this.responseText;
+              console.log(this.responseText);
+            }
+          }
+          request.send();
+        });
+      
+    </script>
+  </body>
+</html>
