@@ -4,6 +4,7 @@ const knex=require('knex');
 const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended:true }));
 app.set('view engine','ejs');
+app.use(bodyparser.json());
 
 const db= knex({
     client:'postgresql',
@@ -36,11 +37,12 @@ const db= knex({
       app.put("/completedTaskDone", (req, res) => {
         const { name, id } = req.body;
         if (name === "todo") {
-        db("task")
+        db("todo")
         .where("id", "=", id).update("status", 1)
-        .returning("status").then(task => {res.json(task[0])})}
+        .returning("status").then(task => {res.json(task[0])});
+         }
          else {
-            db("task").where("id", "=", id).update("status", 0)
+            db("todo").where("id", "=", id).update("status", 0)
             .returning("status")
             .then(task => {res.json(task[0])});
         }
