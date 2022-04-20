@@ -1,51 +1,54 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-// const db=require("./tododb.js");
-const knex = require('knex')
-app.set('view engine','ejs');
+const knex = require("knex");
+app.set("view engine", "ejs");
+const bodyparser = require("body-parser");
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.json());
 const db = knex({
-    client: 'pg',
-    connection: {
-        host: 'localhost',
-        user: 'riswan1',
-        password: 'Riswan@123',
-        database: 'todo'
+  client: "pg",
+  connection: {
+    host: "localhost",
+    user: "riswan1",
+    password: "Riswan@123",
+    database: "todo",
+  },
+});
+
+app.post("/insert", (req, res) => {
+  db("todolist")
+    .insert({ task: req.body.name})
+    .returning("*")
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((err) => {
+      res.status(400).json({ message: "failed" });
+    });
+});
+app.get("/", (req, res) => {
+  db.select("*")
+    .from("todolist")
+    .then((data) => {
+      res.render("ris", { data: data });
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
+
+app.put("/moveTaskDone", (req, res) => {
+    const { name, id } = req.body;
+    if (name === "todo")
+     {
+    db("todolist")
+    .where("id", "=", id).update("status", 1)
+    .returning("status").then(task => {res.json(task[0])})}
+     else {
+    db("todolist").where("id", "=", id).update("status", 0)
+    .returning("status")
+    .then(task => {res.json(task[0])});
     }
-});
+    });
 
-// app.get("/", (req, res) => {
-//     res.sendFile(__dirname + "/" + "index.html");
-// });
-
-
-
-app.get('/insert', (req, res) => {
-
-    db('todolist').insert({ list: req.query['name'] }).returning("*").then(() => { res.redirect('/'); }).catch(err => {
-        res.status(400).json({ message: 'failed' });
-});
-});
-app.get('/',(req,res)=>{
-        db.select('*')
-        .from('todolist')
-        .then((data)=>{
-          res.render('ris',{data: data});
-         })
-         .catch((err) => res.status(400).json(err));
-});
-    // var ris=req.query['name'];
-    // res.redirect('back');
-    // db.data.query(`insert into todolist values('${ris}');`,(res,err) => {
-    //     if(err)
-    //     {
-    //         console.log(err);
-    //     }
-    //     else{
-    //         console.log("success");
-    //     }
-    // });
-
-
-
-
-app.listen(9000);
+app.listen(5454);

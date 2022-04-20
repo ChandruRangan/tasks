@@ -1,33 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To Do List</title>
-</head>
-<body>
-  <form action="/insert" method="get">
-    <div class="head">
-    <input type="text" class=""  name="name" id="entry" aria-desc ribedby="helpId" placeholder="Enter the Task">
-    <br><br><button type="submit" id="addtodo">Add</button>
-   </div>
-    <div class="to_do" id="todocontain">
-  </form>
-  <div>
-    <table>
-      <thead>
-        <tr>
-        </tr>
-      </thead>
-      <tbody id="content">
-        <% for(var i = 0; i <data.length; i++){ %>
-          <tr>
-            <td><%= data[i].list %></td>
-          </tr>
-          <%} %>
-        </tbody>
-      </table>
-    </div>
-</body>
-</html>
+    <head>
+      <title>Title</title>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body class="bg-primary">
+        <form action="/insert" method="post">
+        <div class="class">
+            <div class="form-group">
+              <label for=""></label>
+              <div class="container text-center">
+                  <input type="text" class=""  name="name" id="entry" aria-describedby="helpId" placeholder="Enter the Task">
+                  <br><br><button type="submit" id="addtodo">Add</button>
+                  <div class="to_do" id="todocontain">
+                  </div>
+              </div>
+            </div>
+        </div>
+      </form>
+      <!-- <div class="row"> -->
+        <div class="container col-sm-6">
+          <h3>Todo Task</h3>  
+          <ul class="list-group">
+            <% for(var i = 0; i <data.length; i++){ %>
+              <% if(data[i].status == 0){%>
+              <li class="list-group-item">
+                <input type="checkbox" name="todo" value="<%= data[i].task%>" onclick='moveTask(event,"<%= data[i].id%>")'> <%= data[i].task%></li>
+              <%} %>
+              <%} %>
+            </ul>
+          </div>
+          <div class="container col-sm-6">
+            <h3>Done Task</h3>  
+            <ul class="list-group">
+              <% for(var i = 0; i <data.length; i++){ %>
+                <% if(data[i].status == 1){%>
+                  <li class="list-group-item">
+                <input type="checkbox" name="todo" value="<%= data[i].id%>" onclick='moveTask(event,"<%= data[i].id%>")' /> <%= data[i].task%></li>
+                <%} %>
+                <%} %>
+              </ul>
+            </div>
+        <!-- </div> -->
+        <script>
+        function moveTask(event, id){
+        const{name} = event.target;
+        fetch("/moveTaskDone", 
+        {method: "PUT",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify({name, id})
+        }).then(response => response.json()).then(status=> {
+        window.location.reload()
+        }).catch(err => console.log(err))}
+        </script>
+    </body>
+  </html>
+
+
+
+
+
+
+
+
+
