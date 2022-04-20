@@ -1,4 +1,4 @@
-let prompt = require('prompt-sync')();
+ let prompt = require('prompt-sync')();
 let  title = prompt('enter title : ');
 
 function Titlecase(title){

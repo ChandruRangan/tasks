@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO LIST</title>
+    <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+    <form action="http://localhost:4000/insert" method="POST">
+       <div class="div">
+         <h2>TO DO List</h2>
+          <input id="entry" name="name" type="text">
+           <button type="submit" id="insert">Add</button>
+       <div class="to_do" id="todocontain">
+    </div>
+    </div>
+    
+    
+    </form>
+    <div>
+        <table>
+          <thead>
+          
+          </thead>
+          <ul>
+            <h1>Tasks to do</h1>
+            <% for(var i = 0; i <data.length; i++){ %>
+             <% if(data[i].status == 0){%>  
+              <li>
+                <input type="checkbox" name="todo" value="<%= data[i].task %>"onclick='completedTask(event,"<%= data[i].id %>")' />
+                <%= data[i].task %>
+              </li>
+              <%} %>
+              <%} %>
+            </ul>
+            <h2>Done Items</h2>
+            <ul>
+              <% for(var i = 0; i <data.length; i++){%>
+                <% if(data[i].status == 1){ %>
+                  <li><input type="checkbox" name="done" value="<%= data[i].id%>" onclick='completedTask(event,"<%= data[i].id %>")'/> <%= data[i].task%>
+                    <% data[i].task%> 
+                  </li>
+              <%} %>
+              <%} %>    
+            </ul>
+          </table>
+        </div>
+        <script>
+          function completedTask (event, id){
+          const{name} = event.target;
+          fetch("http://localhost:4000/completedTaskDone", {method: "PUT",
+          headers: {
+          "Content-Type": "application/json"
+          },
+          body: JSON.stringify({name,id})
+          }).then(response => response.json()).then(status=> {
+            window.location.reload()
+
+          }).catch(err => console.log(err))
+          }
+          </script>
+
+</body>
+</html>
