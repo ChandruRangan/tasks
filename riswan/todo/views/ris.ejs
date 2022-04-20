@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Do List</title>
+</head>
+<body>
+  <form action="/insert" method="get">
+    <div class="head">
+    <input type="text" class=""  name="name" id="entry" aria-desc ribedby="helpId" placeholder="Enter the Task">
+    <br><br><button type="submit" id="addtodo">Add</button>
+   </div>
+    <div class="to_do" id="todocontain">
+  </form>
+  <div>
+    <table>
+      <thead>
+        <tr>
+        </tr>
+      </thead>
+      <tbody id="content">
+        <% for(var i = 0; i <data.length; i++){ %>
+          <tr>
+            <td><%= data[i].list %></td>
+          </tr>
+          <%} %>
+        </tbody>
+      </table>
+    </div>
+</body>
+</html>

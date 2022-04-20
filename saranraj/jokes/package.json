@@ -1,0 +1,18 @@
+{
+  "name": "jokes",
+  "version": "1.0.0",
+  "description": "jokes api",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "saran",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "create-react-app": "^5.0.1",
+    "express": "^4.17.3",
+    "knex": "^1.0.7",
+    "save": "^2.4.0"
+  }
+}
