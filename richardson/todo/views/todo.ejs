@@ -27,19 +27,23 @@
           <ul>
             <h1>Tasks to do</h1>
             <% for(var i = 0; i <data.length; i++){ %>
+             <% if(data[i].status == 0){%>  
               <li>
-                <input type="checkbox" name="todo" value="<%= data[i].task %>"onclick='completedTask(event,"<%= data[i].id %>")' /><%= data[i].task%>>
+                <input type="checkbox" name="todo" value="<%= data[i].task %>"onclick='completedTask(event,"<%= data[i].id %>")' />
                 <%= data[i].task %>
               </li>
+              <%} %>
               <%} %>
             </ul>
             <h2>Done Items</h2>
             <ul>
-              <% for(var i = 0; i <todos.length; i++){%>
-                <% if(todos[i].status == 1){ %>
+              <% for(var i = 0; i <data.length; i++){%>
+                <% if(data[i].status == 1){ %>
                   <li><input type="checkbox" name="done" value="<%= data[i].id%>" onclick='completedTask(event,"<%= data[i].id %>")'/> <%= data[i].task%>
                     <% data[i].task%> 
                   </li>
+              <%} %>
+              <%} %>    
             </ul>
           </table>
         </div>
@@ -50,13 +54,10 @@
           headers: {
           "Content-Type": "application/json"
           },
-          body: JSON.stringify({
-          name,
-          id
-          })
+          body: JSON.stringify({name,id})
           }).then(response => response.json()).then(status=> {
-          console.log(status);
-          window.location.reload()
+            window.location.reload()
+
           }).catch(err => console.log(err))
           }
           </script>
