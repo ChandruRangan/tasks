@@ -15,17 +15,18 @@ class Booklist{
     }
     else{
         this.Currentbook.Read=true;
-        this.Currentbook.ReadDate=Date.now();
-        this.Readedbooks.push(this)
-        this.Lastbook=this.Currentbook;
+        this.Currentbook.ReadDate=Date(Date.now);
+        this.Readedbooks.push(this.Currentbook)
+        this.Lastbook=this.Currentbook.Title;
         this.Currentbook=this.NotReaded.shift();
-        this.Nextbook=this.NotReaded[0];
+        this.Nextbook=this.NotReaded[0].Title;
         
     }
  }
  setCurrentBook(a){
      this.Currentbook=a;
      //this.Nextbook=this.NotReaded[0];
+     this.NotReaded.shift();
  }
  checkReaded(a){
     if( a.Read==true){
@@ -63,6 +64,7 @@ booklist.add(King);
 booklist.add(Queen);
 console.log(booklist);
 booklist.setCurrentBook(CNS);
+console.log(booklist);
 booklist.finishCurrentBook();
 console.log(booklist);
 booklist.finishCurrentBook();
