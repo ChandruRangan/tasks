@@ -9,14 +9,14 @@ const db= knex({
     client:'postgresql',
     connection:{
         host:"localhost",
-        user:"postgres",
-        password:"sandy@001",
+        user:"kaviya",
+        password:"kaviya06*",
         database:"todolist",
     },
 })
  app.post("/insert", (req, res) => {
     const {name}=req.body;
-    db("todo").insert({ new_task:name}).returning("*")
+    db("todo").insert({ task:name}).returning("*")
     .then(_=> {
        res.redirect("/");
     }).catch(err => {
@@ -27,7 +27,7 @@ const db= knex({
         db.select('*')
         .from("todo")
         .then((data)=>{
-          res.render('sample',{data: data});
+          res.render('index',{data: data});
          })
          .catch(err => res.status(400).json(err));
       });

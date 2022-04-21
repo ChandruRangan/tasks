@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-      <title>Title</title>
+      <title>Todolist</title>
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,12 +10,13 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body class="bg-primary">
-        <form action="/insert" method="post">
+
+        <form action="/add" method="post">
         <div class="class">
             <div class="form-group">
               <label for=""></label>
               <div class="container text-center">
-                  <input type="text" class=""  name="name" id="entry" aria-describedby="helpId" placeholder="Enter the Task">
+                  <input type="text" class=""  name="name" id="entry" aria-describedby="helpId" placeholder="enter the Task name">
                   <br><br><button type="submit" id="addtodo">Add</button>
                   <div class="to_do" id="todocontain">
                   </div>
@@ -30,7 +31,7 @@
             <% for(var i = 0; i <data.length; i++){ %>
               <% if(data[i].status == 0){%>
               <li class="list-group-item">
-                <input type="checkbox" name="todo" value="<%= data[i].task%>" onclick='moveTask(event,"<%= data[i].id%>")'> <%= data[i].task%></li>
+                <button class="btn btn-dark" type="checkbox" name="todo" value="<%= data[i].task%>" onclick='moveTask(event,"<%= data[i].id%>")'> <%= data[i].task%></li>
               <%} %>
               <%} %>
             </ul>
@@ -41,7 +42,7 @@
               <% for(var i = 0; i <data.length; i++){ %>
                 <% if(data[i].status == 1){%>
                   <li class="list-group-item">
-                <input type="checkbox" name="todo" value="<%= data[i].id%>" onclick='moveTask(event,"<%= data[i].id%>")' /> <%= data[i].task%></li>
+                <button class="btn btn-dark" type="checkbox" name="done" value="<%= data[i].id%>" onclick='moveTask(event,"<%= data[i].id%>")' /> <%= data[i].task%></li>
                 <%} %>
                 <%} %>
               </ul>
@@ -62,12 +63,3 @@
         </script>
     </body>
   </html>
-
-
-
-
-
-
-
-
-
