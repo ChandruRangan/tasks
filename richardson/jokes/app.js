@@ -1,6 +1,5 @@
 const express=require('express');
 const app=express();
-const port=3000;
 const knex=require('knex');
 const bodyparser = require("body-parser");
 app.set('view engine','ejs');
@@ -18,18 +17,20 @@ const db= knex({
     },
 })
 app.get("/",(req,res)=>{
-axios.get( "https://v2.jokeapi.dev/joke/Programming?type=single")
+axios.get( "https://v2.jokeapi.dv/joke/Programming?type=single")
 .then((joke) => {
     var jokes=joke.data.joke   
     console.log(jokes);
     res.render("jokes",{joke:jokes})
-  });
+  }).catch(err => {
+    res.status(400).json({ message: "sorry (:"});
+});
 });
 
 
 app.post("/insert", (req, res) => {
     const {joke}=req.body;
-    db("joke").insert({ jokes:joke}).returning("*")
+    db("joke").insert({ jokes:joke})
     .then(_=> {
        res.redirect("/");
     }).catch(err => {
