@@ -12,31 +12,34 @@
         <h3>Products</h3>
         <form action="/insert" autocomplete="off" method="post">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Enter Product Name">
+            <input type="text" class="form-control" placeholder="Enter Product Name" name="pname">
             </div>
             <div class="form-group">
-              <select name="" id="" class="form-control">
-                <option value="">Select Category</option>
+              <select name="catid" id="" class="form-control">
+                <option>Select Category Name</option>
                 <%for(var i=0 ;i<cat.length; i++) { %>
-                  <option value=""><%=cat[i].category_name%></option>
+                  <option value="<%=cat[i].category_id%>"><%=cat[i].category_name%></option>
                   <%}%>
                 </select>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Enter Price">
+                <input type="text" class="form-control" placeholder="Enter Price" name="price">
               </div>
-              <div class="form-group">
-                <input type="submit" class="btn btn-primary mt-3">
-              </div>
+                <input type="submit" class="btn btn-primary">
             </div>
-        </form>
-        <%/*%>
-        <table>
-          <thead>
+          </form>
+        </div>
+
+        <div class="container-fluid mt-5">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search here...">
+          <a href="" class="btn btn-dark mt-2">Search</a>
+        </div>
+          <table class="table table-dark table-borderd">
+            <thead>
             <tr>
               <th>Product Id</th>
               <th>Product Name</th>
-              <th>Category Name</th>
               <th>Price</th>
               <th>Created At</th>
             </tr> 
@@ -46,12 +49,12 @@
             <tr>
               <td><%=product[i].product_id%></td>
               <td><%=product[i].product_name%></td>
-              <td><%=product[i].category__name%></td>
               <td><%=product[i].price%></td>
               <td><%=product[i].created_at%></td>
+              <td><a href="/update" class="btn btn-secondary">Update</a></td>
             </tr>
+            <%}%>
           </tbody>
-        </table> 
-          <%*/%>
-    </div>
+        </table>
+      </div>
 </body>
