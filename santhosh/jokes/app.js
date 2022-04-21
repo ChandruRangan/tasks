@@ -24,7 +24,6 @@ app.get("/", (req, res) => {
     .get("https://v2.jokeapi.dev/joke/Programming?type=single")
     .then((results) => {
       var joke = results.data.joke;
-      // console.log(joke);
       res.render("jokes", { joke: joke });
     });
 });
@@ -44,6 +43,6 @@ app.post("/insert", (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`The running port is${port}`);
+  console.log(`The running port is: ${port}`);
 });
 
