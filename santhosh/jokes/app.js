@@ -25,6 +25,9 @@ app.get("/", (req, res) => {
     .then((results) => {
       var joke = results.data.joke;
       res.render("jokes", { joke: joke });
+    })
+    .catch(err => {
+      res.status(400).json({ message: "couldn't insert the response" });
     });
 });
 
@@ -32,12 +35,11 @@ app.post("/insert", (req, res) => {
   const {joke}=req.body;
   db("jokes")
     .insert({ fetched_joke: joke })
-    .returning("*")
     .then(() => {
       res.redirect("/");
     })
     .catch(err => {
-      res.status(400).json({ message: "couldn't insert the response" });
+      res.status(400).json({ message: "couldn't fetch the response from api" });
     });
 });
 
