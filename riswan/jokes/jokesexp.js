@@ -19,25 +19,27 @@ const db = knex({
   },
 });
 app.post("/insert", (req, res) => {
-  var ris=req.body.jokes;
-    db("jokes")
-    .insert({ Joke: ris})
-    .returning("*")
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      res.status(400).json({ message: "retry" });
-    });
+    var ris=req.body.jokes;
+      db("jokes").insert({ Joke: ris})
+      .then(() => {
+        res.redirect("/");
+      })
+      .catch((err) => {
+        res.status(400).json({ message: "retry" });
+      });
+  
+  });
 
-});
 app.get('/',(req,res)=>{
-axios.get('https://v2.jokeapi.dev/joke/Programming?type=single').then((faz)=>{
+axios.get('https://v2.jokeapi.ev/joke/Programming?type=single').then((faz)=>{
     var data=faz.data.joke;
     res.render("jokes",{joke:data})
+})
+.catch((err) => {
+  res.render("err");
 });
 });
 
 app.listen(2000, () => {
-  console.log("Running port is http://localhost:2000");
+  console.log("http://localhost:2000");
 });
