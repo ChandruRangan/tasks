@@ -5,17 +5,15 @@ const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended:true }));
 app.set('view engine','ejs');
 app.use(bodyparser.json());
-
 const db= knex({
     client:'postgresql',
     connection:{
         host:"localhost",
-        user:"college",
-        password:"college",
+        user:"kaviya",
+        password:"kaviya06*",
         database:"todolist",
     },
 })
-
  app.post("/insert", (req, res) => {
     const {name}=req.body;
     db("todo").insert({ task:name}).returning("*")
@@ -24,13 +22,12 @@ const db= knex({
     }).catch(err => {
         res.status(400).json({ message: "unable to create a new task"});
     });
-    
     });
     app.get('/',(req,res)=>{
         db.select('*')
         .from("todo")
-        .then((data)=>{  
-          res.render('todo',{data: data});
+        .then((data)=>{
+          res.render('index',{data: data});
          })
          .catch(err => res.status(400).json(err));
       });
@@ -47,6 +44,6 @@ const db= knex({
             .then(task => {res.json(task[0])});
         }
         });
-
-app.listen(4000);
-
+app.listen(4000, () => {
+    console.log(`The running port is http://localhost:4000`);
+});

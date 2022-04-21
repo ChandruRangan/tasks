@@ -1,0 +1,30 @@
+create or replace function credit(aid varchar,money int)
+returns void
+as
+$$
+begin
+update bankacc set amount=amount+money where acc_id=aid;
+end;
+$$
+language plpgsql;
+ create or replace function debit(aid varchar,money int)
+returns void
+as
+$$
+begin
+update bankacc set amount=amount - money where acc_id=aid;
+end;
+$$
+language plpgsql;
+ create or replace function trans(from_id varchar,to_id varchar, amt int)
+ returns void
+ as
+ $$
+ begin
+perform debit(from_id,amt);
+perform credit(to_id,amt);
+ insert into tranacc values (nextval('serial'),from_id,amt,'debit',current_timestamp);
+ insert into tranacc values(nextval('serial'),to_id,amt,'credit',current_timestamp);
+ end;
+  $$
+language plpgsql;

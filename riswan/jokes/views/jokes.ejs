@@ -1,19 +1,26 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
+    <title>Joke</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-  <body>
-    <div class="container text-center">
-    Product Name <input class="form"  type="text" name="proname" placeholder="Product Name">
-    <br><br>Category <input class="form"  type="text" name="cat" placeholder="Select cateor">
-    <br><br>Price <input class="form"  type="text" name="price">
+  <body class="bg-dark">
+    <div class="class">
+      <div class="form-group">
+    <form action="/insert" autocomplete="off" method="post">
+      <div class="container text-center">
+      <input class="form-control input-lg"  type="text" name="jokes" id="joke" value="<%=joke%>"> 
+      <br><br> <input type="submit" value=Joke>
+      </form>
+    </div>
   </div>
+      
   </body>
 </html>
+
+
+
+
+

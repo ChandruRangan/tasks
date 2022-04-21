@@ -16,22 +16,27 @@
         <input type="submit" value="Add a task" class="btn btn-primary mt-2"/>
       </form>
     </div> 
-    <div class="container mt-5 jumbotron">
-      <h1>Todo Tasks</h1>
-      <ul class="list-group" id="todo">   
-        <% for(var i = 0; i <todos.length; i++){ %>
-          <% if(todos[i].status == 0){ %>
-          <li class="list-group-item">
-            <input type="checkbox" name="todo" value="<%=todos[i].id%>" onclick='com(event,"<%=todos[i].id%>")'>
-             <%= todos[i].task %>
-            </li> 
-        <%} %>
-        <%} %>
-      </ul>
-    </div>
-    
-    <div class="container mt-5 jumbotron">
-      <h1>Completed Tasks</h1>
+    <div class="container">
+    <div class="row">
+<div class="col-sm-6 col-md-6">
+  <div class="mt-5 jumbotron bg-dark ">
+    <h3 class="text-white">Todo Tasks</h3>
+        <ul class="list-group" id="todo">   
+          <% for(var i = 0; i <todos.length; i++){ %>
+            <% if(todos[i].status == 0){ %>
+              <li class="list-group-item">
+                <input type="checkbox" name="todo" value="<%=todos[i].id%>" onclick='com(event,"<%=todos[i].id%>")'>
+                <%= todos[i].task %>
+              </li> 
+              <%} %>
+              <%} %>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6">
+    <div class="mt-5 jumbotron bg-dark">
+      <h3 class="text-white">Completed Tasks</h3>
       <ul class="list-group" id="done">   
         <% for(var i = 0; i <todos.length; i++){ %>
           <% if(todos[i].status==1){%>
@@ -42,6 +47,9 @@
         <%} %>
         <%} %>
       </ul>
+    </div>
+    </div>
+    </div>
     </div>
     <script>
     function com(event, id){

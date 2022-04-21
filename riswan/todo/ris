@@ -1,0 +1,10 @@
+Create  or replace function trans( a integer , b integer)
+return void
+as
+$$
+begin
+update bankacc  set  bankacc.amount = bankacc.amount + amount
+where bankacc.accid = acc_trans.accid;
+end;
+$$
+language plpgsql;
