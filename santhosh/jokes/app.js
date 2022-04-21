@@ -24,8 +24,10 @@ app.get("/", (req, res) => {
     .get("https://v2.jokeapi.dev/joke/Programming?type=single")
     .then((results) => {
       var joke = results.data.joke;
-      // console.log(joke);
       res.render("jokes", { joke: joke });
+    })
+    .catch(err => {
+      res.status(400).json({ message: "couldn't insert the response" });
     });
 });
 
@@ -33,17 +35,16 @@ app.post("/insert", (req, res) => {
   const {joke}=req.body;
   db("jokes")
     .insert({ fetched_joke: joke })
-    .returning("*")
     .then(() => {
       res.redirect("/");
     })
     .catch(err => {
-      res.status(400).json({ message: "couldn't insert the response" });
+      res.status(400).json({ message: "couldn't fetch the response from api" });
     });
 });
 
 
 app.listen(port, () => {
-  console.log("The running port is http://localhost:" + `${port}`);
+  console.log(`The running port is: ${port}`);
 });
 

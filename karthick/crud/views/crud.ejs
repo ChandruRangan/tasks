@@ -1,0 +1,57 @@
+<head>
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Products</h3>
+        <form action="/insert" autocomplete="off" method="post">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter Product Name">
+            </div>
+            <div class="form-group">
+              <select name="" id="" class="form-control">
+                <option value="">Select Category</option>
+                <%for(var i=0 ;i<cat.length; i++) { %>
+                  <option value=""><%=cat[i].category_name%></option>
+                  <%}%>
+                </select>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Price">
+              </div>
+              <div class="form-group">
+                <input type="submit" class="btn btn-primary mt-3">
+              </div>
+            </div>
+        </form>
+        <%/*%>
+        <table>
+          <thead>
+            <tr>
+              <th>Product Id</th>
+              <th>Product Name</th>
+              <th>Category Name</th>
+              <th>Price</th>
+              <th>Created At</th>
+            </tr> 
+          </thead>
+          <tbody>
+            <%for(var i=0;i<product.length;i++){%>
+            <tr>
+              <td><%=product[i].product_id%></td>
+              <td><%=product[i].product_name%></td>
+              <td><%=product[i].category__name%></td>
+              <td><%=product[i].price%></td>
+              <td><%=product[i].created_at%></td>
+            </tr>
+          </tbody>
+        </table> 
+          <%*/%>
+    </div>
+</body>
