@@ -18,7 +18,7 @@ const db = knex({
   },
 });
 
-
+fatal: Not possible to fast-forward, aborting
 
 
 
