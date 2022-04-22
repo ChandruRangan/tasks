@@ -13,14 +13,14 @@ const db = knex({
   client: "pg",
   connection: {
     host: "localhost",
-    user: "riswan1",
-    password: "Riswan@123",
-    database: "joke",
+    user: "siv",
+    password: "sivi123",
+    database: "postgres",
   },
 });
 app.post("/insert", (req, res) => {
-    var ris=req.body.jokes;
-      db("jokes").insert({ Joke: ris})
+    var siv=req.body.jokes;
+      db("joke").insert({ jokes: siv})
       .then(() => {
         res.redirect("/");
       })
@@ -31,12 +31,12 @@ app.post("/insert", (req, res) => {
   });
 
 app.get('/',(req,res)=>{
-axios.get('https://v2.jokeapi.ev/joke/Programming?type=single').then((faz)=>{
-    var data=faz.data.joke;
-    res.render("jokes",{joke:data})
+axios.get('https://v2.jokeapi.dev/joke/Programming?type=single').then((puppy)=>{
+    var data=puppy.data.joke;
+    res.render("jokes",{joke:data});
 })
 .catch((err) => {
-  res.render("err");
+  res.status(400).json({ message: "retry" });
 });
 });
 
