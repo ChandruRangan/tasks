@@ -1,22 +1,24 @@
 <%-include('style.ejs')%>
 <body>
     <div class="container mt-5">
-        <h3> Update Products</h3>
-        <form action="/update" autocomplete="off" method="post">
+        <h3 class="alert alert-danger text-center">Update Products</h3>
+        <form action="/updatedata?id=<%=id%>" autocomplete="off" method="post">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Enter Product Name" name="pname" value="">
+            <input type="text" class="form-control" placeholder="Enter Product Name" name="pname" value="<%=product[id].product_name%>" >
             </div>
             <div class="form-group">
-              <select name="catid" id="" class="form-control">
-                <option>Select Category Name</option>
-                  <option value=""></option>
+              <select name="catid"  class="form-control">
+                  <!-- <option value="<%=product[id].category_id%>"><%=product[id].category_name%></option> -->
+                  <option>Select Category Name</option>
+                <%for(var i=0 ;i<product.length; i++) { %>
+                  <option value="<%=product[i].category_id%>"><%=product[i].category_name%></option>
+                  <%}%>
                 </select>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Enter Price" name="price">
+                <input type="text" class="form-control" placeholder="Enter Price" name="price" value="<%=product[id].price%>">
               </div>
-                <input type="submit" class="btn btn-primary">
-                <a href="/display" class="btn btn-secondary">View</a>
+                <input type="submit" class="btn btn-primary" value="Update">
             </div>
           </form>
         </div>
