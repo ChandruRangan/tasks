@@ -1,0 +1,24 @@
+<head>
+  </head>
+  <body>
+      <div class="">
+          <h3>Products</h3>
+          <form action="http://localhost:2000/insert" method="POST">
+            <div>
+              <div>
+                <input type="text"  placeholder="Enter Product Name" name="Product">
+              </div>
+            <div >
+              <select name="" id=""  name="category">
+                <%for(var i=0 ;i<data.length; i++) { %>
+                <option value="<%=data[i].category_id%>"><%=data[i].category_name%></option>
+                <%}%>
+              </select>
+            </div>
+            <div >
+              <input type="text" placeholder="Enter Price" name="price">
+            </div>
+            <input type="submit">
+          </form>
+      </div>
+  </body>
