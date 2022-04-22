@@ -1,0 +1,39 @@
+<%-include('style.ejs')%>
+<div class="container-fluid mt-5">
+    <h3 class="alert alert-success text-center">Products List</h3>
+    <form action="/search" autocomplete="off" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search here..." name="input">
+            <input type="submit" class="btn btn-dark mt-2" placeholder="Search">
+        </div>
+    </form>
+    <table class="table table-dark table-borderd table-striped">
+        <thead>
+        <tr>
+      <th>Product Id <a href="/sort" class="btn btn-outline-success btn-sm">ASEC</a></th>
+      <th>Product Name</th>
+      <th>Price</th>
+      <th>category name</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>Action</th>
+    </tr> 
+</thead>
+  <tbody>
+    <%for(var i=0;i<product.length;i++){%>
+        <tr>
+            <td><%=product[i].product_id%></td>
+            <td><%=product[i].product_name%></td>
+            <td><%=product[i].price%></td>
+            <td><%=product[i].category_name%></td>
+            <td><%=product[i].created_at%></td>
+            <td><%=product[i].updated_at%></td>
+            <td><a href="/update?id=<%=product[i].product_id-1%>" class="btn btn-success">Update</a></td>
+        </tr>
+        <%}%>
+    </tbody>
+</table>
+<div class="text-center">
+    <a class="btn btn-info" href="/">Back</a>
+</div>
+</div>

@@ -1,0 +1,30 @@
+<div>
+    <form method="post" action="/search">
+      <input type="text" placeholder="Search" name="search">
+      <button  type="submit" value="search">Search</button>
+    </form>
+  </div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Category Name</th>
+            <th>Price</th>
+            <th>Created At</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%for (i=0;i<data.length;i++){%>
+           <tr>
+               <td><%=data[i].product_id%></td>
+               <td><%=data[i].product_name%></td>
+               <td><%=data[i].category_name%></td>
+               <td><%=data[i].price%></td>
+               <td><%=data[i].created_at%></td>
+                </tr>
+               <%}%>
+    </tbody>
+</table>
