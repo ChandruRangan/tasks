@@ -1,0 +1,26 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
+</head>
+<div class="container-fluid mt-5">   
+    <table class="table table-dark table-striped table-bodered">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Programing_jokes</th>
+        </tr>
+      </thead>
+      <tbody id="content">
+        <% for(var i = 0; i <data.length; i++){ %>
+          <tr>
+            <td><%= data[i].id %></td>
+            <td><%= data[i].programing_jokes %></td> 
+          </tr>
+          <%} %>
+        </tbody>
+      </table>
+    </div>
