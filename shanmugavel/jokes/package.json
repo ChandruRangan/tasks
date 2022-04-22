@@ -1,0 +1,19 @@
+{
+  "name": "jokes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "express": "^4.17.3",
+    "knex": "^1.0.7",
+    "pg": "^8.7.3",
+    "postgres": "^3.0.5"
+  }
+}
