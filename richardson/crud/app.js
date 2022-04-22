@@ -23,4 +23,15 @@ app.get('/',(req,res)=>{
      })
      .catch(err => res.status(400).json(err));
   });
+  app.post("/insert", (req, res) => {
+    const {product}=req.body;
+    const {category}=req.body;
+    const {price}=req.body;
+    db("products").insert({ product_name:product,category_id:category,price:price,created_at:Date(Date.now())})
+    .then(_=> {
+       res.redirect("/");
+    }).catch(err => {
+        res.status(400).json({ message: err});
+    });
+});
   app.listen(5000);
