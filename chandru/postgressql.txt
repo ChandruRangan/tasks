@@ -9,7 +9,7 @@ $$
 language plpgsql;
  create or replace function debit(aid varchar,money int)
 returns void
-as
+as  
 $$
 begin
 update bankacc set amount=amount - money where acc_id=aid;

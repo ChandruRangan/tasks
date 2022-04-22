@@ -1,0 +1,47 @@
+<div class="container-fluid mt-5">
+    <form action="/search"  method="post">
+        <div class="form-group">
+             <input type="text" class="form-control" placeholder="Search here..." name="input"> 
+            <input type="submit" class="btn btn-dark mt-2" placeholder="Search">
+        </div>
+    </form>
+    <!-- <div class="form-group">
+        <select class="form-control" name="input" action="/search" method="post">
+          <%for(var i=0 ;i<data.length; i++) { %>
+          <option value="<%=data[i].category_id%>"><%=data[i].category_name%></option>
+          <%}%>
+        </select>
+      </div> -->
+<head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+<body>
+<table class="table table-dark table-borderd table-striped">
+    <thead>
+        <tr>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Category Name</th>
+            <th>Price</th>
+            <th>created_at</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%for (var i=0; i<data.length; i++){%>
+            <tr>
+            <td><%=data[i].products_id%></td>
+            <td><%=data[i].product_name%></td>
+            <td><%=data[i].category_name%></td>
+            <td><%=data[i].price%></td>
+            <td><%=data[i].created_at%></td>
+            </tr>
+        <%}%>
+    </tbody>
+</table>
+</body>
+</head>
+</div>
