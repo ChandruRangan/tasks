@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         header{
+            height: 60px;
+            background-color: rgb(0, 255, 255) ;
+        }
+        header h1{
+            padding: 10px;
+            /* color: white; */
+            text-align: center;
+        }
+        main{
+            padding: 30px;
+            margin: 50px auto;
+            /* border: 3px violet solid; */
+            width: 500px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form{
+            margin: 20px;
+           }
+        #mytext{
+            padding: 0 10px;
+            margin-right: 10px;
+            height: 30px;
+          }
+          #addBtn{
+                 background-color: rgb(0, 255, 221);
+                 padding: 10px;
+                 border-radius: 5px;
+                 height: 5px;
+          }
+          #addBtn:hover{
+              cursor:pointer;
+              background-color: rgb(255, 75, 255);
+          }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TO-DO List</h1>
+    </header>
+         <main>
+            <form>
+               <input id="mytext" type="text" placeholder="Enter the Text">
+               <span onclick="mylist()" id="addBtn">Add</span>
+            </form>
+         <ol id="myul"> </ol>
+        </main>
+        <script>
+              function mylist()
+              {
+                if(document.getElementById("mytext").value==""){
+                    alert("input empty")
+                }
+                else{
+                    var li = document.createElement("li");
+                var btn=document.createElement('button');
+                btn.innerText="X";
+                btn.style.marginLeft="100px";
+                li.innerText=document.getElementById("mytext").value;
+                btn.addEventListener('click',(e)=>{
+                    e.preventDefault();
+                    document.getElementById("myul").removeChild(li);
+                })
+                li.appendChild(btn);
+                
+                document.getElementById("myul").appendChild(li);
+                }
+             }
+</script>
+</body>
+</html>
