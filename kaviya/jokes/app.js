@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 5000;
 const knex = require("knex");
 
 const axios = require("axios");
@@ -15,7 +15,7 @@ const db = knex({
     host: "localhost",
     user: "kaviya",
     password: "kaviya06*",
-    database: "jokes",
+    database: "jokedb",
   },
 });
 
@@ -30,9 +30,8 @@ app.get("/", (req, res) => {
 
 app.post("/insert", (req, res) => {
   const {joke}=req.body;
-  db("jokes")
-    .insert({ fetched_joke: joke })
-    .returning("*")
+  db("joke")
+    .insert({ jokes: joke })
     .then(() => {
       res.redirect("/");
     })
