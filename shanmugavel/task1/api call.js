@@ -15,9 +15,11 @@ axios.get(' https://v2.jokeapi.dev/joke/Programming?type=single')
   .then( (response)=> {
      k=response.data.joke;
     // console.log(response);
-    pool.query(`insert into joke values(1,${"'"+k.replaceAll("'",'"')+"'"})`);
+    pool.query(`insert into joke values(1,${k })`);
  
-console.log(k);
+    let h = '@'+`${k}`+'@';
+    console.log(h);
+
 
   })
   .catch(function (error) {
