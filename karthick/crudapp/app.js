@@ -27,5 +27,7 @@ app.get('/pidasc',pidasc);
 app.get('/pnasc',pnasc);
 app.get('/priceasc',priceasc);
 app.get('/catasc',catasc);
-app.listen(5000);
+app.listen(5000,()=>{
+    console.log(`Running port is http://localhost:5000`);
+});
 
