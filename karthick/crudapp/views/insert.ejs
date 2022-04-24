@@ -1,8 +1,8 @@
 <%-include('style.ejs')%>
 <body>
     <div class="container mt-5">
-        <h3>Products</h3>
-        <form action="/insert" autocomplete="off" method="post">
+        <h3 class="alert alert-info text-center">Add New Products</h3>
+        <form action="/inserted" autocomplete="off" method="post">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Enter Product Name" name="pname">
             </div>
@@ -17,8 +17,8 @@
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Enter Price" name="price">
               </div>
-                <input type="submit" class="btn btn-primary">
-                <a href="/display" class="btn btn-secondary">View</a>
+                <input type="submit" class="btn btn-primary" value="Add">
+                <a href="/" class="btn btn-secondary">View</a>
             </div>
           </form>
         </div>

@@ -1,20 +1,18 @@
 {
-  "name": "crud",
+  "name": "joketask",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "joketask",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.0",
+    "axios": "^0.26.1",
     "ejs": "^3.1.7",
-    "ejs-lint": "^1.2.1",
     "express": "^4.17.3",
-    "knex": "^1.0.7",
-    "nodemon": "^2.0.15",
+    "knex": "^2.0.0",
     "pg": "^8.7.3"
   }
 }
