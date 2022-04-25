@@ -1,8 +1,8 @@
 {
-  "name": "todo-task",
+  "name": "todolist",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "todo.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,6 +13,7 @@
     "body-parser": "^1.20.0",
     "ejs": "^3.1.7",
     "express": "^4.17.3",
-    "knex": "^1.0.7"
+    "knex": "^2.0.0",
+    "pg": "^8.7.3"
   }
 }

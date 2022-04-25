@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>crud app</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <form action="http://localhost:8000/insert" method="post">
+    <div>
+      <input type="text" placeholder="product name"><br><br>
+    </div>
+    <div>
+        <select name="category name" placeholder="category name" id="category">
+          <% for(var i=0 ;i<data.length; i++)%>{
+          <option value="<%=data[i].category_id%>"><%=data[i].category_name%></option>
+          <%}%>
+        </select>
+    </div>
+      <input type="price" placeholder="enter price"><br><br>
+    </div>
+    <div>
+      <input type="submit">
+      <a href="/vie">view</a>
+    </div>
+    </form>
+  </body>
+</html>
