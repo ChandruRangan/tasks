@@ -2,55 +2,51 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const knex = require("knex");
-
 const axios = require("axios");
 app.set("view engine", "ejs");
-
 const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 const db = knex({
   client: "pg",
   connection: {
     host: "localhost",
     user: "muthus",
     password: "muthu@904743",
-    database: "jokes",
+    database: "todolist",
   },
 });
-
-app.get("/", (req, res) => {
-  axios
-    .get("https://v2.jokeapi.dev/joke/Programming?type=single")
-    .then((results) => {
-      var joke = results.data.joke;
-      console.log(joke);
-      res.render("jokes", { joke: joke });
-    });
-});
-
 app.post("/insert", (req, res) => {
-  const {joke}=req.body;
-  db("jokes")
-    .insert({ programming_jokes: joke })
-    .returning("*")
+  const {tasks}=req.body;
+  db("todo")
+    .insert({ task:tasks})
     .then(() => {
       res.redirect("/");
     })
-    .catch(err => {
-      res.status(400).json({ message: "unable to insert" });
+    .catch((err) => {
+      res.status(400).json({ message: "unable to insert" +err });
     });
 });
-
-app.get("/display", (req, res) => {
+app.get("/", (req, res) => {
   db.select("*")
-    .from("jokes")
+    .from("todo")
     .then((data) => {
-      res.render("display", { data: data });
+      res.render("todo", { todos: data });
     })
     .catch((err) => res.status(400).json(err));
 });
-
+app.put("/com", (req, res) => {
+  const { name, id } = req.body;
+  if (name == "todo") {
+    db("todo").where("id", "=", id).update("status", 1).returning("status")
+  .then(task => {res.json(task[0])});
+  } 
+  else {
+  db("todo").where("id", "=", id).update("status", 0)
+  .returning("status")
+  .then(task => {res.json(task[0])});
+  }
+  });
 app.listen(port, () => {
   console.log("The running port is http://localhost:" + `${port}`);
 });

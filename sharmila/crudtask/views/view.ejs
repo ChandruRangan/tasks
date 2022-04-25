@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <form action="/vie" method="post">
+        <input type="text" placeholder="search">
+        <button type="submit" value="seacrch">search</button> 
+    </form>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>product_id</th>
+                    <th>product_name</th>
+                    <th>price</th>
+                    <th>category_id</th>
+                    <th>created_at</th>
+                    <th>updated_at</th>
+                </tr>
+            </thead><br>
+            <tbody>
+                <% for(var i=0;i<data.length;i++){ %>
+                <tr>
+                    <td><%= data[i].product_id%></td>
+                    <td><%= data[i].product_name%></td>
+                    <td><%= data[i].price%></td>
+                    <td><%= data[i].category_id%></td>
+                    <td><%= data[i].created_at%></td>
+                    <td><%= data[i].updated_at%></td>
+                </tr>    
+                <%} %>
+            </tbody>
+        </table>
+      </div>
+</body>
+</html>
+
+
+
+
