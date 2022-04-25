@@ -5,13 +5,13 @@
             <input type="submit" class="btn btn-dark mt-2" placeholder="Search">
         </div>
     </form>
-    <!-- <div class="form-group">
+     <!-- <div class="form-group">
         <select class="form-control" name="input" action="/search" method="post">
           <%for(var i=0 ;i<data.length; i++) { %>
           <option value="<%=data[i].category_id%>"><%=data[i].category_name%></option>
           <%}%>
         </select>
-      </div> -->
+      </div>  -->
 <head>
     <link
       rel="stylesheet"
@@ -25,9 +25,10 @@
         <tr>
             <th>Product Id</th>
             <th>Product Name</th>
-            <th>Category Name</th>
+            <th>Category Name <a href="/casc?c=category_name" class="btn btn-outline-info btn-sm">A</a></th>
             <th>Price</th>
             <th>created_at</th>
+            <th>updated_at</th>
         </tr>
     </thead>
     <tbody>
@@ -38,6 +39,9 @@
             <td><%=data[i].category_name%></td>
             <td><%=data[i].price%></td>
             <td><%=data[i].created_at%></td>
+            <td><%=data[i].updated_at%></td>
+            <td><a href="/update?id=<%=data[i].products_id%>" class="btn btn-outline-success">Update</a></td>
+            <td><a href="/delete?id=<%=data[i].products_id%>" class="btn btn-outline-danger">Delete</a></td>
             </tr>
         <%}%>
     </tbody>
