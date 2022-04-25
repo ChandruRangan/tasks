@@ -1,0 +1,81 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="mt-5 container text-center">
+      <h1 class="mb-5">Todo list</h1>
+      <form action="/insert" method="post" autocomplete="off">
+        <input type="text" class="form-control" name="tasks" value="">
+        <input type="submit" value="Add a task" class="btn btn-primary mt-2"/>
+      </form>
+    </div> 
+    <div class="container">
+    <div class="row">
+<div class="col-sm-6 col-md-6">
+  <div class="mt-5 jumbotron bg-dark ">
+    <h3 class="text-white">Todo Tasks</h3>
+        <ul class="list-group" id="todo">   
+          <% for(var i = 0; i <todos.length; i++){ %>
+            <% if(todos[i].status == 0){ %>
+              <li class="list-group-item">
+                <input type="checkbox" name="todo" value="<%=todos[i].id%>" onclick='com(event,"<%=todos[i].id%>")'>
+                <%= todos[i].task %>
+              </li> 
+              <%} %>
+              <%} %>
+            </ul>
+          </div>
+        </div>
+      <div class="col-sm-6 col-md-6">
+    <div class="mt-5 jumbotron bg-dark">
+      <h3 class="text-white">Completed Tasks</h3>
+      <ul class="list-group" id="done">   
+        <% for(var i = 0; i <todos.length; i++){ %>
+          <% if(todos[i].status==1){%>
+          <li class="list-group-item">
+            <input type="checkbox" name="done" value="<%=todos[i].id%>" onclick="com(event,'<%=todos[i].id%>')"> 
+            <%= todos[i].task %>
+          </li> 
+        <%} %>
+        <%} %>
+      </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+    <script>
+    function com(event, id){
+      const{name} = event.target;
+      fetch("http://localhost:3000/com", 
+      {method: "PUT",
+      headers: {
+      "Content-Type": "application/json"
+      },
+      body: JSON.stringify({name, id})
+      }).then(response => response.json()).then(status=> {
+      window.location.reload()
+      }).catch(err => console.log(err))
+      }
+      </script>
+  </body>
+</html>

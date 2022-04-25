@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport", content="width=device-width",initial-scale="1.0">
+        <title>datra</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .container{
+                max-width: 1300px;
+                margin: 0 auto;
+                padding: 0 4%;
+            }body{
+                min-height: 100vh;
+                background-image: white;
+            }
+            nav{
+                padding-top: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            nav .logo{
+                width: 90px;
+
+            }
+            nav ul{
+                list-style: none;
+                display:inline-flex;
+                align-items: center;
+            }
+            nav ul li {
+                padding: 20px;
+            }
+            nav ul li:not(.lg,.sg)::after{
+                display: block;
+                content: '';
+                width: 0%;
+                background-color: #393338;
+                transition: 0.5s;
+                height: 3px;
+            }
+            
+            nav ul li:hover::after{
+                width: 100%;
+            }
+            nav ul li.lg{
+                border: 1px solid #393338;
+                border-radius: 30px;
+                padding: 5px 40px;
+                margin-left: 30px;
+                
+            }
+            nav ul li a{
+                color: #393338;
+                text-decoration: none;
+                font-size: 17px;
+            }
+            main{
+                display: flex;
+                align-items: center;
+                margin-left: 60px;
+            }
+            main .main_text{
+                width: 50%;
+            }
+            main .main_text h1{
+                font-size: 4rem;
+            }
+            main .main_text p{
+                color: #8b7f8d;
+                margin: 20px 0 40px;
+                width: 90%;
+
+            }
+            main .main_text button{
+                background-color: black;
+                color: white;
+                border-radius: 30px;
+                padding: 10px ;
+                outline: none;
+                border: none;
+                cursor: pointer;
+                font-size: 17px;
+                border: 1px solid transparent;
+                transition: all 0.5s;
+            }
+            main .main_text input{
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 10px;
+            }
+            main .main_text button:hover{
+                transform: scale(0.9);
+
+            }
+            main .main_img{
+                width: 50%;
+            }
+            main .main_img img{
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="#"> <img src="logo1.png" width="100%"</a>
+                </div>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Approach</a></li>
+                    <li><a href="#">Solutions</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">Workshop</a></li>
+                    <li class="lg"> <a href="#">Login</a></li>
+                    <li class="sg"> <a href="#">Signup</a></li>
+                </ul>
+            </nav>
+            <main>
+                <div class="main_text">
+                    <h1><b>The better way <br>to work with <br> <mark>marketing</mark>data</b></h1>
+                    <p>Collects all your data in one secure place and makes it analysis-ready for you and your team.Your data is always accuraate and up-to-date for all your marketing reporting needs.
+                        Send data to a dashboard,sheet or data warehouse.
+                    </p>
+                    <input  type="email" id="email" placeholder="Enter your email">
+                    <button type="button" id="button">Get Started</button>
+                </div>
+
+                <div class="main_img">
+                    <img src="image.png">
+                </div>
+
+            </main>
+        </div>
+    </body>
+</html>
