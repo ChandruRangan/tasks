@@ -2,10 +2,13 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const knex = require("knex");
+
 const axios = require("axios");
 app.set("view engine", "ejs");
+
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
+
 const db = knex({
   client: "pg",
   connection: {
@@ -15,6 +18,7 @@ const db = knex({
     database: "jokes",
   },
 });
+
 app.get("/", (req, res) => {
   axios
     .get("https://v2.jokeapi.dev/joke/Programming?type=single")

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator
+        </title>
+        <link rel="stylesheet" href="calc.css">
+    </head>
+    <body>
+        <div class="container">
+            <form id="myform">
+            <input type="text" id="display" maxlength="10" pattern="[0-9]+"><br>
+            <input type="button" class="btn" value="1" onclick="number(1)">
+            <input type="button" class="btn" value="2" onclick="number(2)">
+            <input type="button" class="btn" value="3" onclick="number(3)">
+                <input type="button" class="btn" value="+" onclick="operator('+')"><br>
+                <input type="button" class="btn" value="4" onclick="number(4)">
+                <input type="button" class="btn" value="5" onclick="number(5)">
+                <input type="button" class="btn" value="6" onclick="number(6)">
+                <input type="button" class="btn" value="-" onclick="operator('-')"><br>
+                <input type="button" class="btn" value="7" onclick="number(7)">
+                <input type="button" class="btn" value="8" onclick="number(8)">
+                <input type="button" class="btn" value="9" onclick="number(9)">
+                <input type="button" class="btn" value="*" onclick="operator('*')"><br>
+                <input type="button" class="btn" value="C" onclick="clr()">
+                <input type="button" class="btn" value="0" onclick="number(0)">
+                <input type="button" class="btn" value="=" onclick="equals()">
+                <input type="button" class="btn" value="/" onclick="operator('/')">
+            </form>
+            </div>
+            <script src="calc.js"></script>
+           <!--  <script src="./valid.js"></script> -->
+    </body>
+</html>
