@@ -25,12 +25,28 @@
   font-size: 16px;
   cursor: pointer;
     }
+    #p{color: white;}
    
 </style>
-s
+
 <body>
+    <p id="p"></p>
     <button onclick="fn1()"> Tell me a joke </button>
     <script>
+        function fn1(){
+            let p=document.getElementById("p");
+            var request= new XMLHttpRequest();                                                      // intializing object for AJAX
+          request.open("PUT", "/insert");                                                               //
+          request.onreadystatechange=function(){
+            if(this.readyState === 4 && this.status === 200) {
+               
+               p.innerText=JSON.parse(this.responseText)[0].jokes;
+             
+            //   console.log(JSON.parse(this.responseText));
+            }
+          }
+          request.send();
+        }
         
     </script>
 </body>
