@@ -1,38 +1,38 @@
 const express = require("express");
 const app = express();
 const knex = require("knex");
-const port = 3000;
+const port = 1234;
 const axios = require("axios");
 app.set("view engine","ejs");
 const bodyparser = require("body-parser");
-app.use (bodyParser.urlencoded({extended:true}))
-const db = knex({
-    client: "pg",
-    connection: {
-      host: "localhost",
-      user: "postgres",
-      password: "123",
-      database: "jokes",
-    },
-  });
+app.use (bodyparser.urlencoded({extended:true}));
+
+const db=knex({
+client:'pg',
+connection:{
+  host:'localhost',
+  user:'postgres',
+  password:'123',
+  database:'projokes'
+}
+});
   app.get ('/',(req,res) =>{
       axios.get("https://v2.jokeapi.dev/joke/Programming?type=single")
       .then((result) => {
-      var joke = result.data.joke;
-      console.log(joke);  
-      res.render("display",{})
+      var joke = result.data.joke;  
+      res.render("display",{joke:joke})
       })
   })
-  app.post('/',(req,res) =>{
-      const joke =req.body;
-      db("jokes")
-      .insert({projokes:joke})
-      .returning("*")
-      .then(() =>{
-          res.redirect("/");
-      })
-      .catch(err =>{
-       res.status(400).json({ message: "unable to insert" });
+  app.post('/insert',(req,res) =>{
+      const { joke } = req.body;
+      console.log(joke);
+     db.select('jokes').insert({jokes:joke}).then(()=>{
+       res.redirect('/');
+     }).catch(e=>{
+       res.status(400).json(e);
+     });
       });
+      app.listen(port, () => {
+        console.log("The running port is http://localhost:" + `${port}`);
       });
       

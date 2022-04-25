@@ -11,8 +11,11 @@
   "dependencies": {
     "body-parser": "^1.20.0",
     "ejs": "^3.1.7",
+    "ejs-lint": "^1.2.1",
+    "exports": "^0.0.1",
     "express": "^4.17.3",
     "knex": "^1.0.7",
+    "nodemon": "^2.0.15",
     "pg": "^8.7.3"
   }
 }

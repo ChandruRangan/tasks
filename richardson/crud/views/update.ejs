@@ -1,0 +1,36 @@
+<head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>    
+      <div class="container mt-5">
+          <h3>Products</h3>
+          <form action="/updatedata?id=<%=id%>" autocomplete="off" method="post">
+            <div class="form-group">
+              <div class="form-group">
+                <%for(var i=0 ;i<data.length; i++) { %>
+                <input type="text" class="form-control" placeholder="Enter Product Name" name="product" value="<%=data[i].product_name%>">
+                <%}%>
+
+              </div>
+            <div class="form-group">
+              <select class="form-control" name="category">
+                <%for(var i=0 ;i<c.length; i++) { %>
+                <option value="<%=c[i].category_id%>"><%=c[i].category_name%></option>
+                <%}%>
+              </select>
+            </div>
+            <div class="form-group">
+                <%for(var i=0 ;i<data.length; i++) { %>
+                <input type="text" class="form-control" placeholder="Enter Price" name="price" value="<%=data[i].price%>">
+                <%}%>
+            </div>
+            <input type="submit" class="btn btn-primary mt-3" value="update">
+            
+          </form>
+      </div>
+  </body>
