@@ -1,0 +1,29 @@
+<head>
+  </head>
+  <body>    
+      <div>
+          <h3>Products</h3>
+          <form action="/updatedata?id=<%=id%>" autocomplete="off" method="post">
+            <div >
+              <div >
+                <%for(var i=0 ;i<data.length; i++) { %>
+                <input type="text" placeholder="Enter Product Name" name="product" value="<%=data[i].product_name%>">
+                <%}%>
+
+              </div>
+            <div >
+              <select  name="category">
+                <%for(var i=0 ;i<c.length; i++) { %>
+                <option value="<%=c[i].category_id%>"><%=c[i].category_name%></option>
+                <%}%>
+              </select>
+            </div>
+            <div>
+                <%for(var i=0 ;i<data.length; i++) { %>
+                <input type="text" placeholder="Enter Price" name="price" value="<%=data[i].price%>">
+                <%}%>
+            </div>
+            <input type="submit" value="update">   
+          </form>
+      </div>
+  </body>

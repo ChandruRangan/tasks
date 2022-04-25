@@ -14,10 +14,10 @@
           <form action="/insert" method="POST">
             <div class="form-group">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Enter Product Name" name="Product">
+                <input type="text" class="form-control" placeholder="Enter Product Name" name="product">
               </div>
             <div class="form-group">
-              <select name="" id="" class="form-control" name="category">
+              <select class="form-control" name="category">
                 <%for(var i=0 ;i<data.length; i++) { %>
                 <option value="<%=data[i].category_id%>"><%=data[i].category_name%></option>
                 <%}%>
@@ -27,6 +27,7 @@
               <input type="text" class="form-control" placeholder="Enter Price" name="price">
             </div>
             <input type="submit" class="btn btn-primary mt-3">
+            <a class="btn btn-primary mt-3" href="/view">view</a>
           </form>
       </div>
   </body>
