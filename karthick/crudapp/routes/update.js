@@ -9,7 +9,7 @@ exports.update = async (req, res) => {
     .then((data) => {
         db.select("*")
       .from("categories")
-      .orderBy("category_name", "asc").then((cat)=>{
+      .then((cat)=>{
           res.render("update", { data: data, id: id,cat:cat });
         })
     })
