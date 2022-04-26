@@ -13,9 +13,9 @@ const db = knex({
   client: "pg",
   connection: {
     host: "localhost",
-    user: "postgres",
-    password: "sandy@001",
-    database: "jokes",
+    user: "santhosh",
+    password: "santhosh123",
+    database: "santhoshdb",
   },
 });
 

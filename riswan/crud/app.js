@@ -5,6 +5,8 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set("view engine", "ejs");
+let alert = require('alert');
+
 
 const db = knex({
   client: "pg",
@@ -73,31 +75,43 @@ app.post("/find", (req, res) => {
 
 
 app.get("/update", (req, res) => {
+  const id=parseInt
+  
+  (req.query.id);
   db.select("*")
-  .from("cat")
+  .from("product")
+  .where("product_id",id)
   .then((data) => {
-    res.render("update", { data: data });
+    db.select("*")
+  .from("cat")
+  .orderBy("category","asc")
+  .then((categ)=>{
+    res.render("update", { data: data,id:id,categ:categ });
   })
+  })
+  .catch((err)=>{
+    res.json({message:err});
+  });
 });
 
-app.post("/updatedata", (req, res) => {
-  const {id}=req.body;
-  const {pn}= req.body;
-  const {price} = req.body;
-  const {category} = req.body;
-
-
+app.post("/updatenext", (req, res) => {
+  let proid=parseInt(req.query.id);
+  const pn= req.body.pn;
+  const category = req.body.category;
+  const price = req.body.price;
+  
   db("product")
+  .where('product_id','=', proid)
   .update({
-      product_id: id,
       product_name: pn,
       price: price,
       category_id: category,
-      updated_at: Date(Date.now()),
+      updated_at: Date(Date.now())
     })
-    .where('product_id', id)
+    
     .then(() => {
       res.redirect("/dis");
+      alert("Updated")
     })
     .catch((err) => {
       res.status(400).json({ message: err });
@@ -111,8 +125,9 @@ app.get("/delete", (req, res) => {
     .where('product_id', id)
     .del()
   .then(() => {
-    res.redirect("/dis")
-  })
+    res.redirect("/dis");
+    alert("Deleted")
+    })
 });
 
 app.listen(5454);
