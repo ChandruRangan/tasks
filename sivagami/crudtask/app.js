@@ -72,16 +72,7 @@ crud.post("/find",(req,res)=>{
 
 crud.get("/update", (req, res) => {
 const id=req.query.id;
-/* db.select("*").from("product").where("product_id",id).then((data)=>{
-    db.select("*")
-    .from("category").orderby("category","asc")
-    .then((category) => {
-        res.render("update", { data:data,id:id,category:category });
-        console.log('sucess');
-    })
-    }).catch((err)=>{
-        res.json({message:err});
-    }); */
+
     db.select("*").from("product").where("product_id",id).then((data)=>{
         db.select("*").from('category').orderBy("category","asc").then((cat)=>{
             res.render('update',{data:data,id:id,category:cat});
@@ -91,7 +82,7 @@ const id=req.query.id;
  crud.post("/updatenext", (req, res) => {
       const id=req.query.id;
 
-      
+
     
     const pn= req.body.pn;
     const price = req.body.price;
