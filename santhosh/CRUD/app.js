@@ -9,9 +9,9 @@ const db= knex({
     client:'postgresql',
     connection:{
         host:"localhost",
-        user:"postgres",
-        password:"sandy@001",
-        database:"crud",
+        user:"santhosh",
+        password:"santhosh123",
+        database:"santhoshdb",
     },
 })
 app.get('/',(req,res)=>{
