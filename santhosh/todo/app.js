@@ -9,9 +9,9 @@ const db= knex({
     client:'postgresql',
     connection:{
         host:"localhost",
-        user:"postgres",
-        password:"sandy@001",
-        database:"todolist",
+        user:"santhosh",
+        password:"santhosh123",
+        database:"santhoshdb",
     },
 })
  app.post("/insert", (req, res) => {

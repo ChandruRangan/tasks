@@ -1,11 +1,11 @@
 const express = require("express");
 const app = express();
-const port = 9000;
-const knex = require("knex");
-const axios = require("axios");
+const port = 5000;
+const bodyparser = require("body-parser");
+app.use(bodyparser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
+
+const knex = require("knex");
 const db = knex({
   client: "pg",
   connection: {
@@ -15,46 +15,87 @@ const db = knex({
     database: "product",
   },
 });
+
 app.get("/", (req, res) => {
-  axios
-    .get("product")
-    .then((results) => {
-      var product = results.data.product;
-      console.log(product);
-      res.render("products", { product: product });
+  db.select("*")
+    .from("categories")
+    .orderBy("category_name", "asc")
+    .then((data) => {
+      res.render("crud", { cat: data });
+    })
+    .catch((err) => {
+      res.status(400).json({ err });
     });
 });
 
 app.post("/insert", (req, res) => {
-  const {product}=req.body;
-  db("product")
-    .insert({ category_name: product })
-    .returning("*")
+  const pname = req.body.pname;
+  const catid = req.body.catid;
+  const price = req.body.price;
+  console.log(pname+catid+price);
+  db("products")
+    .insert({
+      product_name: pname,
+      price: price,
+      category_id: catid,
+      created_at: Date(Date.now()),
+    })
     .then(() => {
       res.redirect("/");
     })
-    .catch(err => {
-      res.status(400).json({ message: "unable to insert" });
+    .catch((err) => {
+      res.status(400).json({ message: err });
     });
 });
 
 app.get("/display", (req, res) => {
-  db.select("*")
-    .from("product")
+  db("products as p")
+    .join("categories as c", "p.category_id", "c.category_id")
+    .select(
+      "p.product_id",
+      "p.product_name",
+      "p.price",
+      "c.category_name",
+      "p.created_at"
+    )
     .then((data) => {
-      res.render("display", { data: data });
+      res.render("display", { product: data });
     })
-    .catch((err) => res.status(400).json(err));
+    .catch((err) => {
+      res.json({ message: err });
+    });
 });
+
+app.get("/update", (req, res) => {
+  res.render("update");
+});
+
+app.post("/search", (req, res) => {
+  var input = req.body.input;
+  if(input==''){
+    res.redirect('/display');
+  }
+  else{
+
+    db("products as p")
+    .join("categories as c", "p.category_id", "c.category_id")
+    .where("c.category_name", input)
+    .select(
+      "p.product_id",
+      "p.product_name",
+      "p.price",
+      "c.category_name",
+      "p.created_at"
+      )
+      .then((data) => {
+        res.render("display", { product: data });
+      })
+      .catch((err) => {
+        res.json({ message: err });
+      });
+    }
+  });
 
 app.listen(port, () => {
-  console.log("The running port is http://localhost:" + `${port}`);
+  console.log(`Running Server is http://localhost:${port}`);
 });
-
-
-
-
-
-
-
-

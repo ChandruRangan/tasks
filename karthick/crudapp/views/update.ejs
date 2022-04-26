@@ -10,10 +10,13 @@
         </div>
             <div class="form-group">
               <select name="catid"  class="form-control">
-                  <option>Select Category Name</option>
-                <%for(var i=0 ;i<cat.length; i++) { %>
-                  <option value="<%=cat[i].category_id%>"><%=cat[i].category_name%></option>
-                  <%}%>
+                <%for(var i=0 ;i<data.length; i++) { %>
+                  <option value="<%=data[i].category_id%>" selected><%=cat[data[0].category_id-1].category_name%></option>
+                <%}%>
+               <%for(var i=0 ;i<cat.length; i++) { %>
+                 <%if(cat[data[0].category_id-1].category_name==cat[i].category_name){ continue;}%>
+                <option value="<%=cat[i].category_id%>"><%=cat[i].category_name%></option>
+                <%}%>
                 </select>
               </div>
               <div class="form-group">
