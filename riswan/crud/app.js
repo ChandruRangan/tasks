@@ -75,7 +75,9 @@ app.post("/find", (req, res) => {
 
 
 app.get("/update", (req, res) => {
-  const id=(req.query.id);
+  const id=parseInt
+  
+  (req.query.id);
   db.select("*")
   .from("product")
   .where("product_id",id)
