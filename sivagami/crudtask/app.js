@@ -90,6 +90,8 @@ const id=req.query.id;
   });
  crud.post("/updatenext", (req, res) => {
       const id=req.query.id;
+
+      
     
     const pn= req.body.pn;
     const price = req.body.price;
