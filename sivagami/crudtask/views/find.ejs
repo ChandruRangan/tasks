@@ -1,89 +1,49 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>search</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body class="bg-secondary">
       <form action="/find" method="post">
-      <div class="input-group mb-2">
-        <input type="text" placeholder="Search">
-    <div class="input-group-append">
-        <button class="btn btn-success" type="submit">Go</button>
-        </div>
-        <div><br>
+      <input class="form" type="text" placeholder="Search" name="search" value="<%product%>">
+      <button class="btn btn-dark" type="submit">search</button>
+        </form>
+        <br><br>
         <table class="table table-bordered">
         <thead>
           <tr>
             <th>product_id</th>
             <th>product_name</th>
             <th>price</th>
-            <th>categoryname</th>
+            <th>category_id</th>
             <th>created_at</th>
             <th>updated_at</th>
           </tr>
           </thead>
           <tbody id="content">
-              <% for (var i=0;i<product.length;i++){ %>
+              <% for(var i=0;i<product.length;i++){ %>
                 <tr>
                     <td><%=product[i].product_id%></td>
                     <td><%= product[i].product_name%></td>
                     <td><%= product[i].price%></td>
-                    <td><%= product[i].categoryname%></td>
+                    <td><%= product[i].category_id%></td>
                     <td><%= product[i].created_at%></td>
+                    <td><%=product[i].updated_at%></td>
+                    <td><a href="/update?id=<%= product[i].product_id%>" class="btn btn-dark">Update</a></td>
+                    <td><a href="/delete?id=<%= product[i].product_id%>" class="btn btn-dark">Delete</a></td>
                 </tr>
                 <%} %>
-            </tbody>
+
+
+
+                
+               </tbody>
+            </table>
+            </div>
         </body>
-
-     ffh
-
-
-fgh
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container">
-    <h2>Product Table</h2>
-    <table class="table">
-        
-          </table>
+        </html>

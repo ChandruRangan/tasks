@@ -43,7 +43,7 @@ async function StoreInDb() {
             
             let LastRecord = await dbcal("select no from jokes order by no desc limit 1");
             console.log(LastRecord);
-            if (LastRecord[0]) {
+            if (LastRecord&&LastRecord[0]) {
                pool.query(
                 `INSERT INTO jokes(no,joke)VALUES(${LastRecord[0].no + 1},${
                   "'" + data.replaceAll("'", `"`) + "'"

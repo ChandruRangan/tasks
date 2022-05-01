@@ -1,0 +1,101 @@
+mondb> db.Patients.aggregate([{$match:{"Address.mobilenumber":9941892668}}, {$lookup: { from:"patientvisits", localField:"Address.mobilenumber",foreignField:"patient.mobilenumber",let:{patientmobilenumber:"$Address.mobilenumber"},pipeline:[{$match:{ $expr:{$eq:["$patient.mobilenumber","$$patientmobilenumber"]}}}],as: "patienthistory"}}])
+[
+  {
+    _id: ObjectId("626a31741556e75b24c3abf1"),
+    Name: 'rani',
+    Age: 34,
+    Gender: 'female',
+    Address: {
+      street: 'mgmstreet',
+      City: 'thiruchi',
+      state: 'tamilnadu',
+      Country: 'india',
+      coordinates: [ '11.9503° N,13.9503° N' ],
+      mobilenumber: 9941892668
+    },
+    patienthistory: [
+      {
+        _id: ObjectId("6268f6de1ebc6ffe63d1388b"),
+        hospital: 'GH',
+        employeeid: 13579,
+        visitedat: '20-03-2022',
+        feepaid: 1000,
+        patient: { name: 'rani', mobilenumber: 9941892668 }
+      }
+    ]
+  }
+]
+
+
+ db.Patients.find({Age:{"$gte":21,"$lte":39},Gender:"male","Address.state":"tamilnadu","Address.Country":"india"},{Age:1,Gender:1,"Address.state":1,"Address.Country":1,_id:0})
+[
+  {
+    Age: 22,
+    Gender: 'male',
+    Address: { state: 'tamilnadu', Country: 'india' }
+  },
+  {
+    Age: 34,
+    Gender: 'male',
+    Address: { state: 'tamilnadu', Country: 'india' }
+  }
+
+
+
+
+
+  6.db.Employees.aggregate([{ $group: { _id: { hospitalName: "$hospital" }, HospitalExpenses: { $sum: { $toInt: "$Address.salary" } }, CountOfEmployees: { $sum: 1 } } }]).pretty()
+[
+  {
+    _id: { hospitalName: 'GH' },
+    HospitalExpenses: 80000,
+    CountOfEmployees: 3
+  },
+  {
+    _id: { hospitalName: 'KKK' },
+    HospitalExpenses: 60000,
+    CountOfEmployees: 1
+  },
+  {
+    _id: { hospitalName: 'GHT' },
+    HospitalExpenses: 130000,
+    CountOfEmployees: 3
+  },
+  {
+    _id: { hospitalName: 'CMC' },
+    HospitalExpenses: 50000,
+    CountOfEmployees: 2
+  }
+]
+
+
+
+3a))
+> db.patientvisits.aggregate([{$match:{visitedat:{$gte:"01-03-2022",$lte:"30-03-2022"}}},{$count:"my count"}])
+[ { 'my count': 2 } ]
+
+
+5.
+db.patientvisits.aggregate([{ $lookup: { from: "Employees", localField: "employeeid", foreignField: "employeeid", as: "dn" } }, { $group: { _id: { DoctorName: "$dn.name" }, DoctorIncome: { $sum: { $toInt: "$feepaid" } }, patientVisitedCount: { $sum: 1 } } }])
+[
+  {
+    _id: { DoctorName: [ 'sivi' ] },
+    DoctorIncome: 2000,
+    patientVisitedCount: 1
+  },
+  {
+    _id: { DoctorName: [ 'navya' ] },
+    DoctorIncome: 1000,
+    patientVisitedCount: 1
+  },
+  {
+    _id: { DoctorName: [ 'merlin' ] },
+    DoctorIncome: 1500,
+    patientVisitedCount: 1
+  }
+]
+
+
+
+
+
