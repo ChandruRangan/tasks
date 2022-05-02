@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
       res.status(400).json({ err });
     });
 });
-app.post("/insert", (req, res) => {
+app.post("/insertemp", (req, res) => {
   const fname = req.body.fullname;
   const email = req.body.email;
   const pwd = req.body.password;
@@ -48,7 +48,7 @@ app.post("/insert", (req, res) => {
     });
 });
 
-app.post("/insertp", (req, res) => {
+app.post("/insertpro", (req, res) => {
   const proname = req.body.proname;
   const prolead = req.body.prolead;
   const sdate = req.body.sdate;
@@ -70,21 +70,15 @@ app.post("/insertp", (req, res) => {
 app.get("/display", (req, res) => {
   db.select("*").from("employee")
     .then((data) => {
-      res.render("display", { employee: data });
+      db.select("*").from("project").then((project)=>{
+        res.render("display", { employee: data ,project:project});
+      })
     })
     .catch((err) => {
       res.json({ message: err });
     });
 });
-app.get("/display", (req, res) => {
-  db.select("*").from("project")
-    .then((data) => {
-      res.render("display", { project: data });
-    })
-    .catch((err) => {
-      res.json({ message: err });
-    });
-});
+
 app.get("/update", (req, res) => {
   res.render("update");
 });
