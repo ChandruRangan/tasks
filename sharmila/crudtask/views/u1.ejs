@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+  
+    <div>
+      <form action="/updated?id=<%=id%>" method="post">
+      <div>
+          <div>
+              <%for(var i=0;i<data.length;i++){ %>
+            <input type="text" placeholder="enter product name"  name="product" value="<%= data[i].product_name%>">
+            <%}%>
+          
+          </div>
+  
+          <div >
+              <select  name="category" value="<%=data[0].category_name%>">
+                <%for(var i=0 ;i<category.length; i++) { %>
+                <option value="<%=category[i].category_id%>"><%=category[i].category_name%></option>
+                <%}%>
+              </select>
+            </div>
+            <div>
+                <%for(var i=0 ;i<data.length; i++) { %>
+                <input type="text" placeholder="Enter Price" name="price" value="<%=data[i].price%>">
+                <%}%>
+            </div>
+            <input type="submit" value="update">   
+      </form>
+  </div>
+  
+
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

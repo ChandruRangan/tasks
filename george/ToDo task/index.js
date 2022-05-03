@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 4040;
+const port = 4044;
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,29 +16,36 @@ const db = knex({
         database: 'todo'
     }
 });
-app.get('/',(req,res) =>{
-    db.select('*').from('task').then(data =>{
-        res.render('view',{todos:data});
-    })
-        .catch(err=> status (400).json(err));
-    });
-    app.post('/addtask',(req,res)=>{
+ //using post we get the task we need to do.we insert it in db 
+    //and redirect the page to '/'.
+app.post("/insert",(req,res)=>{
     const {newtask}= req.body;
-    db('todolist').insert({task:newtask}).returning('*')
-    .then( _ =>{res.redirect('/');})
+    db("todolist").insert({task:newtask})
+    .then(()=>
+        {res.redirect("/");})
     .catch(err=>{
         res.status(400).json({message: "unable to create new task"});
     });
     });
-    app.put('/moveTaskDone', (req, res) => {
+//the task we got from the put() is shown using the get() from the db in which we 
+//stored the data(task)
+app.get("/",(req,res) =>{
+    db.select("*").from("todolist").then(data =>{
+        res.render("view",{todos:data});
+    })
+        .catch(err=> {req.status(400).json(err)});
+    });
+    //using this put() we add the task to the  completed task by clicking the
+    // the checkbox. 
+app.put("/moveTaskDone", (req, res) => {
         const { name, id } = req.body;
-        if (name === 'todo') {
-          db('task').where('id', '=', id).update('status',   1).returning('status')
+        if (name === "todo") {
+          db("task").where("id", "=", id).update("status", 1).returning("status")
         .then(task => {res.json(task[0])});
         } 
         else {
-        db('task').where('id', '=', id).update('status', 0)
-        .returning('status')
+        db("task").where("id", "=", id).update("status", 0)
+        .returning("status")
         .then(task => {res.json(task[0])});
         }
         });

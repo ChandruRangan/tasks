@@ -4,7 +4,6 @@ const port = 5000;
 const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-
 const knex = require("knex");
 const db = knex({
   client: "pg",
@@ -15,7 +14,6 @@ const db = knex({
     database: "product",
   },
 });
-
 app.get("/", (req, res) => {
   db.select("*")
     .from("categories")
@@ -27,7 +25,6 @@ app.get("/", (req, res) => {
       res.status(400).json({ err });
     });
 });
-
 app.post("/insert", (req, res) => {
   const pname = req.body.pname;
   const catid = req.body.catid;
@@ -47,7 +44,6 @@ app.post("/insert", (req, res) => {
       res.status(400).json({ message: err });
     });
 });
-
 app.get("/display", (req, res) => {
   db("products as p")
     .join("categories as c", "p.category_id", "c.category_id")
@@ -65,11 +61,9 @@ app.get("/display", (req, res) => {
       res.json({ message: err });
     });
 });
-
 app.get("/update", (req, res) => {
   res.render("update");
 });
-
 app.post("/search", (req, res) => {
   var input = req.body.input;
   if(input==''){
@@ -88,7 +82,7 @@ app.post("/search", (req, res) => {
       "p.created_at"
       )
       .then((data) => {
-        res.render("display", { product: data });
+        res.render("display",  { product: data });
       })
       .catch((err) => {
         res.json({ message: err });
