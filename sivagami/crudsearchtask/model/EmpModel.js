@@ -18,19 +18,22 @@ const EmpSchema= new mongoose.Schema({
       },
     "JoiningDate":{
       type: String,
-      default:Date,
+      // default:Date.now,
     
     },
     "DateofBirth":{
       type:String,
-      default:Date,
+      // default:Date,
     },  
     });
     
-    const Employee = mongoose.model('Employee', EmpSchema, "Employee_table");
+    const Employee = mongoose.model('Employee', EmpSchema );
     
-    
-    
-    // // Export API routes
+  // // Export API routes
     module.exports ={Employee}
     
+    module.exports.get = function (callback, limit)
+     {
+      Employee_table.find(callback).limit(limit);
+  }
+

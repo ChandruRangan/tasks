@@ -10,11 +10,21 @@ router.get('/', function (req, res) {
   });
 });
 
-// router.post()
+// import Employee controller
+
+var Employeecontroller = require('./Empcontroller');
+
+// Employee routes
+
+router.route('/Emptable')
+.get(Employeecontroller.app)
+.post(Employeecontroller.new);
+
+router.route('/Emptable/:Employee_id')
+.get(Employeecontroller.view)
+.patch(Employeecontroller.update)
+.put(Employeecontroller.update)
+.delete(Employeecontroller.delete);
 
 
-
-
-
-
-   module.exports=router;
+module.exports=router;
