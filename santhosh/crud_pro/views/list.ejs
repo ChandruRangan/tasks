@@ -1,0 +1,24 @@
+<%-include("style.ejs")-%>
+<div class="container-fluid mt-5">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Fullname</th>
+                <th>Email id</th>
+                <th>Phonenumber</th>
+                <th>Joining date</th>
+                <th>DateofBirth</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (i=0;i<emp.length;i++){%>
+                <tr>
+               <td><%=emp[i].full_name%></td>
+               <td><%=emp[i].email%></td>
+               <td><%=emp[i].phonenumber%></td>
+               <td><%=emp[i].joiningdate%></td>
+               <td><%=emp[i].dateofbirth%></td>
+               <%}%>
+            </tbody>
+        </table>
+</div>
