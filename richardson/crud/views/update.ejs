@@ -19,7 +19,7 @@
               </div>
             <div class="form-group">
               <select class="form-control" name="category">
-                <%for(var i=0 ;i<c.length; i++) { %>
+                <%for(var i=0 ;i<c.length; i++) { %>   
                 <option value="<%=c[i].category_id%>"><%=c[i].category_name%></option>
                 <%}%>
               </select>
@@ -29,7 +29,9 @@
                 <input type="text" class="form-control" placeholder="Enter Price" name="price" value="<%=data[i].price%>">
                 <%}%>
             </div>
-            <input type="submit" class="btn btn-primary mt-3" value="update">
+            <input type="submit" class="btn btn-primary" value="update">
+            <a href="/view" class="btn btn-primary">back</a>
+
             
           </form>
       </div>
