@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dsiplay Employee</title>
+</head>
+<body>
+    <div>
+        <form method="post" action="/display">
+          <input type="text" placeholder="Search" name="search">
+          <button  type="submit" value="search">Search</button>
+        </form>
+      </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>PHONENO</th>
+                <th>DOJ</th>
+                <th>DOB</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (i=0;i<data.length;i++){%>
+               <tr>
+                   <td><%=data[i].%></td>
+                   <td><%=data[i].%></td>
+                   <td><%=data[i].%></td>
+                   <td><%=data[i].%></td>
+                   <td><%=data[i].%></td>
+                   <td><%=data[i].%></td>
+                    </tr>
+                   <%}%>
+        </tbody>
+    </table>
+        <tbody>
+</body>
+</html>
