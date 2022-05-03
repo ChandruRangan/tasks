@@ -1,6 +1,6 @@
 const  {Pool} = require('pg');
 const pool = new Pool({
-    user : 'santhosh',host: 'localhost',database:'studetndb',password:'santhosh123',port:'5432'
+    user : 'santhosh',host: 'localhost',database:'santhoshdb',password:'santhosh123',port:'5432'
 });
 function call(q){
     return new Promise((ress, rej)=>{
