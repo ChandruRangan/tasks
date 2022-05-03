@@ -15,8 +15,7 @@ const db = knex({
 },
 });
 app.get("/", (req, res) => {
-  db.select("*")
-    .from("project")
+  db.select("*").from("project")
     .then((data) => {
       res.render("index");
     })
@@ -70,7 +69,8 @@ app.post("/insertpro", (req, res) => {
 app.get("/display", (req, res) => {
   db.select("*").from("employee")
     .then((data) => {
-      db.select("*").from("project").then((project)=>{
+      db.select("*").from("project")
+      .then((project)=>{
         res.render("display", { employee: data ,project:project});
       })
     })
@@ -82,46 +82,46 @@ app.get("/display", (req, res) => {
 app.get("/update", (req, res) => {
   res.render("update");
 });
-app.post("/search", (req, res) => {
+app.post("/searchemp", (req, res) => {
+  var input = req.body.input;
+  console.log(input);
+  if(input==''){
+    res.redirect('/display');
+  }
+  else{
+    db("employee")
+   
+    .select("*")
+    .where("employee.fullname",input)
+      .then((data) => {
+        console.log(data)
+        res.render("searchemp",  { employee: data });
+      })
+      .catch((err) => {
+        console.log(err)
+        res.json({ message: err });
+      });
+    }
+  });
+app.post("/searchpro", (req, res) => {
   var input = req.body.input;
   if(input==''){
     res.redirect('/display');
   }
   else{
-    db("Project as p").join("Project as c", "p.employee_id", "c.employee_id").where("c.fullname", input)
-    .select(
-      "p.employee_id",
-      "p.fullname",
-      "c.email",
-      )
+    db("project")
+    .select("*")
+    .where("project.projectname",input)
       .then((data) => {
-        res.render("display",  { project: data });
+        console.log(data)
+        res.render("searchpro",  { project: data });
       })
       .catch((err) => {
+        console.log(err)
         res.json({ message: err });
       });
     }
   });
-  app.post("/search", (req, res) => {
-    var input = req.body.input;
-    if(input==''){
-      res.redirect('/display');
-    }
-    else{
-    db("Employee as p").join("Employee as c", "p.project_id", "c.project_id").where("c.category_name", input)
-      .select(
-        "p.project_id",
-        "p.projectname",
-        "c.projectlead",
-        )
-        .then((data) => {
-          res.render("display",  { employee: data });
-        })
-        .catch((err) => {
-          res.json({ message: err });
-        });
-      }
-    });
-app.listen(port, () => {
+  app.listen(port, () => {
   console.log(`Running Server is http://localhost:${port}`);
 });

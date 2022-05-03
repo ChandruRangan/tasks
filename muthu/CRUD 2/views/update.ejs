@@ -1,23 +1,65 @@
 <%-include('style.ejs')%>
 <body>
-    <div class="container mt-5">
-        <h3> Update Projects</h3>
-        <form action="/update" autocomplete="off" method="post">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Enter Project Name" name="pname" value="">
+    <div class="container mt-12">
+             <div class="col-md-12 container alert alert-success">
+               <h3 class="text-center">Update Employees</h3>
+               </div>
+          <div class="col-md-6 jumbotron" >   
+             <form action="/updateemp" autocomplete="off" method="post">
+             <div class="form-group">
+            <label for="fullname" class="control-label">Full Name</label>
+            <input type="text" name="fullname" id="fname" class="form-control" placeholder="Enter Full Name">
             </div>
             <div class="form-group">
-              <select name="empid" id="" class="form-control">
-                <option>Select Project Name</option>
-                  <option value=""></option>
-                </select>
-              </div>
-              <div class="form-group">
-                <input type="number" class="form-control" placeholder="Enter Phone Number" name="phone">
-              </div>
+            <label for="email" class="control-label">Email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email Id">
+            </div>
+            <div class="form-group">
+            <label for="password" class="control-label">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter password">
+             </div>
+            <div class="form-group">
+            <label for="phone" class="control-label">Phone Number</label>
+            <input type="number" name="phone" id="phone" class="form-control" placeholder="Enter Phone Number">
+            </div>  
+            <div class="form-group">
+           <label for="doj" class="control-label">Joining Date</label>
+           <input type="date" name="doj" id="doj" class="form-control" placeholder="Enter Joining Date">
+           </div>
+           <div class="form-group">
+            <label for="dob" class="control-label">Date Of Birth</label>
+            <input type="date" name="dob" id="dob" class="form-control" placeholder="Enter Date of Birth">
+            </div>
                 <input type="submit" class="btn btn-primary">
                 <a href="/display" class="btn btn-secondary">View</a>
+            </form>
             </div>
-          </form>
+    </div>
+
+<div class="container mt-12">
+  <div class="col-md-12 container alert alert-success">
+          <h3 class="text-center">Update Projects</h3>
+  </div>  
+  <div class="col-md-6 jumbotron" >      
+          <form action="/updatepro" autocomplete="off" method="post">
+            <div class="form-group">
+              <label for="proname" class="control-label">Project Name</label>
+             <input type="text" name="proname" id="proname" class="form-control" placeholder="Enter Project Name">
         </div>
+         <div class="form-group">
+              <label for="prolead" class="control-label">Project Lead</label>
+              <input type="prolead" id="prolead" name="prolead" class="form-control" placeholder="Enter Project Lead">
+       </div>
+        <div class="form-group">
+            <label for="sdate" class="control-label">Project Start Date</label>
+            <input type="date" id="sdate" name="sdate" class="form-control" placeholder="Enter Start Date">
+       </div>
+       <div class="form-group">
+           <label for="edate" class="control-label">Project End Date</label>
+           <input type="date" name="edate" id="edate" class="form-control" placeholder="Enter End Date">
+       </div>  
+               <input type="submit" class="btn btn-primary">
+               <a href="/display" class="btn btn-secondary">View</a>
+            </form>  
+            </div>     
 </body>
