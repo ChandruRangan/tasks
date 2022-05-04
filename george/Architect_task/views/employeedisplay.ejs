@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dsiplay Employee</title>
+</head>
+<body>
+    <div>
+        <form method="post" action="/searchemp" >
+          <input type="text" placeholder="Search" name="search">
+          <button  type="submit" value="search">Search</button>
+        </form>
+      </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>PHONENO</th>
+                <th>DOJ</th>
+                <th>DOB</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (i=0;i<Employee.length;i++){%>
+               <tr>
+                   <td><%=Employee[i].Name%></td>
+                   <td><%=Employee[i].Email%></td>
+                   <td><%=Employee[i].Password%></td>
+                   <td><%=Employee[i].DOJ%></td>
+                   <td><%=Employee[i].DOB%></td>
+                   <td><a href="/delete?id=<%= %>">Delete</a></td>
+                    </tr>
+                   <%}%>
+        </tbody>
+    </table>
+    
+</body>
+</html>
