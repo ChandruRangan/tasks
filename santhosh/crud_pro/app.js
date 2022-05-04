@@ -1,12 +1,11 @@
 const express = require('express');
 const app = express();
-const mongoose=require('mongoose');
 const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended:true }));
 app.set('view engine','ejs');
 app.use(bodyparser.json());
-const Employee = mongoose.model('empModel');
-
+const Employee = require('./models/emp.model');
+const db = require('./models/Dbconfig')
 
 app.get('/',(req,res)=>{
       res.render('Emp', {
@@ -14,11 +13,12 @@ app.get('/',(req,res)=>{
       });
      })
 
-app.post('/',(req,res) => {
+app.post('/insert',(req, res) => {
     req.body._id == ''
     insertRecord(req, res);
-    
-})
+   
+});
+
 function insertRecord(req, res){
     var employee = new Employee();
     employee.full_name = req.body.full_name;
@@ -30,6 +30,7 @@ function insertRecord(req, res){
     employee.save((err, doc) => {
         if(!err){
             console.log("Record inserted");
+            res.redirect("/");
         }
         else{
             console.log('Error during insertion: '+ err);
@@ -37,6 +38,18 @@ function insertRecord(req, res){
     })
 
 }
+app.get('/list', (req, res) => {
+    Employee.find((err, docs) => {
+        if(!err){
+            res.render("list", {
+                emp: docs
+            });
+        }
+        else 
+        console.log('Error in retrieving emp list: ' + err)
+    })
+});
+
 
 app.listen(2000, () => {
     console.log(`The running port is http://localhost:2000`)

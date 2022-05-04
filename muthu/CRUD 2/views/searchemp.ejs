@@ -1,0 +1,38 @@
+<%-include('style.ejs')%>
+<div class="container-fluid mt-5">
+    <form action="/searchemp" autocomplete="off" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search here..." name="input">
+              <button type="submit" class="btn btn-dark mt-2">Search</button>
+        </div>
+    </form>
+<table class="table table-borderd">
+    <thead class="thead-dark">
+    <tr>
+      <th>Employee_id</th>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Phone No</th>
+      <th>Date of Joining</th>
+      <th>Action</th>
+      <th>Action</th>
+    </tr> 
+</thead>
+  <tbody>
+    <%for(var i=0;i<employee.length;i++){%>
+        <tr>
+            <td><%=employee[i].employee_id%></td>
+            <td><%=employee[i].fullname%></td>
+            <td><%=employee[i].email%></td>
+            <td><%=employee[i].phone_number%></td>
+            <td><%=employee[i].joiningdate%></td>
+            <td><a href="/update" class="btn btn-success">Update</a></td>
+            <td><a href="/delete" class="btn btn-danger">Delete</a></td>
+        </tr>
+        <%}%>
+    </tbody>
+</table>
+<div class="text-center">
+    <a class="btn btn-info" href="/display">Back</a>
+</div>
+</div>
