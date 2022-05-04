@@ -15,6 +15,7 @@
       <th>Phone No</th>
       <th>Date of Joining</th>
       <th>Action</th>
+      <th>Action</th>
     </tr> 
 </thead>
   <tbody>
@@ -26,6 +27,7 @@
             <td><%=employee[i].phone_number%></td>
             <td><%=employee[i].joiningdate%></td>
             <td><a href="/update" class="btn btn-success">Update</a></td>
+            <td><a href="/delete" class="btn btn-danger">Delete</a></td>
         </tr>
         <%}%>
     </tbody>
