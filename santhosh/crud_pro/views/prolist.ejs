@@ -1,0 +1,39 @@
+<%-include("style.ejs")-%>
+
+<div>
+    <form method="post" action="/search">
+        <div class="container-fluid mt-3">
+            <input type="text" class="form-control" placeholder="Search" name="search">
+            <button  type="submit" class=" mt-2 btn btn-outline-info" value="search">Search</button>
+        </div>
+    </form>
+  </div>
+  
+<div class="container-fluid mt-5">
+    <a href="/project" class="btn btn-success">Create New</a><br><br>
+    <table class="table table-striped table-bordered">
+        <thead><h1>Project</h1>
+            <tr>
+                <th>Project Name</th>
+                <th>Project Lead</th>
+                <th>Team member</th>
+                <th>Project StartDate</th>
+                <th>Project EndDate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (i=0;i<proj.length;i++){%>
+                <tr>
+               <td><%=proj[i].pro_name%></td>
+               <td><%=proj[i].pro_lead%></td>
+               <td><%=proj[i].team_mem%></td>
+               <td><%=proj[i].Psdate%></td>
+               <td><%=proj[i].Pedate%></td>
+               <%}%>
+            </tbody>
+        </table>
+        
+        <div class="text-center">
+            <a href="/project" class="btn btn-primary">Back</a>
+        </div>
+</div>

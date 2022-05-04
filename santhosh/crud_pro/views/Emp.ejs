@@ -1,7 +1,7 @@
 <%-include("style.ejs");-%>
 <body>
       <div class="container mt-5 jumbotron">
-          <h3 class="">Employee Details</h3><br>
+          <h3 class=""> <h3> Create Employee Details</h3><br>
           <form action="/insert" method="POST">
               <div>
                 <label id="fname" >Fullname:</label>
@@ -16,19 +16,20 @@
               <input type="password"  class="form-control" id="pwd" placeholder="Password" name="password"><br><br>
             </div>
             <div >
-              <label id="numb" >Enter Phone number</label>
+              <label id="numb" >Enter Phone number:</label>
               <input type="number" class="form-control" id="numb" placeholder="Phone number" name="phonenumber"><br><br>
             </div>
             <div >
               <label id="jdate" >Joining date:</label>
-              <input type="date"  class="form-control" id="jdate" data-date="" data-date-format="MM DD YYY" placeholder="MM/DD/YYY" name="joiningdate"><br><br>
+              <input type="text"  class="form-control" id="jdate" data-date="" data-date-format="MM DD YYY" placeholder="MM/DD/YYY" name="joiningdate"><br><br>
             </div>
             <div>
               <label id="dob">Date of birth:</label>
-              <input type="date"  class="form-control" id="dob" data-date="" data-date-format="MM DD YYY" placeholder="MM/DD/YYY" name="dateofbirth"><br><br>
+              <input type="text"  class="form-control" id="dob" data-date="" data-date-format="MM DD YYY" placeholder="MM/DD/YYY" name="dateofbirth"><br><br>
             </div>
             <input type="submit" class="btn btn-outline-success">
-            <a  href="/list" class="btn btn-outline-info">View</a><br><br>
+            <a  href="/list" class="btn btn-outline-info">View</a>
+            <a href="/project" class="btn btn-outline-Secondary">Create Project</a>
           </form>
             
       </div>
