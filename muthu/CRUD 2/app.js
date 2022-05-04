@@ -78,10 +78,71 @@ app.get("/display", (req, res) => {
       res.json({ message: err });
     });
 });
-
 app.get("/update", (req, res) => {
   res.render("update");
 });
+
+
+app.get("/deleteEmp",async(req,res)=>{
+const  id  = parseInt(req.query.id);
+console.log(id);
+await db("employee")
+  .where("employee_id", id)
+  .del()
+  .then(() => {
+      res.redirect('/');
+  }).catch(err=>{
+      res.status(400).json(err);
+  });
+});
+
+app.get("/deletePro",async(req,res)=>{
+  const  id  = parseInt(req.query.id);
+  console.log(id);
+  await db("project")
+    .where("project_id", id)
+    .del()
+    .then(() => {
+        res.redirect('/');
+    }).catch(err=>{
+        res.status(400).json(err);
+    });
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.post("/searchemp", (req, res) => {
   var input = req.body.input;
   console.log(input);
@@ -90,7 +151,6 @@ app.post("/searchemp", (req, res) => {
   }
   else{
     db("employee")
-   
     .select("*")
     .where("employee.fullname",input)
       .then((data) => {

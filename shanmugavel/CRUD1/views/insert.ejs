@@ -1,0 +1,47 @@
+<%-include('style.ejs')%>
+<body>
+    <input type="text" placeholder="Enter name" id="name">
+    <input type="text" placeholder="Email Address" id="Email">
+    <input type="password" placeholder="Password" id="pswd">
+    <input type="text" placeholder="phone number" id="phono">
+    <input type="text" placeholder="joining date" id="DOJ">
+    <input type="text" placeholder="Date of birth "id="DOB">
+
+    <button onclick="submit()">submit</button>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        function submit(){
+            console.log("hi")
+            let name=document.getElementById("name").value;
+            let email=document.getElementById("Email").value;
+            let pwd=document.getElementById("pswd").value;
+            let phone=document.getElementById("phono").value;
+            let doj=document.getElementById("DOJ").value;
+            let dob=document.getElementById("DOB").value;
+    
+   
+      $.ajax({
+        type: "POST",
+        url: "/empinsert",
+        dataType: "json",
+        data: {
+            Full_name:name ,
+            Email_Address:email ,
+            
+            Phone_Number:phone,
+            Joining_Date:doj,
+            DOB:dob,
+            Password:pwd
+        },
+        success: function (data) {
+           console.log('Success');
+
+        },
+        
+    });
+      
+        }
+    </script>
+
+
+</body>
