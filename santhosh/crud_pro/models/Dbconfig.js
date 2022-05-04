@@ -11,3 +11,4 @@ mongoose.connect('mongodb://localhost:27017/cruddb', { useNewUrlParser: true }, 
  
 
 require('./emp.model');
+require('./pro.model');
