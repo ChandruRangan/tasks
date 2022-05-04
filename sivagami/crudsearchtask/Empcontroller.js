@@ -1,9 +1,14 @@
 // const { Employee} = require('./model/EmpModel');
 
-    Employee_table=require('./model/EmpModel');
+    const { Db } = require('mongodb');
+const  Employee=require('./model/EmpModel');
 
-exports.app = function (req,res){
-    Employee_table .get(function (err,Emptable){
+exports.new = function (req,res){
+    Employee.get(function (err,CRUDtask){
+
+
+
+      
         if (err) {
             res.json({
                 status: "error",
@@ -18,77 +23,78 @@ exports.app = function (req,res){
     });
 }
 
-exports.new = function (req,res){
-    var Employee= new Employee_table();
-    Employee.fn=req.body.FN;
-    Employee.e=req.body.email;
-    Employee.Pd=req.body.Pwd;
-    Employee.phn=req.body.phoneno;
-    Employee.Jd=req.body.Joindate;
-    Employee.dob=req.body.DOB;
+exports.app = function (req,res){
+    var Employe= new Employee();
+    Employe.fn=req.body.FN;
+    Employe.e=req.body.email;
+    Employe.Pd=req.body.Pwd;
+    Employe.phn=req.body.phoneno;
+    Employe.Jd=req.body.Joindate;
+    Employe.dob=req.body.DOB;
 
-    Employee.save(function (err){
+    Employe.save(function (err){
         if(err)
         res.json(err);
     res.json({
         message:'Employee table created ',
-        data:Employee
+        data:Emptable
     });
     });
 };
 
 // view Employee
 
-exports.view=function (req,res){
-    Employee_table.findById(req.params.Employee_id, function(err,Employee){
-if(err)
-    res.send(err);
-    res.json({
-        message:'Employee details loading',
-        data:Employee
-    });
-});
-};
+// exports.view=function (req,res){
+//     Employee.find(req.params.Employee_id, function(err,Employe){
+// if(err)
+//     res.send(err);
+//     res.json({
+//         message:'Employee details loading',
+//         data:Employe
+//     });
+// });
+// };
 
 // update Employee
 
-exports.update=function(req,res){
-    Employee_table.findById(req.params.Employee_id, function(err,Employee){
-        if(err)
-            res.send(err);
-            Employee.fn=req.body.FN;
-            Employee.e=req.body.email;
-            Employee.Pd=req.body.Pwd;
-            Employee.phn=req.body.phoneno;
-            Employee.Jd=req.body.Joindate;
-            Employee.dob=req.body.DOB;   
+// exports.update=function(req,res){
+//     Employee.findById(req.params.Employee_id, function(err,Employe){
+//         if(err)
+//             res.send(err);
+//             Employe.fn=req.body.FN;
+//             Employe.e=req.body.email;
+//             Employe.Pd=req.body.Pwd;
+//             Employe.phn=req.body.phoneno;
+//             Employe.Jd=req.body.Joindate;
+//             Employe.dob=req.body.DOB;   
             
-        Employee.save(function (err){
-                if(err)
-                res.json(err);
-            res.json({
-                message:'Employee table updated ',
-                data:Employee
-            });
-        });
-    });
-}
+//         Employe.save(function (err){
+//                 if(err)
+//                 res.json(err);
+//             res.json({
+//                 message:'Employee table updated ',
+//                 data:Employe
+//             });
+//         });
+//     });
+// }
 
 // delete Employee 
 
-exports.delete = function(req,res){
-    Employee_table.remove({
-       _id:req.params.Employee_id
-    },function(err,Employee){
-        if(err)
-        res.send(err);
+// exports.delete = function(req,res){
+//     Employee.remove({
+//        _id:req.params.Employee_id
+//     },function(err,Employe){
+//         if(err)
+//         res.send(err);
 
-        res.json({
-            status:"success",
-            message:'Employee deleted'
-        });
-    });
-};
+//         res.json({
+//             status:"success",
+//             message:'Employee deleted',
+//             data:Employe
+//         });
+//     });
+// };
 
 
 
