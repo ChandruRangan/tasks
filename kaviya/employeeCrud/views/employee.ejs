@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
+
+    <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+ <body class="col-5">
+    <h3>Employee Details</h3><br>
+  <form action="http://localhost:3500/insert" method="POST">
+    <div>
+      <div>
+        Fullname: <input type="text" class="form-group"  placeholder="Enter Name" name="ename"><br><br>
+      </div>
+      <div>
+        Email: <input type="email"  class="form-group" id="email" placeholder="Enter Email" name="email"><br><br>
+      </div>
+      <div>
+        Password: <input type="password" class="form-group" id="pwd" placeholder="Enter Password" name="pwd"><br><br>
+      </div>
+      <div>
+        Phone Number: <input type="number"  class="form-group" id="ephone" placeholder="Enter PhoneNumber" name="phone"><br><br>
+      </div>
+      <div>
+        Join Date: <input type="date" id="jdate" placeholder="MM/DD/YYYY" name="jdate"><br><br>
+      </div>
+      <div>
+        Date Of Birth: <input type="date" id="dob" placeholder="MM/DD/YYYY" name="dob"><br><br>
+      </div>
+      <!-- <input type="submit">
+      <a href="/views">Enter Project Details</a> -->
+      <button type="submit" class="btn btn-outline-success">SUMBIT</button>
+      <a  href="/view" class="btn btn-outline-dark">DISPLAY</a>
+      <a href="/project" class="btn btn-outline-info">create project</a>
+    </div>
+  </form>    
+ </body>
+</html>
+
+<!-- <head>
+  <title>employeeCrud</title>
+</head>
+<body>
+  <form action="http://localhost:2000/insert" method="POST">
+    <div>
+      <div>
+        Fullname: <input type="text"  placeholder="Enter Name" name="ename"><br><br>
+      </div>
+      <div>
+        Email: <input type="email" placeholder="Enter Name" name="email"><br><br>
+      </div>
+      <div>
+        Password: <input type="password" id="email" placeholder="Enter Email" name="pwd"><br><br>
+      </div>
+      <div>
+        Phone Number: <input type="number" id="ephone" placeholder="Enter PhoneNumber" name="phone"><br><br>
+      </div>
+      <div>
+        Join Date: <input type="date" id="jdate" placeholder="MM/DD/YYYY" name="jdate"><br><br>
+      </div>
+      <div>
+        Date Of Birth: <input type="date" id="dob" placeholder="MM/DD/YYYY" name"><br><br>
+      </div>
+      <input type="submit">
+      <a href="/views">Enter Project Details</a>
+    </div>
+  </form>
+</body>  -->

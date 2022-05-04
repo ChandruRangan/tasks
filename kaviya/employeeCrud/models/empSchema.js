@@ -28,5 +28,5 @@ empSchema.path("email").validate((val) => {
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return emailRegex.test(val);
 }, 'Please enter valid e-mail address.');
-module.exports = mongoose.model("empDetails", empSchema);
+module.exports = mongoose.model("empdetails", empSchema);
 

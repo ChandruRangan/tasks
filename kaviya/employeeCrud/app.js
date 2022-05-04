@@ -27,12 +27,13 @@ app.use(bodyparser.urlencoded({ extended:true }));
 app.set('view engine','ejs');
 app.use(bodyparser.json());
 const emp = require('./models/empSchema');
-// const project = require('./models/projectSchema');
+const pro = require('./models/proSchema');
 
 // const mongoose = require("mongoose")
+//employee details
 app.get("/",(req,res)=>{
     // res.send("<h1>hi</h1>");
-    res.render('index', {
+    res.render('employee', {
     viewtitle:"Insert Employee Details"
     });
 });
@@ -44,31 +45,68 @@ app.post('/insert',(req,res) => {
 
 function insertValue(req,res){
   var employee = new emp();
-  employee.fullName = req.body.fullName;
+  employee.fullName = req.body.ename;
   employee.email = req.body.email;
-  employee.password = req.body.password;
-  employee.phoneNumber = req.body.phoneNumber;
-  employee.joinDate = req.body.joinDate;
-  employee.dateofbirth = req.body.dateofbirth;
+  employee.password = req.body.pwd;
+  employee.phoneNumber = req.body.phone;
+  employee.joinDate = req.body.jdate;
+  employee.dateofbirth = req.body.dob;
   employee.save((err) => {
     if(!err){
       console.log("Value inserted");
-      res.rediect("/");
+      res.redirect("/");
     }
     else{
       console.log('something goes wrong while inserting'+ err);
     }
   })
 }
+//project details
+app.get("/project",(req,res)=>{
+  // res.send("<h1>hi</h1>");
+  res.render('project', {
+  viewtitle:"Insert Project Details"
+  });
+});
 
-// app.get("/",(req,res)=>{
-//   // res.send("<h1>hi</h1>");
-//   res.render('views', {
-//   viewtitle:"Insert Project Details"
-//   });
-// });
+app.post('/insert',(req,res) => {
+  req.body._id =='';
+  insertRecord(req,res);
+});
+
+function insertRecord(req,res){
+  var project = new pro();
+  project.projectName = req.body.projectName;
+  project.projectLead = req.body.projectLead;
+  project.teamMember = req.body.teamMember;
+  project.p_StartDate = req.body.p_StartDate;
+  project.p_EndDate= req.body.p_EndDate;
+  project.save((err,doc) => {
+    if(!err){
+      console.log("project added");
+      res.redirect("/project");
+    }
+    else{
+      console.log("something went wrong while inserting" + err);
+    }
+  })
+}
+
+//empTable
+app.get('/empTable',(req,res) => {
+  emp.find((err,docs) => {
+    if(!err){
+      res.render("empTable", {
+        employee: docs
+      });
+    }
+    else{
+      console.log('not found: '+err )
+    }
+  })
+});
 
 
-app.listen(2000, () => {
-    console.log("port 2000 is running!");
+app.listen(3500, () => {
+    console.log("port 3500 is running!");
 });
