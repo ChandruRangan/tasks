@@ -1,0 +1,8 @@
+{
+    "test_case":"3",
+    "modification":{
+        
+        "new-col":"name",
+        "format":"fname, lname"
+    }        
+}
