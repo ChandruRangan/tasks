@@ -78,11 +78,6 @@ app.get("/display", (req, res) => {
       res.json({ message: err });
     });
 });
-app.get("/update", (req, res) => {
-  res.render("update");
-});
-
-
 app.get("/deleteEmp",async(req,res)=>{
 const  id  = parseInt(req.query.id);
 console.log(id);
@@ -108,40 +103,41 @@ app.get("/deletePro",async(req,res)=>{
         res.status(400).json(err);
     });
   });
+app.get("/updateEmp",async(req,res)=>{
+    const  id  = parseInt(req.query.id);
+    console.log(id);
+     await db("employee")
+        .select('*')
+       .where("employee_id", id).returning('*')
+   
+      .then((data) => {
+          
+        data[0].joiningdate=  dteconfig(data[0].joiningdate)
+        data[0].date_of_birth=  dteconfig(data[0].date_of_birth)
+          res.render('updateemp',{emp:data});
+      }).catch(err=>{
+          res.status(400).json(err);
+      });
+    
+    });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.get("/updatePro",async(req,res)=>{
+  const  id  = parseInt(req.query.id);
+  console.log(id);
+   await db("project")
+      .select('*')
+     .where("project_id", id).returning('*')
+ 
+    .then((data) => {
+        console.log(data)
+      data[0].project_start_date=  dteconfig(data[0].project_start_date)
+      data[0].project_end_date=  dteconfig(data[0].project_end_date)
+        res.render('updatepro',{pro:data});
+    }).catch(err=>{
+        res.status(400).json(err);
+    });
+  
+  });
 
 app.post("/searchemp", (req, res) => {
   var input = req.body.input;
@@ -185,3 +181,25 @@ app.post("/searchpro", (req, res) => {
   app.listen(port, () => {
   console.log(`Running Server is http://localhost:${port}`);
 });
+app.post('/updatedemp',async(req,res)=>{
+        const {id, fullname,email,password,dob,doj}  =req.body
+        console.log(req.body);
+     db('employee').where('employee_id',id).update({fullname:fullname,email:email,password
+    :password,joiningdate:doj,date_of_birth:dob}).returning('*').then((data)=>{
+      console.log(data);
+      res.redirect('/display')
+    })
+})
+app.post('/updatepro',async(req,res)=>{
+  const {id, proname,prolead,sdate,edate}  =req.body
+  console.log(req.body);
+db('project').where('project_id',id).update({projectname:proname,projectlead:prolead,
+  project_start_date:sdate,project_end_date:edate})
+  .returning('*').then((data)=>{
+    console.log(data)
+res.redirect('/display')
+})
+})
+function dteconfig(date){
+  return  date.toISOString().replace(/T/, ' ').replace(/\..+/, '').toString().substr(0,10)
+}

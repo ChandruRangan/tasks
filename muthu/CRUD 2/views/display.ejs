@@ -28,7 +28,7 @@
             <td><%=employee[i].phone_number%></td>
             <td><%=employee[i].joiningdate%></td>
             <td><%=employee[i].date_of_birth%></td>
-            <td><a href="/update" class="btn btn-success">Update</a></td>
+            <td><a href="/updateEmp?id=<%=employee[i].employee_id%>" class="btn btn-success">Update</a></td>
             <td><a href="/deleteEmp?id=<%=employee[i].employee_id%>" class="btn btn-danger">Delete</a></td>
         </tr>
         <%}%>
@@ -66,7 +66,7 @@
             <td><%=project[i].projectlead%></td>
             <td><%=project[i].project_start_date%></td>
             <td><%=project[i].project_end_date%></td>
-            <td><a href="/update" class="btn btn-success">Update</a></td>
+            <td><a href="/updatePro?id=<%=project[i].project_id%>" class="btn btn-success">Update</a></td>
             <td><a href="/deletePro?id=<%=project[i].project_id%>" class="btn btn-danger">Delete</a></td>
         </tr>
         <%}%>

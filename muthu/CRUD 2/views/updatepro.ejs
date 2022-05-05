@@ -1,0 +1,32 @@
+<%-include('style.ejs')%>
+<body>
+     <div class="container" style="margin-top: 70px;">
+    <div class="col-md-12 container alert alert-success">
+        <h4>Update Project</h4>         
+        <hr>
+   </div> 
+  <div class="col-md-6 jumbotron">
+       <form action="/updatepro" autocomplete="off" method="post">
+  <div class="form-group">
+      <label for="proname" class="control-label">Project Name</label>
+      <input type="text" name="id" style="display: none;" value="<%=pro[0].project_id%>">
+     <input type="text" value="<%=pro[0].projectname%>" name="proname" id="proname" class="form-control" placeholder="Enter Project Name">
+   </div>
+    <div class="form-group">
+      <label for="prolead" class="control-label">Project Lead</label>
+      <input type="prolead" value="<%=pro[0].projectlead%>" id="prolead" name="prolead" class="form-control" placeholder="Enter Project Lead">
+     </div>
+     <div class="form-group">
+        <label for="sdate" class="control-label">Project Start Date</label>
+        <input type="date" value="<%=pro[0].project_start_date%>" id="sdate" name="sdate" class="form-control" placeholder="Enter Start Date">
+   </div>
+   <div class="form-group">
+       <label for="edate" class="control-label">Project End Date</label>
+       <input type="date"value="<%=pro[0].project_end_date%>"  name="edate" id="edate" class="form-control" placeholder="Enter End Date">
+   </div> 
+         <input type="submit" class="btn btn-info">
+         <a href="/display" class="btn btn-info">View</a>
+</form>
+</div>
+</div>
+</body>
