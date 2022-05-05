@@ -10,27 +10,31 @@ exports.update = async (req, res) => {
         db.select("*")
       .from("employee")
       .then((cat)=>{
-          res.render("updateemp", { data: data, id: id,cat:cat });
+          res.render("updateemp", { data: data, id: id});
         })
     })
     .catch((err) => {
       res.status(400).json(err);
     });
 };
-
 exports.updatedata=(async(req,res)=>{
-    let pid=parseInt(req.query.id);
-    console.log(pid);
-    const pname = req.body.pname;
-    const catid = req.body.catid;
-    const price = req.body.price;
-    db('products')
-    .where('product_id', '=',pid)
+    let empid=parseInt(req.query.id);
+    console.log(empid);
+    const fname = req.body.fullname;
+    const email = req.body.email;
+    const pwd = req.body.password;
+    const phno = req.body.phone;
+    const jdate = req.body.doj;
+    const dob = req.body.dob;
+    db('employee')
+    .where('employee_id',empid)
     .update({
-      product_name: pname,
-      price: price,
-      category_id: catid,
-      updated_at: Date(Date.now())    
+      fullname: fname,
+      email: email,
+      password : pwd,
+      phone_number : phno,
+      joiningdate : jdate,
+      date_of_birth : dob, 
     }).then(()=>{
       res.redirect('/');
     }).catch(e=>{
