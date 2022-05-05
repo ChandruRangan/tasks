@@ -29,7 +29,8 @@
                <td><%=emp[i].phonenumber%></td>
                <td><%=emp[i].joiningdate%></td>
                <td><%=emp[i].dateofbirth%></td>
-               <td><a href="/delete?id=<%=emp[i]._id%>" class="btn btn-danger">Delete</a></td>
+               <td><a href="/update?id=<%=emp[i]._id%>" class="btn btn-info">Update</a></td>
+               <td><a href="/delete?id=<%=emp[i]._id%>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')">Delete</a></td>
                <%}%>
             </tbody>
         </table>
