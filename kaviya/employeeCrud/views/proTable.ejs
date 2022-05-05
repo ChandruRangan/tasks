@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container-fluid mt-5">
+        <table class="table table-striped table-bordered">
+            <thead><h3>Project Details</h3>
+                <tr>
+                    <th>ProjectName</th>
+                    <th>ProjectLead</th>
+                    <th>TeamMember</th>
+                    <th>p_StartDate</th>
+                    <th>P_EndDate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%for (i=0;i<project.length;i++){%>
+                    <tr>
+                        <td><%=project[i].projectName%></td>
+                        <td><%=project[i].projectLead%></td>
+                        <td><%=project[i].teamMember%></td>
+                        <td><%=project[i].p_StartDate%></td>
+                        <td><%=project[i].p_EndDate%></td>
+                        <td><a href="/delete?id=<%=project[i]._id%>" >Delete</a></td>
+                    </tr>
+                <%}%>
+            </tbody>
+        </table>
+        <div>
+            <a href="/" class="btn btn-outline-info">Back</a>
+            <a href="/project" class="btn btn-success">Add Project</a><br><br>
+        </div>
+
+    </div>
