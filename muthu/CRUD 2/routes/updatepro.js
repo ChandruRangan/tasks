@@ -4,13 +4,13 @@ exports.update = async (req, res) => {
   const id = parseInt(req.query.id);
   await db
     .select("*")
-    .from("products")
-    .where("product_id", id)
+    .from("project")
+    .where("project_id", id)
     .then((data) => {
         db.select("*")
-      .from("categories")
+      .from("project")
       .then((cat)=>{
-          res.render("update", { data: data, id: id,cat:cat });
+          res.render("updatepro", { data: data, id: id});
         })
     })
     .catch((err) => {
@@ -19,18 +19,19 @@ exports.update = async (req, res) => {
 };
 
 exports.updatedata=(async(req,res)=>{
-    let pid=parseInt(req.query.id);
+    let proid=parseInt(req.query.id);
     console.log(pid);
-    const pname = req.body.pname;
-    const catid = req.body.catid;
-    const price = req.body.price;
-    db('products')
-    .where('product_id', '=',pid)
+    const proname = req.body.proname;
+    const prolead = req.body.prolead;
+    const sdate = req.body.sdate;
+    const edate = req.body.edate;
+    db('project')
+    .where('project_id', '=',proid)
     .update({
-      product_name: pname,
-      price: price,
-      category_id: catid,
-      updated_at: Date(Date.now())    
+      projectname: proname,
+      projectlead: prolead,
+      project_start_date : sdate,
+      project_end_date : edate,   
     }).then(()=>{
       res.redirect('/');
     }).catch(e=>{

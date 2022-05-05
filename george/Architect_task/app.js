@@ -9,6 +9,9 @@ const client = require ('./mongo');
 app.get('/',async(req,res)=>{
     res.render('emp');
 })
+app.get('/pro',async(req,res)=>{
+    res.render('project');
+})
 app.post('/insert',async (req,res)=>{
     const fullname = req.body.fname;
     const email = req.body.email;
@@ -22,15 +25,56 @@ app.post('/insert',async (req,res)=>{
 app.post('/insert1',async(req,res)=>{
     const Projectname = req.body.projectname;
     const Projectlead = req.body.projectlead;
-    // const Teammembers = req.body.tm1;
-    // const Teammembers= req.body.tm2;
+    const Teammember = req.body.tm;
     const Prostartdate = req.body.psd;
     const Proenddate = req.body.ped;
-    await client.db('Architectdb').collection('Project').insertOne({Projectname:Projectname,Projectlead:Projectlead,Projectstartdate:Prostartdate,Projectenddate:Proenddate})
+    await client.db('Architectdb').collection('Project').insertOne({Projectname:Projectname,Projectlead:Projectlead,Teammember:Teammember,Projectstartdate:Prostartdate,Projectenddate:Proenddate})
     .then((res) => { console.log("inserted"); })
     .catch((err) => { console.log(err) });
 })
-app.get('/display',(req,res)=>{
-    
+app.get('/display',async(req,res)=>{
+    await client.db('Architectdb').collection('Emp').find({}).toArray()
+    .then((data)=>{
+        res.render('employeedisplay',{Employee:data})
+    })
+    .catch((err) => {
+        res.json({ message: err });
+      });
+});
+app.get('/displaypro',async(req,res)=>{
+    await client.db('Architectdb').collection('Project').find({}).toArray()
+    .then((data)=>{
+        res.render('projectdisplay',{Project:data})
+    })
+    .catch((err) => {
+        res.json({ message: err });
+      });
+});
+app.post('/searchemp', async(req,res)=>{
+    const input= req.body.search;
+    await client.db('Architectdb').collection('Emp').findOne({Name:input})
+    .then((data)=>{
+        let data1=[data]
+        res.render('employeedisplay',{Employee:data1}) 
+
+    })
+    .catch((err) => {
+        res.json({ message: err });
+      });
 })
+app.post('/searchpro',async(req,res)=>{
+    const input= req.body.search;
+    await client.db('Architectdb').collection('Project').findOne({Projectname:input})
+    .then((data)=>{
+        let data2 = [data]
+        res.render('projectdisplay',{Project:data2})
+    })
+    .catch((err) => {
+        res.json({ message: err });
+      });
+})
+app.get('/delete',async(req,res)=>{
+    await client.db('Architect').collection('Emp').deleteOne({}) 
+})
+
 app.listen(3001)
