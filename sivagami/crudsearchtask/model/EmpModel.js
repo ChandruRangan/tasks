@@ -2,35 +2,39 @@ const mongoose = require("mongoose");
 
 const EmpSchema= new mongoose.Schema({
  
-    "FullName":{
+    FullName:{
       type:String,
       required:true,
     },
-    "Email":{
+    Email:{
       type:String,
       },
-    "Password":{
+    Password:{
       type:String,
       default:0,
     } ,
-    "PhoneNumber":{
+    PhoneNumber:{
       type:Number,
       },
-    "JoiningDate":{
-      type: String,
-      default:Date,
+    JoiningDate:{
+      type: String
+      // default:Date
     
     },
-    "DateofBirth":{
-      type:String,
-      default:Date,
+    DateofBirth:{
+      type:String
+      // default:Date,
     },  
     });
     
-    const Employee = mongoose.model('Employee', EmpSchema, "Employee_table");
+    const Employee = mongoose.model('Employee', EmpSchema );
     
-    
-    
-    // // Export API routes
+  // // Export API routes
     module.exports ={Employee}
     
+  //   module.exports.get = function (callback)
+  //    {
+  //      console.log(Employee);
+  //     Employee.find(callback);
+  // }
+
