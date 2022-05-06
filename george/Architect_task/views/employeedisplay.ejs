@@ -16,23 +16,29 @@
     
     <table>
         <thead>
-            <tr>
+            <tr><th>EMPID</th>
                 <th>NAME</th>
                 <th>EMAIL</th>
+                <th>PASSWORD</th>
                 <th>PHONENO</th>
                 <th>DOJ</th>
                 <th>DOB</th>
+                <th>ACTION</th>
+                <th>ACTION</th>
             </tr>
         </thead>
         <tbody>
             <%for (i=0;i<Employee.length;i++){%>
                <tr>
+                   <td><%=Employee[i].EMPID%></td>
                    <td><%=Employee[i].Name%></td>
                    <td><%=Employee[i].Email%></td>
                    <td><%=Employee[i].Password%></td>
+                   <td><%=Employee[i].Phoneno%></td>
                    <td><%=Employee[i].DOJ%></td>
                    <td><%=Employee[i].DOB%></td>
-                   <td><a href="/delete?id=<%= %>">Delete</a></td>
+                   <td><a href="/delete?EMPID=<%= Employee[i].EMPID%>">Delete</a></td>
+                   <td><a href="/updateemp?EMPID=<%= Employee[i].EMPID%>">Update</a></td>
                     </tr>
                    <%}%>
         </tbody>

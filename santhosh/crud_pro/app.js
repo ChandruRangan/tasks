@@ -22,21 +22,16 @@ app.get('/project', (req,res)=> {
 
 app.post('/insert',(req, res) => {
     insertrecord(req, res);
-   
 });
 
 function insertrecord(req, res){
-    const empdate = new Date(req.body.joiningdate);
-    const jdate = (empdate.getMonth()+1)+'-'+empdate.getDate()+'-'+empdate.getFullYear()
-    const date = new Date(req.body.dateofbirth);
-    const bdate = (date.getMonth()+1)+'-'+date.getDate()+'-'+date.getFullYear()
-    const employee = new Employee();
+    var employee = new Employee()
     employee.full_name = req.body.full_name;
     employee.email = req.body.email;
     employee.password = req.body.password;
     employee.phonenumber = req.body.phonenumber;
-    employee.joiningdate = jdate;
-    employee.dateofbirth = bdate;
+    employee.joiningdate = req.body.joiningdate;
+    employee.dateofbirth = req.body.dateofbirth;
     employee.save((err) => {
         if(!err){
             console.log("Record inserted");
@@ -48,21 +43,42 @@ function insertrecord(req, res){
     })
 
 }
+
+app.get("/update",(req,res)=>{
+    const id=req.query.id;
+    Employee.find({_id:id},
+        function(err, data){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.render("update", {emp: data,id:id});
+            }
+        }) 
+});
+app.post('/updatedata', (req, res) => {
+    Employee.updateOne({_id:req.query.id},req.body,(err,data)=>{
+        if(!err){
+            res.redirect("/list");
+        }
+        else{
+            console.log(err);
+        }
+    })
+})
+
 app.post('/project', (req,res)=>{
     insertRecord(req, res);
 });
 
 function insertRecord(req,res){
-    const date = new Date(req.body.Psdate);
-    const Pdate = (date.getMonth()+1)+'-'+date.getDate()+'-'+date.getFullYear()
-    const edate = new Date(req.body.Pedate)
-    const Edate = (edate.getMonth()+1)+'-'+edate.getDate()+'-'+date.getFullYear()
     var project = new Project();
     project.pro_name = req.body.pro_name;
     project.pro_lead = req.body.pro_lead;
-    project.team_mem = req.body.team_mem;
-    project.Psdate = Pdate;
-    project.Pedate = Edate;
+    project.team_mem = req.body.team_mems;
+    console.log(project.team_mem);
+    project.Psdate = req.body.Psdate;
+    project.Pedate = req.body.Pedate;
     project.save((err) => {
         if(!err){
             console.log("Record inserted");
