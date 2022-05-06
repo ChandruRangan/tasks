@@ -144,7 +144,7 @@ app.get("/delete",(req,res) =>{
   })
 })
 
-//search
+//empsearch
 app.get("/search",(req,res) =>{
   emp.find({fullName:req.query.search},
     function(err,data){
@@ -156,6 +156,74 @@ app.get("/search",(req,res) =>{
       }
     })
 })
+
+//prosearch
+app.get("/search",(req,res) =>{
+  emp.find({projectName:req.query.search},
+    function(err,data){
+      if(err){
+        console.log(err);
+      }
+      else{
+        res.render("proTable",{employee: data});
+      }
+    })
+})
+
+//update
+
+
+// app.get("/update", (req, res) => {
+//   // res.send("<h1>hi</h1>");
+//   res.render("update", {
+//     viewtitle: "update the employee details",
+//   });
+// });
+
+app.get("/empupdate",(req,res)=>{
+  const id=req.query.id;
+  emp.find({_id:id},
+      function(err, data){
+          if(err){
+              console.log(err);
+          }
+          else{
+              res.render("empupdate", {employee: data,id:id});
+          }
+      })
+});
+app.post('/updatedata', (req, res) => {
+  emp.updateOne({_id:req.query.id},req.body,(err,data)=>{
+      if(!err){
+          res.redirect("/empTable");
+      }
+      else{
+          console.log(err);
+      }
+  })
+})
+
+// app.get('/:id',(req,res) =>{
+//   emp.findById(req.params.id, (err,doc) =>  {
+//     if(!err){
+//       res.render('/update',{
+//         employee: doc
+//       })
+//     }
+//     else{
+//       console.log(err);
+//     }
+//   })
+// })
+
+// app.post("/update", (req, res) => {
+//   UpdateRecord(req, res);
+// });
+
+// function UpdateRecord(req,res){
+  
+// }
+// 
 
 app.listen(3446, () => {
   console.log("http://localhost:3446");

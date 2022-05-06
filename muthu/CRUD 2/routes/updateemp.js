@@ -1,4 +1,4 @@
-const { db } = require("./dbconfig");
+// const { db } = require("./dbconfig");
 
 exports.update = async (req, res) => {
   const id = parseInt(req.query.id);
@@ -9,7 +9,7 @@ exports.update = async (req, res) => {
     .then((data) => {
         db.select("*")
       .from("employee")
-      .then((cat)=>{
+      .then(()=>{
           res.render("updateemp", { data: data, id: id});
         })
     })

@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-//  const Router = require("./router")
 const bodyparser= require("body-parser");
 const Emproute=  require ('./emp.route');  //import route
 //const router = require("./emp.route");
@@ -25,26 +24,13 @@ if(!db)
 else
     console.log("Db connected successfully")
 //setup server port
-    app.listen(4200,()=>{
+    app.listen(5000,()=>{
       console.log("port is running");
       }); 
 
-
-      // app.use(function(req, res, next) {
-      //   next(createError(404));
-      // });
+    app.use('/',Emproute);
       
-
-      app.use('/',Emproute);
-      
-//       app.use(function(err, req, res, next) {
-//         res.locals.message = err.message;
-//         res.locals.error = req.app.get('env') === 'development' ? err : {};
-//         res.status(err.status || 500);
-//   res.render('error');
-// });
-
-module.exports=app;
+  module.exports=app;
       
 // app.get('/', (req, res) => 
 // res.send('Hello World with Express'));

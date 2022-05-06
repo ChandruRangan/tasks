@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+</body>
+</html>
+
+
+
+
+<div class="form-group">
+    <label for="Teammember">Team member</label>
+    <input type="teammember" class="form-control" name="tm">
+  </div>
+
+
+  function add(){
+    var new_input="<input type='text' id='new_"+new_chq_no+"'>";
+
+  }
+  function remove(){
+    var last_chq_no = $('#total_chq').val();
+    if(last_chq_no>1){
+      $('#new_'+last_chq_no).remove();
+      $('#total_chq').val(last_chq_no-1);
+    }
+  }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<input type="text">
+<button onclick="add()">Add</button>
+<button onclick="remove()">remove</button>
+<div id="new_chq"></div>
+<input type="hidden" value="1" id="total_chq">

@@ -3,47 +3,47 @@ require 'json'
 
 class Read_file
     def read(fname)
-        @r=File.open(fname,"r")
-        @read=@r.readlines()
+        @read_file=File.open(fname,"r")
+        @read_line=@read_file.readlines()
     end
 end
 
 class Dob < Read_file
     def dob(fname)
-        @w=File.open(fname,"w+")
-        @wr="#{@read[0].split("|")[0]},#{@read[0].split("|")[1]}"
-        @w.write(@wr)
-        (1..@read.length-1).each do |i|
-            @dob=Date.parse("#{@read[i].split("|")[1]}")
-            @wr="#{@read[i].split("|")[0]},#{@dob.strftime($test_case['format'])}\n"
-            @w.write(@wr)
+        @write_file=File.open(fname,"w+")
+        @write_line="#{@read_line[0].split("|")[0]},#{@read_line[0].split("|")[1]}"
+        @write_file.write(@write_line)
+        (1..@read_line.length-1).each do |i|
+            @dob=Date.parse("#{@read_line[i].split("|")[1]}")
+            @write_line="#{@read_line[i].split("|")[0]},#{@dob.strftime($test_case['format'])}\n"
+            @write_file.write(@write_line)
         end
     end
 end
 
 class Age < Read_file 
     def age_lt_50(fname)
-        @w=File.open(fname,"w+")
-        @wr="#{@read[0].split("|")[0]},#{@read[0].split("|")[1]}"
-        @w.write(@wr)
-        (1..@read.length-1).each do |i|
-            if(eval("#{@read[i].split("|")[1]}")<50)
-            @wr="#{@read[i].split("|")[0]},#{@read[i].split("|")[1]}"
-            @w.write(@wr)
+        @write_file=File.open(fname,"w+")
+        @write_line="#{@read_line[0].split("|")[0]},#{@read_line[0].split("|")[1]}"
+        @write_file.write(@write_line)
+        (1..@read_line.length-1).each do |i|
+            if(eval($test_case['format']+@read_line[i].split("|")[1]))
+            @write_line="#{@read_line[i].split("|")[0]},#{@read_line[i].split("|")[1]}"
+            @write_file.write(@write_line)
             end
         end
     end
     def age_gt_18(fname)
-        @w=File.open(fname,"w+")
-        @wr="#{@read[0].split("|")[0]},#{@read[0].split("|")[1].chomp()},Eligible To Vote\n"
-        @w.write(@wr)
-        (1..@read.length-1).each do |i|
-            if(eval("#{@read[i].split("|")[1]}")>18)
-            @wr="#{@read[i].split("|")[0]},#{@read[i].split("|")[1].chomp()},T\n"
-            @w.write(@wr)
+        @write_file=File.open(fname,"w+")
+        @write_line="#{@read_line[0].split("|")[0]},#{@read_line[0].split("|")[1].chomp()},#{$test_case['newHead']}\n"
+        @write_file.write(@write_line)
+        (1..@read_line.length-1).each do |i|
+            if(eval($test_case['format']+@read_line[i].split("|")[1]))
+            @write_line="#{@read_line[i].split("|")[0]},#{@read_line[i].split("|")[1].chomp()},#{$test_case['true']}\n"
+            @write_file.write(@write_line)
             else
-            @wr="#{@read[i].split("|")[0]},#{@read[i].split("|")[1].chomp()},F\n"
-            @w.write(@wr)
+            @write_line="#{@read_line[i].split("|")[0]},#{@read_line[i].split("|")[1].chomp()},#{$test_case['false']}\n"
+            @write_file.write(@write_line)
             end
         end
     end
@@ -51,12 +51,12 @@ end
 
 class Full_name < Read_file
     def full_name(fname)
-        @w=File.open(fname,"w+")
-        @wr="Name\n"
-        @w.write(@wr)
-        (1..@read.length-1).each do |i|
-            @wr="#{@read[i].split("|")[0]} #{@read[i].split("|")[1]}"
-            @w.write(@wr)
+        @write_file=File.open(fname,"w+")
+        @write_line="#{$test_case['header']}\n"
+        @write_file.write(@write_line)
+        (1..@read_line.length-1).each do |i|
+            @write_line="#{@read_line[i].split("|")[0]} #{@read_line[i].split("|")[1]}"
+            @write_file.write(@write_line)
         end
     end
 end

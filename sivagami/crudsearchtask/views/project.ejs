@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Project</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <h5>Project_Table:</h5>
+
+    <form action="/proinsert" method="post">
+        <div class="form-group">
+            <label for="name">ProjectName:</label>
+            <input type="text"  placeholder="ProjectName"  name="PN"><br><br>
+            <label for="name">ProjectLead:</label>
+            <input type="text"  placeholder="ProjectLead"  name="PL"><br><br>
+            <label for="name">TeamMembers:</label>
+            <input type="text"  placeholder="TeamMembers"  name="TM"><br><br>
+            <label for="name">ProjectstartDate:</label>
+            <input type="text" placeholder="MM/DD/YYYY" name="startDate"><br><br>
+            <label for="name">ProjectEndDate:</label>
+            <input type="text" placeholder="MM/DD/YYYY" name="endDate"><br><br>
+        </div> 
+
+            <div class="input-group-append">
+              <div class="container text-center">
+              <button type="submit" class="btn btn-info" value="Submit Button">submit</button>
+              <button type="submit" class="btn btn-info" value="Submit Button">View</button>
+              </div><br>
+            </div> 
+        <div>
+            <a href="/dis" class="text-secondary">view</a> 
+            </div>
+    </form>
+
+  </body>
+</html>
