@@ -24,17 +24,11 @@ const EmpSchema= new mongoose.Schema({
     DateofBirth:{
       type:String
       // default:Date,
-    },  
+    },
     });
     
-    const Employee = mongoose.model('Employee', EmpSchema );
-    
-  // // Export API routes
+const Employee = mongoose.model('Employee', EmpSchema,'employees' );
+     // // Export API routes
     module.exports ={Employee}
     
-  //   module.exports.get = function (callback)
-  //    {
-  //      console.log(Employee);
-  //     Employee.find(callback);
-  // }
-
+ 
