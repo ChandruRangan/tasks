@@ -17,20 +17,18 @@
               <option>search API</option>
               </select>
             <input class="form" type="text" placeholder="Search" name="search" >
-            </div>
-            </form>
-            </div>
-         <br><br>
+            </div><br><br>
 
 
           <div class="container-fluid mt-5">
 
-            <a href="/dis" class="btn btn-success">find</a><br>
+            <!-- <a href="/dis" class="btn btn-success">find</a><br> -->
          
          <table class="table table-striped table-bordered">
              <thead>
                <h5>Employee_Table:</h5>
                  <tr>
+                    <!-- <th>Employee_id</th> -->
                      <th>FullName</th>
                      <th>Email</th>
                      <th>Password</th>
@@ -40,16 +38,17 @@
                      </tr>
                      </thead>
                      <tbody>
-                         <%for(i=0;i<employee.length;i++){%>
+                         <%for( i=0;i<employee.length;i++){%>
                             <tr>
+                                <!-- <td><%=employee[i].employee_id%></td> -->
                                 <td><%=employee[i].FullName%></td>
                                 <td><%=employee[i].Email%></td>
                                 <td><%=employee[i].Password%></td>
                                 <td><%=employee[i].PhoneNumber%></td>
                                 <td><%=employee[i].JoiningDate%></td>
                                 <td><%=employee[i].DateofBirth%></td>
-                                <td><a href="/update?id=<%=employee[i].employee_id%>" class="btn btn-dark">Update</a></td> 
-                                <td><a href="/delete?id=<%=employee[i].employee_id%>" class="btn btn-dark">Delete</a></td>
+                                <td><a href="/update?id=<%=employee[i]._id%>" class="btn btn-dark">Update</a></td> 
+                                <td><a href="/delete?id=<%=employee[i]._id%>" class="btn btn-dark">Delete</a></td>
                             </tr>
                          <%}%>
                         </tbody>

@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const EmpSchema= new mongoose.Schema({
+
+  //  employee_id:{
+  //    type:Number,
+  //  },
  
     FullName:{
       type:String,
