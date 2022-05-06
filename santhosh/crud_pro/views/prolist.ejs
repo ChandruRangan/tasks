@@ -1,9 +1,9 @@
 <%-include("style.ejs")-%>
 
 <div>
-    <form method="post" action="/search">
+    <form method="post" action="/searche">
         <div class="container-fluid mt-3">
-            <input type="text" class="form-control" placeholder="Search" name="search">
+            <input type="text" class="form-control" placeholder="Search" name="searche">
             <button  type="submit" class=" mt-2 btn btn-outline-info" value="search">Search</button>
         </div>
     </form>
@@ -19,6 +19,7 @@
                 <th>Team member</th>
                 <th>Project StartDate</th>
                 <th>Project EndDate</th>
+                <th>#</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,7 @@
                <td><%=proj[i].team_mem%></td>
                <td><%=proj[i].Psdate%></td>
                <td><%=proj[i].Pedate%></td>
+               <td><a href="/deleted?id=<%=proj[i]._id%>" class="btn btn-danger" onclick="return confirm('Are you sure you sure you want to delete this?')">Delete</a></td>
                <%}%>
             </tbody>
         </table>

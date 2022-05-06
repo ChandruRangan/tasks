@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div>
+        <form action="/prodis" method="get">
+                <div class="form-group">
+                search<select class="form-group" name="search">
+                  <option>search API</option>
+                  </select>
+                <input class="form" type="text" placeholder="Search" name="search" >
+                </div> <br><br>
+ 
+          <div class="container-fluid mt-5">
+           <table class="table  table-striped table-bordered">
+                <thead>
+                    <h5>Project_Table:</h5><br>
+                    <tr>
+                        <th>ProjectName</th>
+                        <th>ProjectLead</th>
+                        <th>TeamMembers</th>
+                        <th>ProjectStartDate</th>
+                        <th>ProjectEndDate</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <% for(i=0;i<project.length;i++){%>
+                               <tr>
+                                   <td><%=project[i].ProjectName%></td>
+                                   <td><%=project[i].ProjectLead%></td>
+                                   <td><%=project[i].TeamMembers%></td>
+                                   <td><%=project[i].ProjectstartDate%></td>
+                                   <td><%=project[i].ProjectEndDate%></td>
+                                   <td><a href="/update?id=<%=project[i].project_id%>" class="btn btn-dark">Update</a></td> 
+                                   <td><a href="/delete?id=<%=project[i].project_id%>" class="btn btn-dark">Delete</a></td>
+                               </tr>
+                            <%} %>
+                        </tbody>  
+            </table>  
+
+        </body>
+        </html>
