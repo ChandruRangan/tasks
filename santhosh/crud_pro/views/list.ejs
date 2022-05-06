@@ -1,0 +1,40 @@
+<%-include("style.ejs")-%>
+<div>
+    <form method="post" action="/search">
+        <div class="container-fluid mt-3">
+            <input type="text" class="form-control" placeholder="Search" name="search">
+            <button  type="submit" class=" mt-2 btn btn-outline-info" value="search">Search</button>
+        </div>
+    </form>
+  </div>
+
+<div class="container-fluid mt-5">
+    <a href="/" class="btn btn-success">Create New</a><br><br>
+    <table class="table table-striped table-bordered">
+        <thead><h1>Employee Details</h1>
+            <tr>
+                <th>Fullname</th>
+                <th>Email id</th>
+                <th>Phone number</th>
+                <th>Joining date</th>
+                <th>DateofBirth</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (i=0;i<emp.length;i++){%>
+                <tr>
+               <td><%=emp[i].full_name%></td>
+               <td><%=emp[i].email%></td>
+               <td><%=emp[i].phonenumber%></td>
+               <td><%=emp[i].joiningdate%></td>
+               <td><%=emp[i].dateofbirth%></td>
+               <td><a href="/update?id=<%=emp[i]._id%>" class="btn btn-info">Update</a></td>
+               <td><a href="/delete?id=<%=emp[i]._id%>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')">Delete</a></td>
+               <%}%>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <a href="/" class="btn btn-primary">Back</a>
+        </div>
+</div>

@@ -1,0 +1,36 @@
+<%-include("style.ejs");-%>
+<body>
+      <div class="container mt-5 jumbotron">
+          <h3 class=""> <h3> Create Employee Details</h3><br>
+          <form action="/insert" method="POST">
+              <div>
+                <label id="fname" >Fullname:</label>
+                <input type="text" class="form-control"  placeholder="Enter Fullname" value="<%=emp[i].full_name%>" name="full_name"><br><br>
+              </div>
+            <div>
+              <label id="mail" >Enter your email:</label>
+              <input type="text" class="form-control"  placeholder="Enter email" value="<%=emp[i].email%>" name="email"><br><br>
+            </div>
+            <div >
+              <label id="pwd" >Enter the Password:</label>
+              <input type="password"  class="form-control"  placeholder="Password" value="<%=emp[i].password%>"  name="password"><br><br>
+            </div>
+            <div >
+              <label id="numb" >Enter Phone number:</label>
+              <input type="number" class="form-control"  placeholder="Phone number" value="<%=emp[i].phonenumber%>"  name="phonenumber"><br><br>
+            </div>
+            <div >
+              <label id="jdate" >Joining date:</label>
+              <input type="date"  class="form-control"   placeholder="MM/DD/YYY" value="<%=emp[i].joiningdate%>" name="joiningdate"><br><br>
+            </div>
+            <div>
+              <label id="dob">Date of birth:</label>
+              <input type="date"  class="form-control"   placeholder="MM/DD/YYY"  value="<%=emp[i].dateofbirth%>" name="dateofbirth"><br><br>
+            </div>
+            <input type="submit" class="btn btn-outline-success">
+            <a  href="/list" class="btn btn-outline-info">View</a>
+            <a href="/project" class="btn btn-outline-Secondary">Create Project</a>
+          </form>
+            
+      </div>
+    </body>

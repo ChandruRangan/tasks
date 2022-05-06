@@ -9,9 +9,9 @@ const db= knex({
     client:'postgresql',
     connection:{
         host:"localhost",
-        user:"postgres",
-        password:"sandy@001",
-        database:"crud",
+        user:"santhosh",
+        password:"santhosh123",
+        database:"santhoshdb",
     },
 })
 app.get('/',(req,res)=>{
@@ -134,3 +134,4 @@ app.get("/casc", (req, res) => {
   app.listen(2000, () => {
       console.log(`The running port is http://localhost:2000`)
   });
+  

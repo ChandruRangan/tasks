@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body class="col-5">
+    <h3>Project Details</h3>
+    <form action="http://localhost:3446/project" method="POST">
+        <div>
+            <div>
+                ProjectName:<input type="text" class="form-group" id="pname" placeholder="Enter Project Name" name="pname"><br><br>
+            </div>
+            <div>
+                ProjectLead:<input type="text" class="form-group" id="lname" placeholder="Enter Name" name="lname"><br><br>
+            </div>
+            <div>
+                TeamMembers:<input type="text" class="form-group" id="tmname" placeholder="Enter Project Name" name="tmname"><br><br>
+            </div>
+            <div>
+                Project StartDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="sdate"><br><br>
+            </div>
+            <div>
+                Project EndDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="edate"><br><br>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-success">SUMBIT</button>
+        <!-- <a  href="/empTable" class="btn btn-outline-dark">EmployeeTable</a> -->
+        <a  href="/proTable" class="btn btn-outline-dark">ProjectTable</a>
+        <a href="/" class="btn btn-outline-info">Add Employee</a>
+    </form>    
+  </body>
+</html>
+<!-- <head>
+    <title>projectdetails</title>
+</head>
+<body>
+    <h3>Project Details</h3>
+    <form action="http://localhost:2000/insert" method="POST">
+        <div>
+            <div>
+                ProjectName:<input type="text" id="pname" placeholder="Enter Project Name" name="pname"><br><br>
+            </div>
+            <div>
+                ProjectLead:<input type="text" id="lname" placeholder="Enter Name" name="lname"><br><br>
+            </div>
+            <div>
+                TeamMembers:<input type="text" id="tmname" placeholder="Enter Project Name" name="tmname"><br><br>
+            </div>
+            <div>
+                Project StartDate:<input type="date" id="date" placeholder="MM/DD/YYYY"><br><br>
+            </div>
+            <div>
+                Project EndDate:<input type="date" id="date" placeholder="MM/DD/YYYY"><br><br>
+            </div>
+        </div>
+
+    </form>
+</body> -->

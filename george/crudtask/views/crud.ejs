@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <form action=" " method="post">
+    <form action="/crud" method="post">
         <input type="text" placeholder="search">
         <button type="submit" value="search">search</button>
     </form>
@@ -20,11 +20,23 @@
                     <th> product_id </th>
                     <th>product_name</th>
                     <th>price</th>
-                    <th> category_id</th>
+                    <th> category_name</th>
                     <th>created_at</th>
                     <th>updated_at</th>
                 </tr>
-            </thread>
+            </thread><br>
+            <tbody>
+                <%for(var i= 0;i<data.length;i++){%>
+                    <tr>
+                        <td><%=data[i].product_id%></td>
+                        <td><%=data[i].product_name%></td>
+                        <td><%=data[i].price%></data></td>
+                        <td><%=data[i].category_name%></td>
+                        <td><%=data[i].created_at%></td>
+                        <td><%=data[i].updated_at%></td>
+                    </tr>
+                    <%}%>
+            </tbody>
         </table>
     </div>
 </body>

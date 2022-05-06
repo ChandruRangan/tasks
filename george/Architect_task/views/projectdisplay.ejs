@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Project</title>
+</head>
+<body>
+    <div>
+        <form method="post" action="searchpro">
+          <input type="text" placeholder="Search" name="search">
+          <button  type="submit" value="search">Search</button>
+        </form>
+      </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Pro_id</th>
+                <th>Pro_Name</th>
+                <th>Pro_Lead</th>
+                <th>Team_member</th>
+                <th>PSD</th>
+                <th>PED</th>
+                <th>ACTION</th>
+                <th>ACTION</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (i=0;i<Project.length;i++){%>
+               <tr>
+                   <td><%=Project[i].PROID%></td>
+                   <td><%=Project[i].Projectname%></td>
+                   <td><%=Project[i].Projectlead%></td>
+                   <td><%=Project[i].Teammember%></td>
+                   <td><%=Project[i].Projectstartdate%></td>
+                   <td><%=Project[i].Projectenddate%></td>
+                   <td><a href="/deletepro?PROID=<%= Project[i].PROID%>">Delete</a></td>
+                   <td><a href="/updatepro?PROID=<%= Project[i].PROID%>">Update</a></td>
+                    </tr>
+                   <%}%>
+        </tbody>
+    </table>
+</body>
+</html>

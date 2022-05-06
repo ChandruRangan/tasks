@@ -1,0 +1,32 @@
+<%-include("style.ejs");-%>
+<body>
+      <div class="container mt-5 jumbotron">
+          <h3 class=""> Create Project Details</h3><br>
+          <form action="/project" method="POST">
+              <div>
+                <label id="Pname" >Project Name:</label>
+                <input type="text" class="form-control" id="Pname" placeholder="Enter project name" name="pro_name"><br><br>
+              </div>
+            <div>
+              <label id="Lname" >Project Lead:</label>
+              <input type="text" class="form-control" id="Lname" placeholder="Enter lead name" name="pro_lead"><br><br>
+            </div>
+            <div >
+              <label id="Tmembers" >Team Members:</label>
+              <input type="text"  class="form-control" id="Tmembers" placeholder="Enter team members" name="team_mem"><br><br>
+            </div>
+            <div >
+              <label id="Ps" >Project Start Date:</label>
+              <input type="date" class="form-control"  placeholder="MM-DD-YYY"  name="Psdate"><br><br>
+            </div>
+            <div >
+              <label id="Pe" >Project End Date:</label>
+              <input type="date"  class="form-control" id="Pe" placeholder="MM/DD/YYY" name="Pedate"><br><br>
+            </div>
+            <input type="submit" class="btn btn-outline-success">
+            <a  href="/prolist" class="btn btn-outline-info">View</a>
+            <a href="/" class="btn btn-outline-secondary">Insert Employee</a>
+          </form>
+            
+      </div>
+    </body>
