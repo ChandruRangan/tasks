@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dsiplay Employee</title>
+    <%-include('style.ejs')%>
+</head>
+<body class="container container-fluid">
+    <h1 class="text-center display-4" >Project Details</h1>
+    <div>
+        <form method="post" action="/datap" >
+          <input type="text" class="form-control mt-2" placeholder="Search" name="search">
+          <button class="my-3 btn btn-primary" type="submit" value="search">Search</button>
+          <a class="btn btn-success" href="/pro">Insert</a>
+        </form>
+      </div>
+    <table class="table table-hover table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th scope="col">PROJECT NAME</th>
+                <th scope="col">PROJECTLEAD</th>
+                <th scope="col">STARTDATE</th>
+                <th scope="col">ENDDATE</th>
+                <th scope="col">TEAM MEMBERS</th>
+                <th  scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (i=0;i<pro.length;i++){%>
+               <tr scope="row">
+                   <td><%=pro[i].ProjectName%></td>
+                   <td><%=pro[i].ProjectLead%></td>
+                   <td><%=pro[i].StartDate%></td>
+                   <td><%=pro[i].EndDate%></td>
+                   <td><%=pro[i].TeamMembers%></td>
+                   <td class="text-center"><a class="btn btn-danger" href="">Delete</a>
+                    <a href=""class="btn btn-warning">Update</a></td>
+                    </tr>
+                   <%}%>
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+
+
+
