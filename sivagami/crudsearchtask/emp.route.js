@@ -8,16 +8,20 @@ const router = require('express').Router();
 
 //employee API
 router.get("/",function(req,res){
-  res.render('cruds',{title:'CRUDtask'});
+  res.render('Emp',{title:'CRUDtask'});
 });
 
 router.post("/insert",(req,res)=>{
-  console.log( 'INSERT', req.body);
+  // console.log( 'INSERT', req.body);
+  // if(req.body.id == "")
     insertdata(req, res);
+    // else
+    // updatedata(req,res);
 });
 function insertdata(req, res){
   console.log('inside func')
     const employee = new Employee();
+    // employee.employee_id = req.body.id;
     employee.FullName = req.body.FullName;
     employee.Email = req.body.email;
     employee.Password = req.body.pwd;
@@ -26,7 +30,7 @@ function insertdata(req, res){
     employee.DateofBirth = req.body.DOB;
 
     employee.save((err,doc)=>{
-      console.log('error', err);
+      // console.log('error', err);
      if(!err)
       res.redirect("/");
      else
@@ -59,12 +63,13 @@ const project= new Project();
      });
  };
     
+ //display employeetable
 router.get('/dis',(req,res)=>{
   
  Employee.find((err,empdetails)=>{
      if(!err){
-       console.log(empdetails);
-      res.render("find",{employee:empdetails});
+      //  console.log(empdetails);
+      res.render("Emptable",{employee:empdetails});
      }
      else{
       console.log(err);
@@ -72,6 +77,8 @@ router.get('/dis',(req,res)=>{
    });
   });
   
+
+  //display projecttable
   router.get('/prodis',(req,res)=>{
    Project.find((err,projectdetails)=>{
       if(!err){
@@ -83,70 +90,111 @@ router.get('/dis',(req,res)=>{
       }
     });
 });
-//     .then((projecttable)=>{
-//       res.render('find',{project:projecttable});
-//   })
-//   // })
-//  .catch((err)=>{
-//      res.json({message:err});
-//   });
-// });
-
-// router.post("/find",function(req,res){
-  
-//   Employee.find({})
-//    .then((value)=>{
-//       res.render('find',{employee:value});
-//    })
-//       .catch((err)=>{
-//         res.json({message:err});
-//      });
-   
-//     Project.find({})
-//     .then((value)=>{
-//       res.render('find',{project:value});
-//   })
-//   // })
-//  .catch((err)=>{
-//      res.json({message:err});
-//   });
-// });
 
 
 
+//update Employee
 
+router.post("/update",(req,res)=>{
+  console.log( 'INSERT', req.body);
+  updatedata(req,res);
+});
 
+function updatedata(req,res){
+  console.log('inside fn');
+  const id=req.query;
+  Employee.findOneAndUpdate( {id: req.query.id }, req.body, (err,doc)=>{
+    console.log('inside fn');
+   if(!err){
+    console.log('update')
+  res.redirect("/dis"),{
+   employee:doc}
+    }
+   else
+     console.log(err, 'error in update'),{
+     employee:req.body}
+  });
+}
 
-// function updateRecord(req,res){
-//   Employee.findByIdAndUpdate( {_id: req.body._id }, req.body, {new: true}, (err,doc)=>{
-//    if(!err) {res.redirect('/list'); }
-//    else
-//      console.log(err, 'error in update');
-//   });
-// }
-
-// router.get('/list',(req,res)=>{
-//   Employee.find((err,docs)=>{
-//     if(!err){
-//       res.render("employee/list",{
-//         list:docs
-//       });
-//     }
-//   });
-// });
+router.get('/update',(req,res)=>{
+  console.log('ironman')
+  const id=req.query;
+  Employee.find((err,docs)=>{
+    if(!err){
+      console.log('spider')
+      res.render("update",{
+        employee:docs
+      });
+    }
+  });
+});
 
 // router.get('/:id',(req,res)=>{
-//   Employee.findById(req.params.id, (err,doc)=>{
+//   console.log('batman')
+//   Employee.find(req.params.id, (err,docs)=>{
+//     console.log('spiderman')
 //     if(!err){
-//       res.render("cruds",{
-//         title:"update employee",
-//         employee:doc
-//       });
+//       console.log('Ironman')
+//       res.redirect("/update"),
+//        {
+//          title:"update employee",
+//          employee:docs
+//        };
+//       }
+//     else{
+//       console.log(err)
 //     }
 //   });
 // });
   
 
+//update Project
+
+
+//delete Employee API
+
+// router.get("/delete",(req,res) => { 
+//   console.log('delete')
+//   Employee.findByIdAndDelete({_id:req.query.id},(err)=>{
+//     console.log("deleteone")
+//     if(!err){
+//       console.log('always delete')
+//       res.redirect('/Emptable');
+//     }
+//     else{
+//       console.log("cannot delete"+err);
+//     }
+//   })
+
+// })
+
+router.get('/delete', (req, res)=> {
+  console.log('sivi');
+  Employee.findByIdAndRemove({_id:req.query.id}, (err, doc) => {
+    console.log("deleteone")
+      if (!err) {
+        console.log('always delete')
+          res.redirect('/dis');
+      } else {
+          console.log('Failed to Delete user Details: ' + err);
+      }
+  });
+})
+
+//delete Project API
+
+router.get("/delete",(req,res)=>{
+  console.log('inside fn')
+  Project.findByIdAndDelete({ProjectName:req.query.PN},(err)=>{
+    console.log('delete')
+    if(!err){
+      res.redirect('/protable');
+     }
+     else{
+       console.log('cannot delete'+err);
+     }
+  })
+})
   
 module.exports=router;
 

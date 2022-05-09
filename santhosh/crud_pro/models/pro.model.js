@@ -7,8 +7,8 @@ var proSchema = new mongoose.Schema({
     pro_lead : {
         type : String
     },
-    team_mem : {
-        type : String
+    team_mem: {
+        type : Array
     },
     Psdate : {
         type : String
