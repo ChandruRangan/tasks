@@ -8,7 +8,13 @@ var proSchema = new mongoose.Schema({
         type: String,
         required: "please enter project lead name!",
     },
-    teamMember: {
+    teamMember1: {
+        type: String,
+    },
+    teamMember2: {
+        type: String,
+    },
+    teamMember3: {
         type: String,
     },
     p_StartDate: {
