@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
+  <style>
+      input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+  </style>
+</head>
+
+<body>
+          <h1 class="text-center display-4"> Inserting Employee Details</h1>
+        <div class="container w-50 containetr-fluid my-3">
+   <form action="/empinsert" method="post">
+    <input required class="form-control mb-2" type="text" placeholder="Enter name" name="Fname">
+    <input required class="form-control mb-2" type="text" placeholder="Email Address" name="Email">
+    <input required class="form-control mb-2"type="password" placeholder="Password" name=" Password">
+    <input required class="form-control mb-2" type="number" placeholder="phone number" name=" Phone">
+    <input required class="form-control mb-2" type="date" placeholder="joining date" name="Join_date">
+    <input required class="form-control mb-2" type="date" placeholder="Date of birth " name="DOB">
+    <button class="btn btn-success" type="submit">submit</button>
+   </form>
+        </div>
+        
+         <div class="container text-center">
+            <a href="/datas" class="btn btn-info">View</a>
+           
+         </div>
+
+        <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            function submit(){
+                console.log("hi")
+                let name=document.getElementById("name");
+                let email=document.getElementById("Email");
+                let pwd=document.getElementById("pswd");
+                let phone=document.getElementById("phono");
+                let doj=document.getElementById("DOJ");
+                let dob=document.getElementById("DOB");
+    
+    
+                $.ajax({
+                    type:'POST',
+                    url:'/empinsert',
+                    dataType:'json',
+                    data:{
+                        Fname:name.value,
+                        Email_id:email.value,
+                        Password:pwd.value,
+                        Phone:phone.value,
+                        Join_date:doj.value,
+                        DOB:dob.value
+                    }
+                    // success:function(data){
+                    //     console.log('success');
+                    // }
+                })
+                name.value='';dob.value='';email.value='';pwd.value='';phone.value='';doj.value='';
+                // 
+    
+   
+    
+</body>
+</html>

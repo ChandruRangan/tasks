@@ -12,6 +12,10 @@
 </head>
 <body>
     <form method="post" action="/insert">
+      <div class="form-group">
+        <label for="Emp_id">Empid:</label>
+        <input type="ID" class="form-control" name="ID">
+      </div>
         <div class="form-group">
           <label for="fullname">fullname:</label>
           <input type="Name" class="form-control" name="fname">
@@ -37,7 +41,6 @@
              <input type="date" name="dob" class="form-control">
        </div>
         
-        <button type="submit" class="btn btn-default">Submit</button>
         <input type="submit" class="btn btn-info">
           <a href="/display" class="btn btn-info">View</a>
       </form>

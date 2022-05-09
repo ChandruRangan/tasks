@@ -10,7 +10,43 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+    <h5>Employee_Table:</h5>
       
-    
+    <form action="/update" method="post">
+        <div class="form-group">
+         
+           <label for="name">FullName:</label>
+            <input type="text"  placeholder="FullName"  name="FullName"  value="<%=employee[0].FullName%>"><br><br>
+            <label for="email">EmailAddress:</label>
+            <input type="email" class="form-group" placeholder="Enter email" name="email"   value="<%=employee[0].Email%>"><br><br>
+            <label for="name">Password:</label>
+            <input type="password" class="form-group" id="pwd" placeholder="Password"  name="Pwd"  value="<%=employee[0].Password%>"><br><br>
+            <label for="name">PhoneNumber:</label>
+            <input type="text" id="ph.no" placeholder="phonenumber" name="phoneno"  value="<%=employee[0].PhoneNumber%>"><br><br>
+            <label for="name">JoiningDate:</label>
+            <input type="text" placeholder="MM/DD/YYYY" name="JoinDate"   value="<%=employee[0].JoiningDate%>"><br><br>
+            <label for="name">D.O.B:</label>
+            <input type="text" placeholder="MM/DD/YYYY" name="DOB"  value="<%=employee[0].DateofBirth%>"><br><br>
+           
+      
+          <div class="input-group-append">
+            <div class="container text-center">
+              <!-- <td><a href="/Emptable" class="btn btn-dark">Update</a></td> -->
+            <button type="submit" class="btn btn-info" value="Submit Button">UPDATE</button>
+
+            <!-- <a href="/dis" class="text-secondary">update</a> -->
+            <button type="submit" class="btn btn-info" value="Submit Button">View</button>
+            </div><br>
+          </div> 
+           <div>
+          <a href="/dis" class="text-secondary">view</a>
+</div>
+
+
+
+          
+
+          </div>  
+        </form>
   </body>
 </html>
