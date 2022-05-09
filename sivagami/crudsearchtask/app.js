@@ -8,7 +8,7 @@ app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
 app.set('view engine','ejs');
 app.use(express.json());
-// app.engine('ejs', require('ejs').renderFile);
+
 
 
 mongoose.connect('mongodb://localhost:27017/CRUDtask',
@@ -30,12 +30,8 @@ else
 
     app.use('/',Emproute);
       
-  module.exports=app;
-      
-// app.get('/', (req, res) => 
-// res.send('Hello World with Express'));
 
-// app.use('/api',Emproute)
+      
 
 
 
