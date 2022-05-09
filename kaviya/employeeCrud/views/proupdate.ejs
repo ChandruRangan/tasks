@@ -10,22 +10,42 @@
   </head>
   <body class="col-5">
     <h3>Project Details</h3>
-    <form action="http://localhost:3446/project" method="POST">
+    <form action="/updatepro?id=<%=id%>" method="POST">
         <div>
             <div>
-                ProjectName:<input type="text" class="form-group" id="pname" placeholder="Enter Project Name" name="pname"  value="<%=project[i].projectName%>"><br><br>
+                <% for(var i=0;i<project.length; i++) { %>
+                     ProjectName:<input type="text" class="form-group" id="pname" placeholder="Enter Project Name" name="projectName"  value="<%=project[i].projectName%>"><br><br>
+                <%}%>
             </div>
             <div>
-                ProjectLead:<input type="text" class="form-group" id="lname" placeholder="Enter Name" name="lname" value="<%=project[i].projectLead%>"><br><br>
+                <% for(var i=0;i<project.length; i++) { %>
+                    ProjectLead:<input type="text" class="form-group" id="lname" placeholder="Enter Name" name="lname" value="<%=project[i].projectLead%>"><br><br>
+                <%}%>
             </div>
             <div>
-                TeamMembers:<input type="text" class="form-group" id="tmname" placeholder="Enter Project Name" name="tmname" value="<%=project[i].teamMember%>"><br><br>
+                <% for(var i=0;i<project.length; i++) { %>
+                    TeamMember1:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="tmname1" value="<%=project[i].teamMember1%>"><br><br>
+                <%}%>    
             </div>
             <div>
-                Project StartDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="sdate" value="<%=project[i].p_StartDate%>"><br><br>
+                <% for(var i=0;i<project.length; i++) { %>
+                    TeamMember2:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="tmname1" value="<%=project[i].teamMember2%>"><br><br>
+                <%}%>    
             </div>
             <div>
-                Project EndDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="edate" value="<%=project[i].p_EndDate%>"><br><br>
+                <% for(var i=0;i<project.length; i++) { %>
+                    TeamMember3:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="tmname1" value="<%=project[i].teamMember3%>"><br><br>
+                <%}%>    
+            </div>
+            <div>
+                <% for(var i=0;i<project.length; i++) { %>
+                    Project StartDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="sdate" value="<%=project[i].p_StartDate%>"><br><br>
+                <%}%>
+            </div>
+            <div>
+                <% for(var i=0;i<project.length; i++) { %>
+                    Project EndDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="edate" value="<%=project[i].p_EndDate%>"><br><br>
+                <%}%>
             </div>
         </div>
         <button type="submit" class="btn btn-outline-success">Update</button>

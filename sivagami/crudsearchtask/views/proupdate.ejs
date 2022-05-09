@@ -12,28 +12,26 @@
   <body>
     <h5>Project_Table:</h5>
 
-    <form action="/proinsert" method="post">
+    <form action="/updated?id=<%=project[0].id%>" method="POST">
         <div class="form-group">
             <label for="name">ProjectName:</label>
-            <input type="text"  placeholder="ProjectName"  name="PN"><br><br>
+            <input type="text"  placeholder="ProjectName"  name="ProjectName" value="<%=project[0].ProjectName%>"><br><br>
             <label for="name">ProjectLead:</label>
-            <input type="text"  placeholder="ProjectLead"  name="PL"><br><br>
+            <input type="text"  placeholder="ProjectLead"  name="ProjectLead" value="<%=project[0].ProjectLead%>"><br><br>
             <label for="name">TeamMembers:</label>
-            <input type="text"  placeholder="TeamMembers"  name="TM"><br><br>
+            <input type="text"  placeholder="TeamMembers"  name="TeamMembers" value="<%=project[0].TeamMembers%>"><br><br>
             <label for="name">ProjectstartDate:</label>
-            <input type="text" placeholder="MM/DD/YYYY" name="startDate"><br><br>
+            <input type="text" placeholder="MM/DD/YYYY" name="ProjectstartDate"  value="<%=project[0].ProjectstartDate%>"><br><br>
             <label for="name">ProjectEndDate:</label>
-            <input type="text" placeholder="MM/DD/YYYY" name="endDate"><br><br>
+            <input type="text" placeholder="MM/DD/YYYY" name="ProjectEndDate" value="<%=project[0].ProjectEndDate%>"><br><br>
         </div> 
 
-            <div class="input-group-append">
+            
               <div class="container text-center">
-              <button type="submit" class="btn btn-info" value="Submit Button">submit</button>
+              <button type="submit" class="btn btn-info" value="Submit Button">Update</button>
               <a href="/prodis" class="text-secondary">view</a> 
-              
+              <a href="/project" class="btn btn-primary">Back</a>
               </div>
-            </div>
-    </form>
-
-  </body>
+        </form>
+      </body>
 </html>
