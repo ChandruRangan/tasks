@@ -8,8 +8,11 @@ app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
 app.set('view engine','ejs');
 app.use(express.json());
-// app.engine('ejs', require('ejs').renderFile);
+const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
 
+// Set up Global configuration access
+dotenv.config();
 
 mongoose.connect('mongodb://localhost:27017/CRUDtask',
   {
@@ -30,13 +33,17 @@ else
 
     app.use('/',Emproute);
       
-  module.exports=app;
+    // let PORT = process.env.PORT || 5000;
+    // app.listen(PORT, () => {
+    //   console.log(`Server is up and running on ${PORT} ...`);
+    // });
       
-// app.get('/', (req, res) => 
-// res.send('Hello World with Express'));
-
-// app.use('/api',Emproute)
-
+    app.get('/search/:key',async(req,res)=>{
+      // console.log(req.params.key)
+      let data=await employee.find()
+      res.send(data);
+    })
+    
 
 
 
