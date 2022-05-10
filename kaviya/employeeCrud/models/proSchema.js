@@ -18,10 +18,10 @@ var proSchema = new mongoose.Schema({
         type: String,
     },
     p_StartDate: {
-        type: String,
+        type: Date,
     },
     p_EndDate: {
-        type: String,
+        type: Date,
     },
 
 });

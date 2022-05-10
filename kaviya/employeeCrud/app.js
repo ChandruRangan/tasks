@@ -45,17 +45,20 @@ app.post("/insert", (req, res) => {
 
 function insertValue(req, res) {
   var employee = new emp();
-  const date1 =new Date(req.body.jdate);
-  const jdate=(date1.getMonth()+1)+'-'+date1.getDate()+'-'+date1.getFullYear()
-  const date2 =new Date(req.body.dobdate);
-  const dobdate=(date2.getMonth()+1)+'-'+date2.getDate()+'-'+date2.getFullYear()
-  console.log(jdate);
+  // const date1 =new Date(req.body.jdate);
+  // const jdate=`${date1.getMonth()} - ${date1.getDate()} - ${date1.getFullYear()}`
+  // // console.log(jdate);
+  // // const jdate=(date1.getMonth()+1)+'-'+date1.getDate()+'-'+date1.getFullYear()
+  // const date2 =new Date(req.body.dob);
+  // const dob=(date2.getMonth()+1)+'-'+date2.getDate()+'-'+date2.getFullYear()
+  // // console.log(jdate);
   employee.fullName = req.body.ename;
   employee.email = req.body.email;
   employee.password = req.body.pwd;
   employee.phoneNumber = req.body.phone;
-  employee.joinDate = jdate;
-  employee.dateofbirth = dobdate;
+  employee.joinDate = req.body.jdate;
+  employee.dateofbirth = req.body.dob;
+  // console.log(req.boby.birthDate)
   employee.save((err) => {
     if (!err) {
       console.log("Value inserted");
@@ -80,8 +83,10 @@ app.post("/project", (req, res) => {
 
 function insertRecord(req, res) {
   var project = new pro();
-  const date =new Date(req.body.jdate);
-  const mdate=(date.getMonth()+1)+'-'+date.getDate()+'-'+date.getFullYear()
+  // const date1 =new Date(req.body.sdate);
+  // const sdate=(date1.getMonth()+1)+'-'+date1.getDate()+'-'+date1.getFullYear()
+  // const date2 =new Date(req.body.edate);
+  // const edate=(date2.getMonth()+1)+'-'+date2.getDate()+'-'+date2.getFullYear()
   project.projectName = req.body.pname;
   project.projectLead = req.body.lname;
   project.teamMember1 = req.body.tmname1;
@@ -152,7 +157,12 @@ app.get("/deletepro",(req,res) =>{
 
 //empsearch
 app.get("/search",(req,res) =>{
-  emp.find({fullName:req.query.search},
+  emp.find(
+    {$or: [
+    {fullName: {$regex: req.query.search}},
+    {email: {$in: req.query.search}},
+    {phoneNumber: {$in: req.query.search}}
+    ]},
     function(err,data){
       if(err){
         console.log(err);
@@ -164,14 +174,21 @@ app.get("/search",(req,res) =>{
 })
 
 //prosearch
-app.get("/search",(req,res) =>{
-  emp.find({projectName:req.query.search},
+app.get("/searchs",(req,res) =>{
+  pro.find(
+    {$or : [
+    {projectName:{$regex: req.query.search}},
+    {projectLead:{$regex: req.query.search}},
+    {teamMember1:{$regex: req.query.search}},
+    {teamMember2:{$regex: req.query.search}},
+    {teamMember3:{$regex: req.query.search}},
+    ]},
     function(err,data){
       if(err){
         console.log(err);
       }
       else{
-        res.render("proTable",{employee: data});
+        res.render("proTable",{project: data});
       }
     })
 })
@@ -198,7 +215,7 @@ app.get("/empupdate",(req,res)=>{
           }
       })
 });
-app.post('/updateemp', (req, res) => {
+app.put('/updateemp', (req, res) => {
   const id=req.query.id;
   console.log(id)
   emp.updateOne({_id:id},req.body,(err,data)=>{
@@ -223,7 +240,7 @@ app.get("/proupdate",(req,res)=>{
           }
       })
 });
-app.post('/updatepro', (req, res) => {
+app.put('/updatepro', (req, res) => {
   const id=req.query.id;
   console.log(id)
   pro.updateOne({_id:id},req.body,(err,data)=>{

@@ -10,46 +10,37 @@
   </head>
  <body class="col-5">
     <h3>Updated Employee Details</h3><br>
-  <form action="/updateemp?id=<%=id%>" method="post">
+  <form action="/updateemp?id=<%=id%>" method="put">
     <div>
+      <% for(var i=0;i<employee.length; i++) { %>
       <div>
-        <% for(var i=0;i<employee.length; i++) { %>
-          Fullname: <input type="text" class="form-group"  placeholder="Enter Name" name="fullName"  value="<%=employee[i].fullName%>"><br><br>
-        <%}%>
+        Fullname: <input type="text" class="form-group"  placeholder="Enter Name" name="fullName"  value="<%=employee[i].fullName%>"><br><br>
       </div>
       <div>
-      <% for(var i=0;i<employee.length; i++) { %>
         Email: <input type="email"  class="form-group" id="email" placeholder="Enter Email" name="email"  value="<%=employee[i].email%>"><br><br>
-        <%}%>
       </div>
       <div>
-      <% for(var i=0;i<employee.length; i++) { %>
-        Password: <input type="password" class="form-group" id="pwd" placeholder="Enter Password" name="password"  value="<%=employee[i].password %>"><br><br>
-      <%}%>  
+      Password: <input type="password" class="form-group" id="pwd" placeholder="Enter Password" name="password"  value="<%=employee[i].password %>"><br><br>  
       </div>
       <div>
-        <% for(var i=0;i<employee.length; i++) { %>
-          Phone Number: <input type="number"  class="form-group" id="ephone" placeholder="Enter PhoneNumber" name="phoneNumber"  value="<%=employee[i].phoneNumber%>"><br><br>
-        <%}%>  
+        Phone Number: <input type="number"  class="form-group" id="ephone" placeholder="Enter PhoneNumber" name="phoneNumber"  value="<%=employee[i].phoneNumber%>"><br><br> 
       </div>
       <div>
-        <% for(var i=0;i<employee.length; i++) { %>
-          Join Date: <input type="date" id="jdate" name="joinDate"  value="<%=employee[i].joinDate%>"><br><br>
-        <%}%>  
+        Join Date: <input type="date" id="jdate" name="joinDate" value="<%=employee[i].joinDate%>"><br><br>
+        <p><%=employee[i].joinDate%></p>
       </div>
       <div>
-        <% for(var i=0;i<employee.length; i++) { %>
-          Date Of Birth: <input type="date" id="dob" name="dateofbirth"  value="<%=employee[i].dateofbirth%>"><br><br>
-        <%}%>  
+        Date Of Birth: <input type="date" id="dob" name="dateofbirth"  value="<%=employee[i].dateofbirth%>"><br><br>
       </div>
       <!-- <input type="submit">
-      <a href="/views">Enter Project Details</a> -->
-      <!-- <button type="submit" class="btn btn-outline-success">UPDATE</button> -->
-      <!-- <a  href="/empTable" class="btn btn-outline-dark" name="search">UPDATE</a> -->
-      <!-- <a  href="/proTable" class="btn btn-outline-dark">ProjectTable</a> -->
-      <!-- <a href="/project" class="btn btn-outline-info">create project</a> -->
-      <input type="submit" value="submit" class="btn btn-success">
-    </div>
+        <a href="/views">Enter Project Details</a> -->
+        <!-- <button type="submit" class="btn btn-outline-success">UPDATE</button> -->
+        <!-- <a  href="/empTable" class="btn btn-outline-dark" name="search">UPDATE</a> -->
+        <!-- <a  href="/proTable" class="btn btn-outline-dark">ProjectTable</a> -->
+        <!-- <a href="/project" class="btn btn-outline-info">create project</a> -->
+        <input type="submit" value="submit" class="btn btn-success">
+        <%}%>  
+      </div>
   </form>    
  </body>
 </html>

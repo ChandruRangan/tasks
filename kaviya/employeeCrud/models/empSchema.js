@@ -15,11 +15,10 @@ var empSchema = new mongoose.Schema({
     type: String,
   },
   joinDate: {
-    type: String,
-    default: Date,
+    type: Date,
   },
   dateofbirth: {
-    type: String,
+    type: Date,
   },
 });
 
