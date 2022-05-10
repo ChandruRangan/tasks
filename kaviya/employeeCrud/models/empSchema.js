@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var empSchema = new mongoose.Schema({
   fullName: {
     type: String,
-    required: "Please enter full name!",
+    required:true,
   },
   email: {
     type: String,
@@ -16,6 +16,7 @@ var empSchema = new mongoose.Schema({
   },
   joinDate: {
     type: String,
+    default: Date,
   },
   dateofbirth: {
     type: String,
