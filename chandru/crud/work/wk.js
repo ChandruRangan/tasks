@@ -1,13 +1,13 @@
 const express =require('express');
-let r = express.Router();
+let router = express.Router();
 const mongoose = require('mongoose');
 const Employee =mongoose.model('Employee');
-r.get('/employee',(req,res)=>{
+router.get('/employee',(req,res)=>{
     res.render("employee/config",{
         viewtitle:"insert Employee"
     });
 });
-r.post('/employee',(req,res)=>{
+router.post('/employee',(req,res)=>{
     insertRecord(req,res);   
     });
 
@@ -34,7 +34,7 @@ r.post('/employee',(req,res)=>{
     }
     });
     }
-    r.get('/employee/list',(req,res)=>{
+    router.get('/employee/list',(req,res)=>{
      /*     res.json('from list');   */ 
        Employee.find((err,docs)=>{
             if(!err){   
@@ -47,21 +47,7 @@ r.post('/employee',(req,res)=>{
             }
         });
     });
-/*   function handleValidationError(err,body){
-      for(field in err.errors){
-          switch(err,erros[field].path){
-              case  'FullName':
-                  body['FullNameError']=err.errors[field].message;
-                  break;
-                  case  'Email':
-                    body['EmailError']=err.errors[field].message;
-                    break;
-                    default:
-                        break;
-          }
-      }
-  } */
-r.get('/:id',(req,res)=>{
+router.get('/employee/:_id',(req,res)=>{
 Employee.findById(req.params.id,(err,doc)=>{
 if(!err){
     res.render("employee/config",{
@@ -72,4 +58,4 @@ if(!err){
 }
 });
 });
-module.exports =r; //module is a variable exports is a object exports use send  a value from  this file to another file(require./)access
+module.exports =router; //module is a variable exports is a object exports use send  a value from  this file to another file(require./)access
