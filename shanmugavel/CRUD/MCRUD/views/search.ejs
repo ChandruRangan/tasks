@@ -9,16 +9,19 @@
 </head>
 <body class="container text-center">
     <div>
-        <form method="post" action="/empsearch" >
-          <input type="text" class="form-control mt-5" placeholder="Search" name="search">
-          <button  class="btn my-2 btn-primary" type="submit" value="search">Search</button>
+        <form method="post"  autocomplete="on"  action="/empsearch" >
+          <input type="text" class="form-control mt-5" placeholder="Search"  onclick="search()" name="search">
+          <div class="autocomplete" >
+            <button  class="btn my-2 btn-primary" type="submit"  value="search">Search</button>
+
+          </div>
           <a class="btn btn-success" href="/">insert</a>
           <a href="/datas" class="btn btn-info">view</a>
         </form>
       </div>
     <table class=" table table-striped">
         <thead class="thead-dark">
-            <tr>
+            <tr>        
                 <th>NAME</th>
                 <th>EMAIL</th>
                 <th>PHONENO</th>
@@ -31,7 +34,7 @@
         <tbody>
             <%for (i=0;i<emp.length;i++){%>
                <tr>
-                
+
                    <td><%=emp[i].Name%></td>
                    <td><%=emp[i].mail%></td>
                    <td><%=emp[i].phno%></td>
@@ -43,5 +46,8 @@
                    <%}%>
         </tbody>
     </table>
+    <script>
+
+    </script>
 </body>
 </html>
