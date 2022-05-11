@@ -5,27 +5,27 @@
           <form action="/insert" method="POST">
               <div>
                 <label id="fname" >Fullname:</label>
-                <input type="text" class="form-control"  placeholder="Enter Fullname"  name="full_name"><br><br>
+                <input  required type="text" class="form-control"  placeholder="Enter Fullname"  name="full_name"><br><br>
               </div>
             <div>
               <label id="mail" >Enter your email:</label>
-              <input type="text" class="form-control"  placeholder="Enter email" name="email"><br><br>
+              <input type="text" required class="form-control"  placeholder="Enter email" name="email"><br><br>
             </div>
             <div >
               <label id="pwd" >Enter the Password:</label>
-              <input type="password"  class="form-control"  placeholder="Password"  name="password"><br><br>
+              <input type="password"  required class="form-control"  placeholder="Password"  name="password"><br><br>
             </div>
             <div >
               <label id="numb" >Enter Phone number:</label>
-              <input type="number" class="form-control"  placeholder="Phone number"   name="phonenumber"><br><br>
+              <input type="number" required class="form-control"  placeholder="Phone number"   name="phonenumber"><br><br>
             </div>
             <div >
               <label id="jdate" >Joining date:</label>
-              <input type="date"  class="form-control"   placeholder="MM/DD/YYY"  name="joiningdate"><br><br>
+              <input type="date" required class="form-control"   placeholder="MM/DD/YYY"  name="joiningdate"><br><br>
             </div>
             <div>
               <label id="dob">Date of birth:</label>
-              <input type="date"  class="form-control"   placeholder="MM/DD/YYY"   name="dateofbirth"><br><br>
+              <input type="date" required class="form-control"   placeholder="MM/DD/YYY"   name="dateofbirth"><br><br>
             </div>
             <input type="submit" class="btn btn-outline-success">
             <a  href="/list" class="btn btn-outline-info">View</a>

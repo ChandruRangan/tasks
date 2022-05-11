@@ -1,4 +1,3 @@
-const res = require('express/lib/response');
 const mongoose = require('mongoose');
 let employeeSchema = new mongoose.Schema({
     FullName: {
