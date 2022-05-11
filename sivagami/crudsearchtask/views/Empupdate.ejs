@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Update</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <h5>Employee_Table:</h5>
+      
+    <form action="/update?id=<%=employee[0].id%>" method="post">
+        <div class="form-group">
+         
+           <label for="name">FullName:</label>
+            <input type="text"  placeholder="FullName"  name="FullName"  value="<%=employee[0].FullName%>"><br><br>
+            <label for="email">EmailAddress:</label>
+            <input type="email" class="form-group" placeholder="Enter email" name="Email"   value="<%=employee[0].Email%>"><br><br>
+            <label for="hidden">Password:</label>
+            <input type="password" style="display: none;" class="form-group" id="pwd" placeholder="Password"  name="Password"  value="<%=employee[0].Password%>"><br><br>
+            <label for="name">PhoneNumber:</label> 
+            <input type="text" id="ph.no" placeholder="phonenumber" name="PhoneNumber"  value="<%=employee[0].PhoneNumber%>"><br><br>
+            <label for="name">JoiningDate:</label>
+            <input type="date" placeholder="MM/DD/YYYY" name="JoiningDate"   value="<%=employee[0].JoiningDate%>"><br><br>
+            <label for="name">D.O.B:</label>
+            <input type="date" placeholder="MM/DD/YYYY" name="DateofBirth"  value="<%=employee[0].DateofBirth%>"><br><br>
+            <div class="container text-center">
+              <button type="submit" class="btn btn-success" >UPDATE</button>
+             <a href="/dis" class="text-secondary">VIEW</a> 
+             <a href="/project" class="btn btn-outline-info">ProjectDetails</a>
+            </div>
+          </div>  
+        </form>
+  </body>
+</html>

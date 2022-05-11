@@ -32,8 +32,10 @@
                             <td><%=employee[i].fullName%></td>
                             <td><%=employee[i].email%></td>
                             <td><%=employee[i].phoneNumber%></td>
-                            <td><%=employee[i].joinDate%></td>
-                            <td><%=employee[i].dateofbirth%></td>
+                            <!-- <td><%=new Date(employee[i].joinDate)%></td> -->
+                            <td><%= `${new Date(employee[i].joinDate).getMonth()+1}-${new Date(employee[i].joinDate).getDate()}-${new Date(employee[i].joinDate).getFullYear()} `%></td>
+                            <td><%= `${new Date(employee[i].dateofbirth).getMonth()+1}-${new Date(employee[i].dateofbirth).getDate()}-${new Date(employee[i].dateofbirth).getFullYear()} `%></td>
+                            <!-- <td><%=employee[i].dateofbirth%></td> -->
                             <td><a href="/delete?id=<%=employee[i]._id%>">Delete</a></td>
                             <!-- <td><a href="/update?id=<%=employee[i]._id%>">Update </a></td> -->
                             <td><a href="/empupdate?id=<%=employee[i]._id%>"><i class='fas fa-pencil-alt'></i></a></td>

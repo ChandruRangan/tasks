@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-      <h5>Employee_Table:</h5>
+      <h4>Employee_Table:</h4><br><br>
       
     <form action="/insert" method="post">
         <div class="form-group">
@@ -25,26 +25,15 @@
             <label for="name">PhoneNumber:</label>
             <input type="text" id="ph.no" placeholder="phonenumber" name="phoneno"><br><br>
             <label for="name">JoiningDate:</label>
-            <input type="text" placeholder="MM/DD/YYYY" name="JoinDate"><br><br>
+            <input type="date" placeholder="MM/DD/YYYY" name="Joindate"><br><br>
             <label for="name">D.O.B:</label>
-            <input type="text" placeholder="MM/DD/YYYY" name="DOB"><br><br>
-           
-      
-          <div class="input-group-append">
-            <div class="container text-center">
-            <button type="submit" class="btn btn-info" value="Submit Button">submit</button>
-            <button type="submit" class="btn btn-info" value="Submit Button">View</button>
-            </div><br>
-          </div> 
-           <div>
-          <a href="/dis" class="text-secondary">view</a>
-</div>
-
-
-
-          
-
-          </div>  
+            <input type="date" placeholder="MM/DD/YYYY" name="DateOfBirth"><br><br>
+              <div class="container text-center">
+                <button type="submit" class="btn btn-success" value="Submit Button">submit</button>
+                <a href="/dis" class="btn btn-outline-info">VIEW</a>
+                <a href="/project" class="btn btn-outline-info">ProjectDetails</a>
+              </div>
+         </div>  
     </form>
   </body>
 </html> 

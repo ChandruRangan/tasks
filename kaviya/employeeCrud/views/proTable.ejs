@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-    <form method="get" action="/search">
+    <form method="get" action="/searchs">
         <div class="container-fluid mt-5">
           <input type="text" placeholder="Search.." name="search">
           <input type="submit" value="search"><br><br>
@@ -21,7 +21,9 @@
                 <tr>
                     <th>ProjectName</th>
                     <th>ProjectLead</th>
-                    <th>TeamMember</th>
+                    <th>teamMember1</th>
+                    <th>teamMember2</th>
+                    <th>teamMember3</th>
                     <th>p_StartDate</th>
                     <th>P_EndDate</th>
                 </tr>
@@ -31,11 +33,14 @@
                     <tr>
                         <td><%=project[i].projectName%></td>
                         <td><%=project[i].projectLead%></td>
-                        <td><%=project[i].teamMember%></td>
-                        <td><%=project[i].p_StartDate%></td>
-                        <td><%=project[i].p_EndDate%></td>
-                        <td><a href="/delete?id=<%=project[i]._id%>" >Delete</a></td>
-                        <!-- <td><a href="/update?id=<%=project[i]._id%>" >Update</a></td> -->
+                        <td><%=project[i].teamMember1%></td>
+                        <td><%=project[i].teamMember2%></td>
+                        <td><%=project[i].teamMember3%></td>
+                        <td><%= `${new Date(project[i].p_StartDate).getMonth()+1}-${new Date(project[i].p_StartDate).getDate()}-${new Date(project[i].p_StartDate).getFullYear()} `%></td>
+                        <td><%= `${new Date(project[i].p_EndDate).getMonth()+1}-${new Date(project[i].p_EndDate).getDate()}-${new Date(project[i].p_EndDate).getFullYear()} `%></td>
+                        <!-- <td><%=project[i].p_StartDate%></td> -->
+                        <!-- <td><%=project[i].p_EndDate%></td> -->
+                        <td><a href="/deletepro?id=<%=project[i]._id%>" >Delete</a></td>
                         <td><a href="/proupdate?id=<%=project[i]._id%>"><i class='fas fa-pencil-alt'></i></a></td>
                     </tr>
                 <%}%>

@@ -45,15 +45,20 @@ app.post("/insert", (req, res) => {
 
 function insertValue(req, res) {
   var employee = new emp();
-  const date =new Date(req.body.jdate);
-  const mdate=(date.getMonth()+1)+'-'+date.getDate()+'-'+date.getFullYear()
-  console.log(mdate);
+  // const date1 =new Date(req.body.jdate);
+  // const jdate=`${date1.getMonth()} - ${date1.getDate()} - ${date1.getFullYear()}`
+  // // console.log(jdate);
+  // // const jdate=(date1.getMonth()+1)+'-'+date1.getDate()+'-'+date1.getFullYear()
+  // const date2 =new Date(req.body.dob);
+  // const dob=(date2.getMonth()+1)+'-'+date2.getDate()+'-'+date2.getFullYear()
+  // // console.log(jdate);
   employee.fullName = req.body.ename;
   employee.email = req.body.email;
   employee.password = req.body.pwd;
   employee.phoneNumber = req.body.phone;
-  employee.joinDate = mdate;
+  employee.joinDate = req.body.jdate;
   employee.dateofbirth = req.body.dob;
+  // console.log(req.boby.birthDate)
   employee.save((err) => {
     if (!err) {
       console.log("Value inserted");
@@ -78,9 +83,15 @@ app.post("/project", (req, res) => {
 
 function insertRecord(req, res) {
   var project = new pro();
+  // const date1 =new Date(req.body.sdate);
+  // const sdate=(date1.getMonth()+1)+'-'+date1.getDate()+'-'+date1.getFullYear()
+  // const date2 =new Date(req.body.edate);
+  // const edate=(date2.getMonth()+1)+'-'+date2.getDate()+'-'+date2.getFullYear()
   project.projectName = req.body.pname;
   project.projectLead = req.body.lname;
-  project.teamMember = req.body.tmname;
+  project.teamMember1 = req.body.tmname1;
+  project.teamMember2 = req.body.tmname2;
+  project.teamMember3 = req.body.tmname3;
   project.p_StartDate = req.body.sdate;
   project.p_EndDate = req.body.edate;
   project.save((err) => {
@@ -133,7 +144,7 @@ app.get("/delete",(req,res) =>{
 })
 
 //prodelete
-app.get("/delete",(req,res) =>{
+app.get("/deletepro",(req,res) =>{
   pro.findByIdAndDelete({_id:req.query.id},(err) => {
     if(!err){
       res.redirect("/proTable");
@@ -146,7 +157,12 @@ app.get("/delete",(req,res) =>{
 
 //empsearch
 app.get("/search",(req,res) =>{
-  emp.find({fullName:req.query.search},
+  emp.find(
+    {$or: [
+    {fullName: {$regex: req.query.search}},
+    {email: {$in: req.query.search}},
+    {phoneNumber: {$in: req.query.search}}
+    ]},
     function(err,data){
       if(err){
         console.log(err);
@@ -158,14 +174,21 @@ app.get("/search",(req,res) =>{
 })
 
 //prosearch
-app.get("/search",(req,res) =>{
-  emp.find({projectName:req.query.search},
+app.get("/searchs",(req,res) =>{
+  pro.find(
+    {$or : [
+    {projectName:{$regex: req.query.search}},
+    {projectLead:{$regex: req.query.search}},
+    {teamMember1:{$regex: req.query.search}},
+    {teamMember2:{$regex: req.query.search}},
+    {teamMember3:{$regex: req.query.search}},
+    ]},
     function(err,data){
       if(err){
         console.log(err);
       }
       else{
-        res.render("proTable",{employee: data});
+        res.render("proTable",{project: data});
       }
     })
 })
@@ -192,8 +215,10 @@ app.get("/empupdate",(req,res)=>{
           }
       })
 });
-app.post('/updatedata', (req, res) => {
-  emp.updateOne({_id:req.query.id},req.body,(err,data)=>{
+app.put('/updateemp', (req, res) => {
+  const id=req.query.id;
+  console.log(id)
+  emp.updateOne({_id:id},req.body,(err,data)=>{
       if(!err){
           res.redirect("/empTable");
       }
@@ -203,6 +228,30 @@ app.post('/updatedata', (req, res) => {
   })
 })
 
+app.get("/proupdate",(req,res)=>{
+  const id=req.query.id;
+  pro.find({_id:id},
+      function(err, data){
+          if(err){
+              console.log(err);
+          }
+          else{
+              res.render("proupdate", {project: data,id:id});
+          }
+      })
+});
+app.put('/updatepro', (req, res) => {
+  const id=req.query.id;
+  console.log(id)
+  pro.updateOne({_id:id},req.body,(err,data)=>{
+      if(!err){
+          res.redirect("/proTable");
+      }
+      else{
+          console.log(err);
+      }
+  })
+})
 // app.get('/:id',(req,res) =>{
 //   emp.findById(req.params.id, (err,doc) =>  {
 //     if(!err){

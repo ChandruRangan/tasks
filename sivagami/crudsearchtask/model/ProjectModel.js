@@ -13,10 +13,10 @@ const ProjectSchema=new mongoose.Schema({
         type:String,
     },
     ProjectstartDate:{
-        type:String,
+        type:Date,
     },
     ProjectEndDate:{
-        type:String,
+        type:Date,
     }
 
 });

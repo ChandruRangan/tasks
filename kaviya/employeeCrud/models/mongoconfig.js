@@ -32,7 +32,7 @@ const mongoose = require("mongoose");
 
 // .then(() => {
 //     console.log('connection successful');
-// }).catch((err) => {
+// }).catch((err) +=> {
 //     console.log("something went wrong",err)
 // }))
 
