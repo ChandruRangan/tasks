@@ -10,7 +10,7 @@
   </head>
  <body class="col-5">
     <h3>Updated Employee Details</h3><br>
-  <form action="/updateemp?id=<%=id%>" method="put">
+  <form action="/updateemp?id=<%=id%>" method="post">
     <div>
       <% for(var i=0;i<employee.length; i++) { %>
       <div>
@@ -26,11 +26,12 @@
         Phone Number: <input type="number"  class="form-group" id="ephone" placeholder="Enter PhoneNumber" name="phoneNumber"  value="<%=employee[i].phoneNumber%>"><br><br> 
       </div>
       <div>
-        Join Date: <input type="date" id="jdate" name="joinDate" value="<%=employee[i].joinDate%>"><br><br>
-        <p><%=employee[i].joinDate%></p>
+        Join Date: <input type="date" id="jdate" name="joinDate" value="<%=`${new Date(employee[i].joinDate).getDate()}/${new Date(employee[i].joinDate).getMonth()+1}/${new Date(employee[i].joinDate).getFullYear()} `%>"><br><br>
+        <p><%=`${new Date(employee[i].joinDate).getDate()}/${new Date(employee[i].joinDate).getMonth()+1}/${new Date(employee[i].joinDate).getFullYear()} `%></p>
       </div>
       <div>
-        Date Of Birth: <input type="date" id="dob" name="dateofbirth"  value="<%=employee[i].dateofbirth%>"><br><br>
+        Date Of Birth: <input type="date" id="dob" name="dateofbirth"  value="<%=`${new Date(employee[i].dateofbirth).getDate()}/${new Date(employee[i].dateofbirth).getMonth()+1}/${new Date(employee[i].dateofbirth).getFullYear()} `%>"><br><br>
+        <p><%=`${new Date(employee[i].dateofbirth).getDate()}/${new Date(employee[i].dateofbirth).getMonth()+1}/${new Date(employee[i].dateofbirth).getFullYear()} `%></p>
       </div>
       <!-- <input type="submit">
         <a href="/views">Enter Project Details</a> -->

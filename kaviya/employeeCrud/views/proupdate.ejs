@@ -10,7 +10,7 @@
   </head>
   <body class="col-5">
     <h3>Project Details</h3>
-    <form action="/updatepro?id=<%=id%>" method="put">
+    <form action="/updatepro?id=<%=id%>" method="post">
         <div>
             <div>
                 <% for(var i=0;i<project.length; i++) { %>
@@ -19,32 +19,34 @@
             </div>
             <div>
                 <% for(var i=0;i<project.length; i++) { %>
-                    ProjectLead:<input type="text" class="form-group" id="lname" placeholder="Enter Name" name="lname" value="<%=project[i].projectLead%>"><br><br>
+                    ProjectLead:<input type="text" class="form-group" id="lname" placeholder="Enter Name" name="projectLead" value="<%=project[i].projectLead%>"><br><br>
                 <%}%>
             </div>
             <div>
                 <% for(var i=0;i<project.length; i++) { %>
-                    TeamMember1:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="tmname1" value="<%=project[i].teamMember1%>"><br><br>
+                    TeamMember1:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="teamMember1" value="<%=project[i].teamMember1%>"><br><br>
                 <%}%>    
             </div>
             <div>
                 <% for(var i=0;i<project.length; i++) { %>
-                    TeamMember2:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="tmname1" value="<%=project[i].teamMember2%>"><br><br>
+                    TeamMember2:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="teamMember2" value="<%=project[i].teamMember2%>"><br><br>
                 <%}%>    
             </div>
             <div>
                 <% for(var i=0;i<project.length; i++) { %>
-                    TeamMember3:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="tmname1" value="<%=project[i].teamMember3%>"><br><br>
+                    TeamMember3:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="teamMember3" value="<%=project[i].teamMember3%>"><br><br>
                 <%}%>    
             </div>
             <div>
                 <% for(var i=0;i<project.length; i++) { %>
-                    Project StartDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="sdate" value="<%=project[i].p_StartDate%>"><br><br>
+                    Project StartDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="p_StartDate" value="<%=`${new Date(project[i].p_StartDate).getDate()}/${new Date(project[i].p_StartDate).getMonth()+1}/${new Date(project[i].p_StartDate).getFullYear()}`%>"><br><br>
+                    <p><%=`${new Date(project[i].p_StartDate).getDate()}/${new Date(project[i].p_StartDate).getMonth()+1}/${new Date(project[i].p_StartDate).getFullYear()}`%></p>
                 <%}%>
             </div>
             <div>
                 <% for(var i=0;i<project.length; i++) { %>
-                    Project EndDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="edate" value="<%=project[i].p_EndDate%>"><br><br>
+                    Project EndDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="p_EndDate" value="<%=`${new Date(project[i].p_EndDate).getDate()}-${new Date(project[i].p_EndDate).getMonth()+1}-${new Date(project[i].p_EndDate).getFullYear()}`%>"><br><br>
+                    <p><%=`${new Date(project[i].p_EndDate).getDate()}/${new Date(project[i].p_EndDate).getMonth()+1}/${new Date(project[i].p_EndDate).getFullYear()} `%></p>
                 <%}%>
             </div>
         </div>
