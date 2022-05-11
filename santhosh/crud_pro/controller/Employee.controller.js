@@ -69,7 +69,13 @@ router.get('/list', (req, res) => {
     })
 });
 router.post('/search', (req, res) => {
-    Employee.find({ full_name: req.body.search },
+    Employee.find({
+        $or:[
+            {full_name:{$regex:req.body.search}},
+            {email:{$regex:req.body.search}},
+            {phonenumber:{$regex:req.body.search}}
+        ]
+    },
         function (err, data) {
             if (err) {
                 console.log(err);

@@ -1,8 +1,8 @@
 
 
 const ObjectId = require('mongodb').ObjectId;
-const client = require('../config/db');
-
+const client = require('../config/db');                                         //rq-cli-incom
+                                                                                //rs-snd
 exports.empinsert = async (req, res) => {
     console.log(req.body)
     const { Fname, Email_id, Password, Phone, Join_date, DOB } = req.body;
@@ -14,34 +14,46 @@ exports.empinsert = async (req, res) => {
             console.log(err);
         });
 }
-
+exports.insert=async(req,res)=>{
+    res.render('insert')
+}
 
 exports.empdisp = async (req, res) => {
     await client.collection('emp').find().toArray()
         .then(data=>{ 
-            console.log(data);
+            // console.log(data);
             res.render('find',{emp:data})});
 
 }
 
 exports.empsearch = async (req, res) => {
-    await client.collection('emp').findOne({Name:req.body.search})
-    .then((data)=>{
-       if(data){
-        let data1 = [data]
-        res.render('search',{emp:data1})
+
+    const val=req.body.search;
+   let data= await client.collection('emp').findOne({$or:[{Name:val},{phno:{$regex:val}},{mail:val}]})
+
+//    let data= await client.collection('emp').find({Name:val})
+
+    // .then((data)=>{
+    //     // console.log(data)
+    //    if(data){
+    //     let data1 = [data]
+    //     res.render('search',{emp:data1})
         
-       }
-        else{
-            res.redirect('/datas')
-        }
-    })
+    //    }
+    //     else{
+    //         res.redirect('/datas')
+    //     }
+    // })
+    console.log(data);
+    let data1 = [data]
+    res.render('search',{emp:data1})
+
 }
 
 exports.empdel = async (req,res)=>{
-        const data = req.query;
-        console.log(data);
-        await client.collection('emp').deleteOne({mail:data.mail})
+        const id = req.query.id;
+        
+        await client.collection('emp').deleteOne({_id:new ObjectId(id)})
       .then((data)=>{
           console.log(data)
         res.redirect('/datas');
@@ -55,7 +67,7 @@ exports.empupdate=async(req,res)=>{
         await client.collection('emp').findOne({_id:new ObjectId(id)})
         .then((data)=>{
             console.log(data)
-            res.render('updateemp',{emp:data})
+            res.render('updateemp',{emp:data})                                                                      //snd.fle
         })
 }
 
@@ -63,7 +75,7 @@ exports.empupdate=async(req,res)=>{
 exports.empupdating=async(req,res)=>{
     const {id,Name,Email,Password,phonenumber,DOJ,DOB }=req.body;
     console.log(id);
-    await client.collection('emp').updateOne({'_id':ObjectId(id)},{$set:{Name:Name,mail:Email,password:Password,phno:phonenumber,joining:DOJ,dob:DOB}},{w:6},(err,result)=>{
+    await client.collection('emp').updateMany({'_id':ObjectId(id)},{$set:{Name:Name,mail:Email,password:Password,phno:phonenumber,joining:DOJ,dob:DOB}},{w:6},(err,result)=>{
        if(!err){
            res.redirect('/datas')
        }
@@ -72,17 +84,7 @@ exports.empupdating=async(req,res)=>{
        }
     })
 }
-exports.proinsert = async (req, res) => {
-    console.log(req.body)
-    const { } = req.body;
-    await client.collection('pro').insertOne({  })
-        .then((res) => {
-            console.log(res);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-}
+
 
 
 

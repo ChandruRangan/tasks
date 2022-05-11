@@ -11,7 +11,6 @@ const ProjectRoute = require('./controller/project.controller')
 app.use('/', EmployeeRoute);
 app.use('/', ProjectRoute);
 
-app.listen(2000, () => {
-    console.log(`The running port is http://localhost:2000`)
+app.listen(4000, () => {
+    console.log(`The running port is http://localhost:4000`)
 });
-
