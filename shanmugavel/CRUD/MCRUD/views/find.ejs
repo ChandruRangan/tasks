@@ -13,7 +13,8 @@
         <form method="post" action="/datas" >
           <input type="text" class="form-control mt-2" placeholder="Search" name="search">
           <button class="my-3 btn btn-primary" type="submit" value="search">Search</button>
-          <a class="btn btn-success" href="/">Insert</a>
+          <a class="btn btn-success" href="/">Insert Employee</a>
+          <a href="/pro" class="btn btn-info">Insert Project</a>
         </form>
       </div>
     <table class="table table-hover table-striped table-bordered">
@@ -37,7 +38,7 @@
                    <td><%=emp[i].password%></td>
                    <td><%=emp[i].joining%></td>
                    <td><%=emp[i].dob%></td>
-                   <td class="text-center"><a class="btn btn-danger" href="/delete?mail=<%=emp[i].mail%>">Delete</a>
+                   <td class="text-center"><a class="btn btn-danger" href="/delete?id=<%=emp[i]._id%>">Delete</a>
                     <a href="/empupdate?id=<%=emp[i]._id%>"class="btn btn-warning">Update</a></td>
                     </tr>
                    <%}%>
