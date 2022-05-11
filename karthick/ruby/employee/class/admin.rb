@@ -7,10 +7,18 @@ class Admin < Employee
   	
   	include Workable		#include the module
   
+  	WORK="Maintaining Office External and Internal works"
+
   def admin_details		
 	@role="Admin"
 	create_info
   	show(@info)
+  end
+
+  def print_constant
+  	puts "````````````````"
+  	puts "Admin Work:#{Admin::WORK}"
+  	puts "````````````````"
   end
 
 end

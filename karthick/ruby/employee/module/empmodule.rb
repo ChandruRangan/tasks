@@ -3,6 +3,7 @@ module Workable
    @info={"Name":@fullname,
       "Age":@age,
       "Salary":@salary,
+      "Company":"Agira",
       "Role":@role,
       "Working_hours":8,
       "Team":@team,

@@ -7,11 +7,19 @@ class Developer < Employee
   	
   	include Workable		#include the module
   
+  	WORK="Application Development and Website Development"
+  
   def developer_details
 	@role="Developer"
   	create_info
   	show(@info)
   end
-  	
+
+  def print_constant
+  	puts "````````````````"
+  	puts "Developer Work:#{Developer::WORK}"
+  	puts "````````````````"
+  end
+
 end
 
