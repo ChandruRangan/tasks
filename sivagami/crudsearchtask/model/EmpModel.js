@@ -15,6 +15,8 @@ const EmpSchema= new mongoose.Schema({
     } ,
     PhoneNumber:{
       type:Number,
+      min:0,
+      max:11,
       },
     JoiningDate:{
       type: Date,

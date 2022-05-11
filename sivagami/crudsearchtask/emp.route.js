@@ -11,6 +11,11 @@ router.get("/", function (req, res) {
   res.render("Emp", { title: 'empdetails' });
 });
 
+let JoinD = Employee.aggregate([{
+  "$project": {
+    "Joindate": { "$dateToString": { "format": "%m-%d-%y", "date": "$JoiningDate" } }}}])
+   
+
 router.post("/insert", (req, res) => {
   insertdata(req, res);
 });
@@ -21,6 +26,8 @@ function insertdata(req, res) {
   // const Joindate=(date.getMonth()+1)+'/'+date.getDate()+'/'+date.getFullYear();
   // console.log(req.body.Joindate);
   //console.log(Joindate);
+  
+  
   const dateb = new Date(req.body.DateOfBirth);
   const DateOfBirth = (dateb.getMonth() + 1) + '/' + dateb.getDate() + '/' + dateb.getFullYear();
   //  console.log(DateOfBirth);
@@ -28,7 +35,7 @@ function insertdata(req, res) {
   employee.Email = req.body.email;
   employee.Password = req.body.pwd;
   employee.PhoneNumber = req.body.phoneno;
-  employee.JoiningDate = req.body.Joindate;
+  employee.JoiningDate = JoinD;
   employee.DateofBirth = req.body.DateOfBirth;
 
   employee.save((err) => {
@@ -72,7 +79,7 @@ router.get('/dis', (req, res) => {
     
   },])
   // console.log('Joindate')
-  console.log(a)
+  // console.log(a)
 })
 
 
@@ -135,31 +142,76 @@ router.get("/delete", (req, res) => {
 
 
 //Project API
-router.get('/project', function (req, res) {
-  res.render('project', { title: 'projecttable' });
-});
+
 
 router.post("/proinsert", (req, res) => {
+  console.log("sivagami")
 
   insertproject(req, res);
 });
 function insertproject(req, res) {
+  console.log("insidefnc")
   const project = new Project();
-  const dateS = new Date(req.body.startDate);
-  const startDate = (dateS.getMonth() + 1) + '/' + dateS.getDate() + '/' + dateS.getFullYear();
+  // const dateS = new Date(req.body.startDate);
+  // const startDate = (dateS.getMonth() + 1) + '/' + dateS.getDate() + '/' + dateS.getFullYear();
   project.ProjectName = req.body.PN;
   project.ProjectLead = req.body.PL;
   project.TeamMembers = req.body.TM;
+  console.log(req.body)
   project.ProjectstartDate = req.body.startDate;
   project.ProjectEndDate = req.body.endDate;
-
   project.save((err, doc) => {
     if (!err)
       res.redirect("/project");
     else
       console.log('error', err);
   });
+
 };
+
+// router.post('/find',(req,res)=>{
+//   console.log("inside")
+//   Teammemberinsert(req,res);
+// });
+// function Teammemberinsert(req,res){
+//   console.log("Team")
+//   const employee = new Employee();
+
+//   // const TeamMembers=req.body.TM;
+//   employee.find((err,empdetails)=>{
+//     console.log("sivi")
+//     if(!err){
+//       console.log("hi")
+//       // res.send({employee:empdetails});
+//      console.log(empdetails)
+//      console.log("hello")
+//     }
+//     else{
+//       console.log(err);
+//      }
+//   });
+//   };
+
+//teammembers
+
+// router.post('/find',(req,res)=>{
+//   Teammemberinsert(req,res);
+// });
+// function Teammemberinsert(req,res){
+//   const employee = new Employee();
+
+//   // const TeamMembers=req.body.TM;
+//   employee.find((err,empdetails)=>{
+//     if(!err){
+//       console.log("hi")
+//       res.send({employee:empdetails});
+//      console.log(empdetails)
+//      console.log("hello")
+//     }});
+//   };
+
+
+
 
 
 
@@ -248,29 +300,28 @@ router.get('/search', async (req, res) => {
   res.send(data);
 })
 
+// router.post("/login",async(req,res)=>{
+//   try{
+//     const emp=await Employee.findOne({Email:req.body.email});
+//     !emp && res.status(404).json("Employee not found");
 
+//     const validPassword=await bcrypt.compare(req.body.Password);
 
-// router.post('/search',(req,res)=>{
-//   Employee.find({FullName:req.body.search},(err,data)=>{
-//     if(!err){
-//       res.render("Emptable",{employee:data});
-//     }
-//     else{
-//       console.log(err);
-//     }
-//   })
+//   }
 // })
 
-// router.post('/prosearch',(req,res)=>{
-//   Project.find({ProjectName:req.body.prosearch},(err,data)=>{
-//     if(!err){
-//       res.render("protable",{employee:data});
-//     }
-//     else{
-//       console.log(err);
-//     }
-//   })
-// })
+router.get('/prosearch', async (req, res) => {
+  console.log(req.query.search)
+  let prodata = await Project.find(
+    {
+      "$or": [
+        { ProjectName: { $regex: req.query.search } },
+        { ProjectLead: { $regex: req.query.search } },
+        //  {PhoneNumber:{$regex:(req.query.search)}},
+      ]
+    })
+  res.send(prodata);
+})
 
 
 
@@ -281,21 +332,27 @@ router.get('/search', async (req, res) => {
 
 
 
+//   Project.aggregate()
+//                 .match({FullName: req.query.FullName })
+//                 .lookup({ from: 'Employee', localField: "FullName", foreignField: 'ProjectName', as: 'Employeedetails' })
+// .exec()
+// .then((TeamMembers) => { console.log(TeamMembers) })
+// .catch((err) => { console.log(err) });
+// res.render("team", { employee: docs, id: id });
 
 
 
-// router.get('/delete', (req, res)=> {
-//   console.log('sivi');
-//   Employee.findByIdAndRemove({_id:req.query.id}, (err, doc) => {
-//     console.log("deleteone")
-//       if (!err) {
-//         console.log('always delete')
-//           res.redirect('/dis');
-//       } else {
-//           console.log('Failed to Delete user Details: ' + err);
-//       }
-//   });
-// })
+//join 
+
+
+
+
+
+
+
+
+
+
 
 
 

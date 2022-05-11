@@ -15,25 +15,31 @@
     <form action="/proinsert" method="post">
         <div class="form-group">
             <label for="name">ProjectName:</label>
-            <input type="text"  placeholder="ProjectName"  name="PN"><br><br>
+            <input type="text"  placeholder="ProjectName"  name="PN" required><br><br>
             <label for="name">ProjectLead:</label>
             <input type="text"  placeholder="ProjectLead"  name="PL"><br><br>
-            <label for="name">TeamMembers:</label>
-            <input type="text"  placeholder="TeamMembers"  name="TM"><br><br>
+           
+                  
+                
+            <!-- <label for="name">TeamMembers:</label>
+            <input type="text"  placeholder="TeamMembers"  name="TM"><br><br> -->
             <label for="name">ProjectstartDate:</label>
-            <input type="text" placeholder="MM/DD/YYYY" name="startDate"><br><br>
+            <input type="date" placeholder="MM/DD/YYYY" name="startDate"><br><br>
             <label for="name">ProjectEndDate:</label>
-            <input type="text" placeholder="MM/DD/YYYY" name="endDate"><br><br>
+            <input type="date" placeholder="MM/DD/YYYY" name="endDate"><br><br>
         </div> 
 
             <div class="input-group-append">
               <div class="container text-center">
-              <button type="submit" class="btn btn-info" value="Submit Button">submit</button>
+             
               <a href="/prodis" class="text-secondary">view</a> 
-              
+              <!-- <a href="/find"  class="text-secondary">Team</a>  -->
               </div>
             </div>
+            <button type="submit" class="btn btn-info" value="Submit Button">submit</button>
     </form>
 
+
+     
   </body>
 </html>
