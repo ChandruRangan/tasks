@@ -11,12 +11,12 @@
   </head>
   <body>
     <div>
-      <form action="/prosearch" method="get">
+      <form action="/prosearch" method="post">
 
         <div class="input-group mb-3">
-          <input type="text" name="search" class="form-control" placeholder="Search" value="prodata">
+          <input type="text" name="search" class="form-control" placeholder="Search">
           <div class="input-group-append">
-            <button class="btn btn-success" type="submit">Search</button>
+            <button class="btn btn-success" type="submit" value="search">Search</button>
           </div>
         </div>
         </form>
@@ -42,7 +42,7 @@
                                    <td><%=project[i].ProjectstartDate%></td>
                                    <td><%=project[i].ProjectEndDate%></td>
                                    <td><a href="/proupdate?id=<%=project[i]._id%>" class="btn btn-dark">Update</a></td> 
-                                   <td><a href="/prodelete?id=<%=project[i]._id%>" class="btn btn-dark">Delete</a></td>
+                                   <td><a href="/prodelete?id=<%=project[i]._id%>" class="btn btn-dark" onclick=" confirm('Are you sure you want to delete this item?');">Delete</a></td>
                                </tr>
                             <%} %>
                         </tbody>  
