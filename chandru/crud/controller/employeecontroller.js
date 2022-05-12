@@ -25,12 +25,20 @@ function insertRecord(req, res) {
         if (!err)
             res.redirect('/employee/list');
         else {
-            console.log('error:' + err);
-        }
+            if (err.name == 'ValidationError') {
+                handleValidationError(err, req.body);
+                res.render("employee/create", {
+            viewtitle: "Insert Employee",
+            employee: req.body
+            });
+            }
+            else
+            console.log('Error during Inserting the record: ' + err);
+            }
     });
 }
 function updateRecord(req, res) {
-    Employee.findOneAndUpdate({ _id: req.body._id }, req.body,  (err, doc) => {
+    Employee.findOneAndUpdate({ _id: req.body._id },req.body,(err, doc) => {
         if (!err) { res.redirect('employee/list'); }
         else {
         if (err.name == 'ValidationError') {
@@ -68,8 +76,7 @@ router.get('/employee/list', (req, res) => {
         }
     });
 });
-
- router.get('/employee/:_id', (req, res) => {
+router.get('/employee/:_id', (req, res) => {
     Employee.findById(req.params._id, (err, doc) => {
         console.log(doc);
         if (!err) {
@@ -77,8 +84,7 @@ router.get('/employee/list', (req, res) => {
                 viewtitle: "Update Employee",
                 employee: doc
             });
-
-        }
+}
     });
 });
 router.get('/employee/delete/:_id', (req, res) => {

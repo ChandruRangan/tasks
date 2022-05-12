@@ -1,0 +1,23 @@
+<h3>Project LIST</h3><a class="btn btn-dark" href="/project"><i class="fa fa-plus"></i>CREATE NEW</a>
+<table class="table table-stripped">
+    <tr>
+    <th>ProjectName</th>
+    <th>ProjectLead</th>
+    <th>TeamMembers</th>
+    <th>ProjectStartdate</th>
+    <th>Projectenddate</th>
+    </tr>
+        {{#each display}}
+        <tr>
+            <td>{{this.ProjectName}}</td>
+            <td>{{this.ProjectLead}}</td>
+            <td>{{this.TeamMembers}}</td>
+            <td>{{this.ProjectStartdate}}</td>
+            <td>{{this.ProjectEnddate}}</td>
+            <td>
+                <a href="/project/{{this._id}}"><i class="fa fa-pencil" style="font-size:25px;color:red"></i></a>
+                 <a href="/project/delete/{{this.id}}"><i class="fa fa-trash fa-lg" style="font-size:25px;color:red"></i></a>
+            </td>
+        </tr>
+        {{/each}}
+</table>
