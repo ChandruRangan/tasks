@@ -10,10 +10,11 @@
 <body class="container container-fluid">
     <h1 class="text-center display-4" >Project Details</h1>
     <div>
-        <form method="post" action="/datap" >
+        <form method="post" action="/proupdate" >
           <input type="text" class="form-control mt-2" placeholder="Search" name="search">
           <button class="my-3 btn btn-primary" type="submit" value="search">Search</button>
-          <a class="btn btn-success" href="/pro">Insert</a>
+          <a class="btn btn-success" href="/pro">Insert Project</a>
+          <a href="/" class="btn btn-info"> Insert Employee</a>
         </form>
       </div>
     <table class="table table-hover table-striped table-bordered">
@@ -35,8 +36,8 @@
                    <td><%=pro[i].StartDate%></td>
                    <td><%=pro[i].EndDate%></td>
                    <td><%=pro[i].TeamMembers%></td>
-                   <td class="text-center"><a class="btn btn-danger" href="">Delete</a>
-                    <a href=""class="btn btn-warning">Update</a></td>
+                   <td class="text-center"><a class="btn btn-danger" href="/deletepro?id=<%=pro[i]._id%>">Delete</a>
+                    <a href="/proupdate?id=<%=pro[i]._id%>"   class="btn btn-warning">Update</a></td>
                     </tr>
                    <%}%>
         </tbody>

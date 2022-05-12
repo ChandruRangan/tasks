@@ -11,13 +11,15 @@
   </head>
   <body>
     <div>
-        <form action="/prosearch" method="post">
-                <div class="form-group">
-                  search<select class="form-control"  name="search">
-                  <option>search API</option>
-                  </select>
-                <!-- <input class="form" type="text" placeholder="Search" name="search" > -->
-                </div> <br><br>
+      <form action="/prosearch" method="post">
+
+        <div class="input-group mb-3">
+          <input type="text" name="search" class="form-control" placeholder="Search">
+          <div class="input-group-append">
+            <button class="btn btn-success" type="submit" value="search">Search</button>
+          </div>
+        </div>
+        </form>
         <form action="/prodis" method="post">
           <div class="container-fluid mt-5">
            <table class="table  table-striped table-bordered">
@@ -40,7 +42,7 @@
                                    <td><%=project[i].ProjectstartDate%></td>
                                    <td><%=project[i].ProjectEndDate%></td>
                                    <td><a href="/proupdate?id=<%=project[i]._id%>" class="btn btn-dark">Update</a></td> 
-                                   <td><a href="/prodelete?id=<%=project[i]._id%>" class="btn btn-dark">Delete</a></td>
+                                   <td><a href="/prodelete?id=<%=project[i]._id%>" class="btn btn-dark" onclick=" confirm('Are you sure you want to delete this item?');">Delete</a></td>
                                </tr>
                             <%} %>
                         </tbody>  

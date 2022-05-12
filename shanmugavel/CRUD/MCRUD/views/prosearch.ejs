@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dsiplay Employee</title>
+    <%-include('style.ejs')%>
+</head>
+<body class="container text-center">
+    <div>
+        <form method="post"    action="/prosearch" >
+          <input type="text" class="form-control mt-5" placeholder="Search"  value="search" name="search">
+          <div  >
+            <button  class="btn my-2 btn-primary" type="submit"  value="search">Search</button>
+
+          </div>
+          <a class="btn btn-success" href="/prodisp">insert</a>
+          <a href="/prodisp" class="btn btn-info">view</a>
+        </form>
+      </div>
+    <table class=" table table-striped">
+        <thead class="thead-dark">
+            <tr>        
+                <th>ProjectName</th>
+                <th>ProjectLead</th>
+                <th>TeamMembers</th>
+                <th>StartDate</th>
+                <th>EndDate</th>
+                <th>ACTION</th>
+            </tr>
+        </thead >
+        <tbody>
+            <%for (i=0;i<pro.length;i++){%>
+               <tr>
+
+                   <td><%=pro[i].ProjectName%></td>
+                   <td><%=pro[i].ProjectLead%></td>
+                   <td><%=pro[i].TeamMembers%></td>
+                   <td><%=pro[i].StartDate%></td>
+                   <td><%=pro[i].EndDate%></td>
+                   <td><a class=" btn btn-danger" href="/delete?id=<%=pro[i].id%>">Delete</a></td>
+                    </tr>
+                   <%}%>
+        </tbody>
+    </table>
+    <script>
+
+    </script>
+</body>
+</html>

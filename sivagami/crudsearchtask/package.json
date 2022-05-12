@@ -1,12 +1,16 @@
 {
   "dependencies": {
+    "alert": "^5.0.10",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
+    "confirm": "^0.1.1",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.7",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.5.0",
     "mongoose": "^6.3.2",
+    "node-popup": "^0.1.14",
     "nodemon": "^2.0.16",
     "router-dom": "^2.2.9"
   }

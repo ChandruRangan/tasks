@@ -41,18 +41,15 @@ router.get("/proupdate", (req, res) => {
                 console.log(err);
             }
             else {
-                console.log(data[0].team_mem[0]);
 
                 res.render("proupdate", { proj: data, id: id });
             }
         })
 });
 
-router.post('/updata', (req, res) => {
-    console.log(req.body)
+router.put('/updata', (req, res) => {
     Project.updateOne({ _id: req.body.id }, req.body,(err, data) => {
         if (!err) {
-            console.log(data)
             res.redirect('/prolist');
         }
         else {
@@ -74,7 +71,11 @@ router.get('/prolist', (req, res) => {
 });
 
 router.post('/searche', (req, res) => {
-    Project.find({ pro_name: req.body.searche },
+    Project.find({$or:[
+        {pro_name:{$regex:req.body.searche}},
+        {pro_lead:{$regex:req.body.searche}},
+        {team_mem:{$regex:req.body.searche}}
+    ]},
         function (err, data) {
             if (err) {
                 console.log(err);

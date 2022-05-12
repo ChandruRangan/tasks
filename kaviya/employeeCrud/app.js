@@ -1,26 +1,8 @@
-// const express = require("express");
-// const app = express();
-// const mongoose = require("mongoose");
-// const bodyparser = require("body-parser");
-// app.use(bodyparser.urlencoded({ extended: true }));
-// app.set("view engine", "ejs");
-// app.use(bodyparser.json());
-// //const Employee = mongoose.model("empModel");
 
-// app.get("/", (req, res) => {
-//   res.render("index", {viewtitle: "Insert Employee",});
-// });
-
-// //app.post("/", (req, res) => {});
-
-// app.listen(2000, () => {
-//   console.log(`The running port is http://localhost:2000`);
-// });
-
-// require('./models/mongoconfig');
 
 const express = require("express");
 const app = express();
+const alert = require("alert")
 const database = require("./models/mongoconfig");
 const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended: true }));
@@ -45,21 +27,18 @@ app.post("/insert", (req, res) => {
 
 function insertValue(req, res) {
   var employee = new emp();
-  const date1 =new Date(req.body.jdate);
-  const jdate=(date1.getMonth()+1)+'-'+date1.getDate()+'-'+date1.getFullYear()
-  const date2 =new Date(req.body.dobdate);
-  const dobdate=(date2.getMonth()+1)+'-'+date2.getDate()+'-'+date2.getFullYear()
-  console.log(jdate);
   employee.fullName = req.body.ename;
   employee.email = req.body.email;
   employee.password = req.body.pwd;
   employee.phoneNumber = req.body.phone;
-  employee.joinDate = jdate;
-  employee.dateofbirth = dobdate;
+  employee.joinDate = req.body.jdate;
+  employee.dateofbirth = req.body.dob;
+  // console.log(req.boby.birthDate)
   employee.save((err) => {
     if (!err) {
       console.log("Value inserted");
       res.redirect("/");
+      alert("value inserted");
     } else {
       console.log("something goes wrong while inserting" + err);
     }
@@ -67,10 +46,10 @@ function insertValue(req, res) {
 }
 //project details
 app.get("/project", (req, res) => {
-  // res.send("<h1>hi</h1>");
-  res.render("project", {
-    viewtitle: "Insert Project Details",
-  });
+    res.render("project", {
+      viewtitle: "Insert Project Details",
+    });
+  
 });
 
 app.post("/project", (req, res) => {
@@ -80,8 +59,6 @@ app.post("/project", (req, res) => {
 
 function insertRecord(req, res) {
   var project = new pro();
-  const date =new Date(req.body.jdate);
-  const mdate=(date.getMonth()+1)+'-'+date.getDate()+'-'+date.getFullYear()
   project.projectName = req.body.pname;
   project.projectLead = req.body.lname;
   project.teamMember1 = req.body.tmname1;
@@ -93,6 +70,7 @@ function insertRecord(req, res) {
     if (!err) {
       console.log("project added");
       res.redirect("/project");
+      alert("value inserted");
     } else {
       console.log("something went wrong while inserting" + err);
     }
@@ -131,6 +109,7 @@ app.get("/delete",(req,res) =>{
   emp.findByIdAndDelete({_id:req.query.id},(err) => {
     if(!err){
       res.redirect("/empTable");
+      alert("sure! you want to delete the data");
     }
     else{
       console.log("not found: " + err);
@@ -143,6 +122,7 @@ app.get("/deletepro",(req,res) =>{
   pro.findByIdAndDelete({_id:req.query.id},(err) => {
     if(!err){
       res.redirect("/proTable");
+      alert("sure! you want to delete the data");
     }
     else{
       console.log("not found: " + err);
@@ -152,7 +132,12 @@ app.get("/deletepro",(req,res) =>{
 
 //empsearch
 app.get("/search",(req,res) =>{
-  emp.find({fullName:req.query.search},
+  emp.find(
+    {$or: [
+    {fullName: {$regex: req.query.search}},
+    {email: {$in: req.query.search}},
+    {phoneNumber: {$in: req.query.search}}
+    ]},
     function(err,data){
       if(err){
         console.log(err);
@@ -164,30 +149,31 @@ app.get("/search",(req,res) =>{
 })
 
 //prosearch
-app.get("/search",(req,res) =>{
-  emp.find({projectName:req.query.search},
+app.get("/searchs",(req,res) =>{
+  pro.find(
+    {$or : [
+    {projectName:{$regex: req.query.search}},
+    {projectLead:{$regex: req.query.search}},
+    {teamMember1:{$regex: req.query.search}},
+    {teamMember2:{$regex: req.query.search}},
+    {teamMember3:{$regex: req.query.search}},
+    ]},
     function(err,data){
       if(err){
         console.log(err);
       }
       else{
-        res.render("proTable",{employee: data});
+        res.render("proTable",{project: data});
       }
     })
 })
 
 //update
 
-
-// app.get("/update", (req, res) => {
-//   // res.send("<h1>hi</h1>");
-//   res.render("update", {
-//     viewtitle: "update the employee details",
-//   });
-// });
-
 app.get("/empupdate",(req,res)=>{
   const id=req.query.id;
+  // const date = new Date(req.body.jdate)
+  // const jdate =`${date.getMonth()} - ${date.getDate()} - ${date.getFullYear()}`
   emp.find({_id:id},
       function(err, data){
           if(err){
@@ -195,6 +181,7 @@ app.get("/empupdate",(req,res)=>{
           }
           else{
               res.render("empupdate", {employee: data,id:id});
+              // alert("updated!")
           }
       })
 });
@@ -204,6 +191,7 @@ app.post('/updateemp', (req, res) => {
   emp.updateOne({_id:id},req.body,(err,data)=>{
       if(!err){
           res.redirect("/empTable");
+          alert("updated");
       }
       else{
           console.log(err);
@@ -228,35 +216,15 @@ app.post('/updatepro', (req, res) => {
   console.log(id)
   pro.updateOne({_id:id},req.body,(err,data)=>{
       if(!err){
-          res.redirect("/proTable");
+        res.redirect("/proTable");
+        alert("updated");
       }
       else{
           console.log(err);
       }
   })
 })
-// app.get('/:id',(req,res) =>{
-//   emp.findById(req.params.id, (err,doc) =>  {
-//     if(!err){
-//       res.render('/update',{
-//         employee: doc
-//       })
-//     }
-//     else{
-//       console.log(err);
-//     }
-//   })
-// })
 
-// app.post("/update", (req, res) => {
-//   UpdateRecord(req, res);
-// });
-
-// function UpdateRecord(req,res){
-  
-// }
-// 
-
-app.listen(3446, () => {
-  console.log("http://localhost:3446");
+app.listen(3444, () => {
+  console.log("http://localhost:3444");
 });

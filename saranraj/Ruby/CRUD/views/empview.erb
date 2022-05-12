@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dsiplay Employee</title>
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
+   
+</head>
+<body class="container container-fluid">
+    <h1 class="text-center display-4" >Employee Details</h1>
+    <div>
+        <form method="post" action="/datas" >
+          <input type="text" class="form-control mt-2" placeholder="Search" name="search">
+          <button class="my-3 btn btn-primary" type="submit" value="search">Search</button>
+          <a class="btn btn-success" href="/">Insert Employee</a>
+          <a href="/proinsert" class="btn btn-info">Insert Project</a>
+        </form>
+      </div>
+    <table class="table table-dark table-hover table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th scope="col">NAME</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">PHONENO</th>
+              
+                <th scope="col">DOJ</th>
+                <th scope="col">DOB</th>
+                <th  scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+           <%emp.each do |i|%>
+               <tr scope="row">
+                   <td><%=i["fname"]%></td>
+                   <td><%=i["email"]%></td>
+                   
+                   <td><%=i["phoneno"]%></td>
+                   <td><%=i["joining_date"]%></td>
+                   <td><%=i["date_of_birth"]%></td>
+                   <td class="text-center"> <form action="/empdelete?id=<%=i['emp_id']%>" method="POST"><input type="hidden" name="_method" value="DELETE"> <input type="submit"class="btn mb-1 btn-success" value="Delete"></form>
+                    <a href="/empupdate?id=<%=i['emp_id']%>"class="btn btn-primary">Update</a></td>
+                    </tr>
+                <%end%>
+        </tbody>
+    </table>
+</body>
+</html>
