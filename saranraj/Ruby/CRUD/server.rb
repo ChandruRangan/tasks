@@ -2,13 +2,10 @@ require 'sinatra'
 require 'json'
 require './controller/employee.rb'
 require './controller/project.rb'
-require './defined_methods/methods.rb'
-require 'rack'
+load './defined_methods/methods.rb'
 include METHODS
 employee=Empcontroller.new
-# rack=Rack::request
-#  rack= Rack::request.new
-# req = Rack::Request
+project=ProController.new
 
 get '/' do
   erb :insert
@@ -43,15 +40,8 @@ get '/proinsert' do
   erb :'proinsert.html', locals:{emp:employee.listout}
 end
 post '/proinsert' do
-  # p request.form_vars
-  # p rack
-  # p params.methods
-  p Sinatra::ExtendedRack.new
+  p params["team_member"]
+   a=array_push_pro(params)
+   project.insert(a)
 end
-# post '/proinsert' do
-#   push = JSON.parse(request.body.read)
-#   puts "I got some JSON: #{push.inspect}"
-# end
-p Sinatra.constants.select {|c| Sinatra.const_get(c).is_a? Class}
-p Sinatra::ExtendedRack.instance_methods
 

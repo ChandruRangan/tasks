@@ -31,12 +31,16 @@
     </select>
     <label class="h3" for="teammem">Team Member:</label>
 
-    <select multiple="multiple" class="custom-select mb-2" name="team_members" id="teammem">
+    <select multiple="multiple"class="custom-select mb-2" name="team_member[]" id="teammem">
     <option >Choose TeamMembers</option>
       <%emp.map do |i| %>
         <option  value="<%=i["fname"]%>"><%=i["fname"]%></option>
-      <%end%>
+    
+        <%end%>
     </select>
+ 
+
+
    
    
     <label class="h3" for="sdate">Start Date:</label>
@@ -51,32 +55,8 @@
     <a href="" class="btn btn-info">View</a>
   </div>
   
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script>
-      function insert(){
-          console.log("hi")
-          let a=[]
-          let team=document.getElementById('teammem')
-          for(let i=0; i<team.selectedOptions; i++){
-             a.push(team.selectedOptions[i].value)
-          }
-         
-        
-    $.ajax({
-      type: "POST",
-      url: "/proinsert",
-      dataType: "json",
-      data: {
-         team:a
-      },
-   
-      
-  });
-    
-      }
-  </script>
+
 </body>
 </html>
 
 
-<%= select_tag "court_case[case_type_stage_id]", options_for_select(CaseTypeStage.all.map{|p| [p.name,p.id]}, {:selected => @court_case.case_type_stage_id}), {:class =>"form-select2", "data-parsley-required" => true, :include_blank => '--Select Stage--', disabled: true } %>

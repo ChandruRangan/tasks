@@ -10,5 +10,14 @@ module METHODS
         return a
 
     end
+    def array_push_pro(param)
+        a=Array.new
+        a.push(param["project_name"])
+        a.push(param["project_lead"])
+        a.push(param["team_member"])
+        a.push(param["sdate"])
+        a.push(param["edate"])
+        return a 
+    end
     
 end
