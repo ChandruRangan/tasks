@@ -22,17 +22,17 @@
           <h1 class="text-center display-4"> Inserting Employee Details</h1>
         <div class="container w-50 containetr-fluid my-3">
    <form action="/empinsert" method="post">
-    <input required class="form-control mb-2" type="text" placeholder="Enter name" name="Fname">
-    <input required class="form-control mb-2" type="text" placeholder="Email Address" name="Email">
-    <input required class="form-control mb-2"type="password" placeholder="Password" name=" Password">
-    <input required class="form-control mb-2" type="number" placeholder="phone number" name=" Phone">
-    <input required class="form-control mb-2" type="date" placeholder="joining date" name="Join_date">
-    <input required class="form-control mb-2" type="date" placeholder="Date of birth " name="DOB">
+   <label class="h3" for="name">Full Name:</label><input required class="form-control mb-2" type="text" placeholder="Enter name" name="fname" required>
+   <label class="h3" for="Email">Email:</label><input required class="form-control mb-2" type="email" placeholder="Email Address" name="email" required>
+   <label class="h3" for="">Password:</label><input required class="form-control mb-2"type="password" placeholder="Password" name="password" required>
+    <label class="h3" for="phono">Phone Number:</label><input required class="form-control mb-2" type="tel" pattern="[0-9]{10}" placeholder="phone number" name="phoneno" minlength="10" maxlength="10" required>
+    <label class="h3" for="DOJ">Joining Date:</label><input required class="form-control mb-2" type="date" placeholder="joining date" name="joining_date" required>
+    <label class="h3" for="DOB">Date Of Birth:</label><input required class="form-control mb-2" type="date" placeholder="Date of birth " name="date_of_birth" required>
     <button class="btn btn-success" type="submit">submit</button>
    </form>
         </div>
          <div class="container text-center">
-            <a href="/datas" class="btn btn-info">View</a>
+            <a href="/viewemp" class="btn btn-info">View</a>
          </div>
        
 
