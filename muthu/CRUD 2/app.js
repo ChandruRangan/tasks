@@ -159,7 +159,37 @@ app.post("/searchemp", (req, res) => {
       });
     }
   });
-app.post("/searchpro", (req, res) => {
+
+// Select Specific Character
+
+app.post("/searchemp", (req, res) => {
+  var input = req.body.input;
+  console.log(input);
+  if(input==''){
+    res.redirect('/display');
+  }
+  else{
+    db("employee")
+    .select("*")
+    .from("employee")
+    .where("employee.fullname")
+    .like("A%",input)
+      .then((data) => {
+        console.log(data)
+        res.render("searchemp",  { employee: data });
+      })
+      .catch((err) => {
+        console.log(err)
+        res.json({ message: err });
+      });
+    }
+  });
+
+//
+
+
+
+  app.post("/searchpro", (req, res) => {
   var input = req.body.input;
   if(input==''){
     res.redirect('/display');
