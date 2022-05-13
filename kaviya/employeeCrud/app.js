@@ -11,6 +11,7 @@ app.set("view engine", "ejs");
 app.use(bodyparser.json());
 const emp = require("./models/empSchema");
 const pro = require("./models/proSchema");
+const cookiejwtauth  = require("./middleware/cookiejwtauth");
 
 // const mongoose = require("mongoose")
 //employee details
@@ -20,8 +21,10 @@ app.get("/", (req, res) => {
   })
 });
 
-app.post("/insert", (req, res) => {
+app.post("/insert", cookiejwtauth, (req, res) => {
   req.body._id == "";
+  console.log(req.user);
+  res.redirect("/")
   insertValue(req, res);
 });
 
@@ -240,16 +243,23 @@ app.get("/login" , (req,res) =>{
 
 app.post("/login", async(req,res) => {
   const user = await emp.findOne({email: req.body.email});
+  // const pass = await emp.findOne({email: req.body.email},{"password":1});
+  // console.log(pass)
   console.log(user);
   console.log(process.env.SECRET_TOKEN)
   try{
     const compare =await bcrypt.compare(req.body.pwd,user.password)
-    const secretToken =jwt.sign(process.env.SECRET_TOKEN)
+    const secretToken =jwt.sign(JSON.stringify(user),process.env.SECRET_TOKEN)
+    console.log(secretToken)
     if(compare){
-      res.json({ secretToken: secretToken});
+      // res.json({ secretToken: secretToken});
+      res.cookie("token", token);
+    // return res.redirect("/welcome");
+
     }
     else{
-      res.json({message:"invalid"})
+      // res.json({message:"invalid"})
+      alert("invalid login")
     }
 
   }
