@@ -1,9 +1,10 @@
-
-
 const express = require("express");
 const app = express();
 const alert = require("alert")
 const database = require("./models/mongoconfig");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -14,10 +15,9 @@ const pro = require("./models/proSchema");
 // const mongoose = require("mongoose")
 //employee details
 app.get("/", (req, res) => {
-  // res.send("<h1>hi</h1>");
-  res.render("employee", {
-    viewtitle: "Insert Employee Details",
-  });
+  emp.find({},(err,employee) =>{
+    res.render("employee", {viewtitle: "Insert Employee Details", employee: employee});
+  })
 });
 
 app.post("/insert", (req, res) => {
@@ -25,11 +25,14 @@ app.post("/insert", (req, res) => {
   insertValue(req, res);
 });
 
-function insertValue(req, res) {
+ async function insertValue  (req, res) {
   var employee = new emp();
   employee.fullName = req.body.ename;
   employee.email = req.body.email;
-  employee.password = req.body.pwd;
+  employee.employeeType = req.body.type;
+  const salt = await bcrypt.genSalt(16)
+  const encryptPwd = await bcrypt.hash(req.body.pwd,salt);
+  employee.password = encryptPwd;
   employee.phoneNumber = req.body.phone;
   employee.joinDate = req.body.jdate;
   employee.dateofbirth = req.body.dob;
@@ -46,11 +49,15 @@ function insertValue(req, res) {
 }
 //project details
 app.get("/project", (req, res) => {
+  emp.find({},(err,employee) =>{
     res.render("project", {
-      viewtitle: "Insert Project Details",
-    });
+      viewtitle: "Insert Project Details",employee: employee});
+
+  })
   
 });
+
+
 
 app.post("/project", (req, res) => {
   req.body._id == "";
@@ -79,7 +86,7 @@ function insertRecord(req, res) {
 
 //empTable
 app.get("/empTable", (req, res) => {
-  emp.find((err, docs) => {
+  emp.find({},(err, docs) => {
     if (!err) {
       res.render("empTable", {
         employee: docs,
@@ -92,7 +99,7 @@ app.get("/empTable", (req, res) => {
 
 //proTable
 app.get("/proTable", (req, res) => {
-  pro.find((err, docs) => {
+  pro.find({},(err, docs) => {
     if (!err) {
       res.render("proTable", {
         project: docs,
@@ -109,7 +116,7 @@ app.get("/delete",(req,res) =>{
   emp.findByIdAndDelete({_id:req.query.id},(err) => {
     if(!err){
       res.redirect("/empTable");
-      alert("sure! you want to delete the data");
+      alert("Deleted!");
     }
     else{
       console.log("not found: " + err);
@@ -122,7 +129,7 @@ app.get("/deletepro",(req,res) =>{
   pro.findByIdAndDelete({_id:req.query.id},(err) => {
     if(!err){
       res.redirect("/proTable");
-      alert("sure! you want to delete the data");
+      alert("Deleted!");
     }
     else{
       console.log("not found: " + err);
@@ -223,6 +230,32 @@ app.post('/updatepro', (req, res) => {
           console.log(err);
       }
   })
+})
+
+//jwt 
+app.get("/login" , (req,res) =>{
+  res.render("user", {viewtitle: "login successfully"});
+  // console.log("login successfully")
+})
+
+app.post("/login", async(req,res) => {
+  const user = await emp.findOne({email: req.body.email});
+  console.log(user);
+  console.log(process.env.SECRET_TOKEN)
+  try{
+    const compare =await bcrypt.compare(req.body.pwd,user.password)
+    const secretToken =jwt.sign(process.env.SECRET_TOKEN)
+    if(compare){
+      res.json({ secretToken: secretToken});
+    }
+    else{
+      res.json({message:"invalid"})
+    }
+
+  }
+  catch(err){
+    console.log(err);
+  }
 })
 
 app.listen(3444, () => {
