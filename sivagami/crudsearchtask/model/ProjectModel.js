@@ -10,7 +10,7 @@ const ProjectSchema=new mongoose.Schema({
         type:String,
     },
     TeamMembers:{
-        type:String,
+        
     },
     ProjectstartDate:{
         type:Date,
