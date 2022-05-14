@@ -17,7 +17,7 @@
             </div>
             <div >
               <label id="numb" >Enter Phone number:</label>
-              <input type="number" required class="form-control"  placeholder="Phone number"   name="phonenumber"><br><br>
+              <input type="number" required class="form-control" pattern="{10}" placeholder="Phone number"   name="phonenumber"><br><br>
             </div>
             <div >
               <label id="jdate" >Joining date:</label>
@@ -27,7 +27,8 @@
               <label id="dob">Date of birth:</label>
               <input type="date" required class="form-control"   placeholder="MM/DD/YYY"   name="dateofbirth"><br><br>
             </div>
-            <input type="submit" class="btn btn-outline-success">
+            <input type="submit"  class="btn btn-outline-success">
+            <a href="/login" class="btn btn-outline-info" >Login</a>
             <a  href="/list" class="btn btn-outline-info">View</a>
             <a href="/project" class="btn btn-outline-Secondary">Create Project</a>
           </form>

@@ -5,7 +5,8 @@ var empSchema = new mongoose.Schema({
         required: 'Please enter full name.'
     },
     email: {
-        type: String
+        type: String,
+        unique: true
     },
     password: {
         type: String

@@ -3,10 +3,10 @@ const app = express();
 const db = require('../models/Dbconfig')
 const Project = require('../models/pro.model');
 const router = express.Router();
+const alert = require('alert')
 
 router.get('/project', (req, res) => {
     res.render('project', {
-        viewtitle: "Insert Project"
     });
 })
 
@@ -24,7 +24,7 @@ router.post('/project', (req, res) => {
     project.Pedate = enddate;
     project.save((err) => {
         if (!err) {
-            console.log("Record inserted");
+            alert("Project Created Successfully");
             res.redirect("/project");
         }
         else {
@@ -47,10 +47,11 @@ router.get("/proupdate", (req, res) => {
         })
 });
 
-router.put('/updata', (req, res) => {
+router.patch('/updata', (req, res) => {
     Project.updateOne({ _id: req.body.id }, req.body,(err, data) => {
         if (!err) {
             res.redirect('/prolist');
+            alert("Project Updated successfully")
         }
         else {
             console.log(err);
@@ -70,26 +71,22 @@ router.get('/prolist', (req, res) => {
     })
 });
 
-router.post('/searche', (req, res) => {
-    Project.find({$or:[
+router.post('/searche',async (req, res) => {
+    let data = await Project.find({$or:[
         {pro_name:{$regex:req.body.searche}},
         {pro_lead:{$regex:req.body.searche}},
         {team_mem:{$regex:req.body.searche}}
     ]},
-        function (err, data) {
-            if (err) {
-                console.log(err);
-            }
-            else {
-                res.render('prolist', { proj: data })
-            }
-        })
+    res.send(data)
+        
+    )
 })
 
 router.get("/deleted", (req, res) => {
     Project.findByIdAndDelete({ _id: req.query.id }, (e) => {
         if (!e) {
             res.redirect("/prolist");
+            alert("Project deleted successfully")
         }
         else {
             req.send(e);
