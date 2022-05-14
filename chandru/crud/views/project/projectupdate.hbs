@@ -1,0 +1,32 @@
+<h3>{{viewtitle}}</h3>
+<form action="/project" method="post" autocomplete="off">
+<input type="hidden" name="_id" value="{{project.id}}">
+ <div class="form-group">
+        <label> ProjectName</label>
+        <input type="text"class="form-control" name="ProjectName"  value={{project.ProjectName}} placeholder="ProjectName">
+    </div>
+ <div class="form-group">
+        <label>ProjectLead </label>
+        <input type="text"class="form-control" name="ProjectLead" value={{project.ProjectLead}} placeholder="Enter your ProjectLead ">
+    </div>
+  <ul style="list-style: none;" id="ul">
+      <li> <input  class="memname form-control mb-2" type="text"  value={{project.TeamMembers}} placeholder="Project Team Members" id="tmem"
+          name="TeamMembers" ></li>
+    </ul><button  type="button"  class="btn btn-primary">Add Team Member</button>
+    <div class="form-row">
+        <label>ProjectStartdate</label>
+    <input type="date" name="ProjectStartdate"  class="form-control" value={{project.ProjectStartdate}} placeholder="Enter ProjectStartdate ">
+    </div>
+      <div class="form-row">
+        <label>Projectenddate</label>
+  <input type="date" name="ProjectEnddate" id="ped" class="form-control" placeholder="Projectenddate">
+    </div>
+    <div class="form-group" id="a">
+        <button type="submit" class="btn btn-info" class="fa fa-database">SUBMIT</button>
+        <a class="btn btn-secondary" href="/project/projectdisplay"><i class="fa fa-list-alt"></i>view All</a>
+    </div>
+       </form>
+{{!--   <div class="form-row">
+      <label>ProjectEnddate</label>
+      <input type="date" name="ProjectEnddate" id="ped" class="form-control" placeholder="Projectenddate">
+    </div> --}}

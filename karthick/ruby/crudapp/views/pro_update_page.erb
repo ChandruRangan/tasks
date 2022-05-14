@@ -1,0 +1,52 @@
+<%# stylesheets and design%>
+<%=erb :style%>
+
+<div class="w3-container w3-margin-top">
+	<form action="/pro_update_data?id=<%=params['id']%>" method="post" class="w3-card-4 w3-padding">
+	<h2 class="w3-center w3-blue">Update Project Form</h2>
+		
+		<%values.each do |val|%>
+		<p><label>Project Name</label>
+		<input type="text" name="project_name" class="w3-input w3-border" value="<%=val['project_name']%>">
+		</p>
+		<%end%>
+
+		<p><label>Project Lead</label>
+        <select class="w3-select" name="project_lead">
+		<%values.each do |v|%>
+        <option value="<%=v['project_lead']%>" selected><%=v['project_lead']%></option>
+		<%emp.each do |val|%>
+		<% next if (v['project_lead']==val['full_name']) %>
+        <option value="<%=val['full_name']%>"><%=val['full_name']%></option>
+        <%end%>
+        <%end%>
+        </select>
+		</p>
+		<p><label>Team Members</label>
+        <br>
+
+		<%team.each do |v|%>
+		<input type="checkbox" name="tm[]" class="w3-check w3-border" value="<%=v%>" checked>
+		<label class="w3-margin-right"><%=v%></label>
+		<%end%> 
+
+	<%kt=""%>
+	<%emp.each{|k| kt+="#{k['full_name']} "}%>
+	<%a=kt.split(" ")-team%>
+
+        <%a.each do |val|%>
+		<input type="checkbox" name="tm[]" class="w3-check w3-border" value="<%=val%>">
+        <label class="w3-margin-right"><%=val%></label>
+		<%end%>
+		
+		</p>
+		<p><label>Project Start Date</label>
+		<input type="date" name="project_s_date" class="w3-input w3-border" value="<%=sd%>">
+		</p>
+		<p><label>Project End Date</label>
+		<input type="date" name="project_e_date" class="w3-input w3-border" value="<%=ed%>">
+		</p>
+		<input type="submit" class="w3-button w3-green w3-round">
+	</form>
+</div>
+</div>
