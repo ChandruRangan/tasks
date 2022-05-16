@@ -25,7 +25,7 @@
 
                
                <br>Team Members <input type="text" class="form-control" class="selectpicker"  name="teammembers" id="entry" value="<%= val['teammembers']%>" multiple data-selected-text-format="count">
-               
+               hash={teammembers}
 
                
                <br>Project Start Date <input type="text" class="form-control"  name="project_start_date" id="entry" value="<%= val['project_start_date']%>" placeholder="Enter project start date">
@@ -37,7 +37,7 @@
 
                <%end%>
                
-               <br><br><button type="submit" id="">Submit</button>
+               <br><br><button type="submit" id="">Update</button>
                
                </form>
                <a href="/viewprodata" class="btn btn-success">Back</a>

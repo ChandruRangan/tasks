@@ -1,10 +1,16 @@
 require 'sinatra'
 require './config/database.rb'
-require './employee_data.rb'
+require './employee_insert.rb'
+require './employee_update.rb'
 require './employee_updates.rb'
+require './employee_data.rb'
+require './employee_delete.rb'
+require './project_insert.rb'
+require './project_update.rb'
+require './project_updates.rb'
 require './pro_data.rb'
 require './Project_data.rb'
-require './project_updates.rb'
+require './project_delete.rb'
 
 get '/' do
     erb :crudemp
@@ -27,12 +33,12 @@ post '/emp_insert' do
     email=params['email']
     password=params['password']
     phoneno=params['phoneno'].to_i
-    joindate=params['joiningdate']
+    joiningdate=params['joiningdate']
     dob=params['dob']
-    DB.exec("INSERT INTO employee (fullname,email,password,phoneno,joiningdate,dob) VALUES('#{fullname}', '#{email}', '#{password}', '#{phoneno}', '#{joindate}', '#{dob}')")
+    em_in=Employee_ins.new()
+    em_in.insert(fullname,email,password,phoneno,joiningdate,dob)
     redirect "/"
 end
-
 
 
 post '/pro_insert' do 
@@ -41,8 +47,8 @@ post '/pro_insert' do
     team_members=params['teammembers']
     pro_start_date=params['projectstartdate']
     pro_end_date=params['projectdeathdate']
-    ris=team_members.join(",")
-    DB.exec("INSERT INTO project (projectname,projectlead,teammembers,project_start_date,project_death_date) VALUES('#{project_name}', '#{project_lead}','{#{ris}}','#{pro_start_date}', '#{pro_end_date}')")
+    pro_in=Project_ins.new()
+    pro_in.insert(project_name,project_lead,team_members,pro_start_date,pro_end_date)
     redirect "/project"
 end
 
@@ -61,20 +67,22 @@ post '/emp_updatenext' do
     phoneno=params['phoneno'].to_i
     joindate=params['joiningdate']
     dob=params['dob']
-    DB.exec("update employee set fullname='#{fullname}',email='#{email}',password='#{password}',phoneno='#{phoneno}', joiningdate='#{joindate}',dob='#{dob}' where emp_id=#{emp_id}")
+    em_up=Employee_update.new()
+    em_up.update(emp_id,fullname,email,password,phoneno,joindate,dob)
     redirect "/view"
 end 
 
 get '/delete' do
     emp_id=params['id']
-    DB.exec("delete from employee where emp_id=#{emp_id}")
+    em_del=Employee_delete.new()
+    em_del.delete(emp_id)
     redirect "/view"
 end
 
 
 get '/pro_update' do
     projectid=params['id']
-    erb :pro_update, :locals=>{pupdate:Projectupdate.proup(projectid)}
+    erb :project_update, :locals=>{pupdate:Projectupdate.proup(projectid)}
 end
 
 post '/pro_updatenext' do
@@ -82,14 +90,17 @@ post '/pro_updatenext' do
     projectname=params['projectname']
     projectlead=params['projectlead']
     teammembers=params['teammembers']
-    project start date=params['project start date']
-    project death date=params['project death date']
-    DB.exec("update project set projectname='#{projectname}',projectlead='#{projectlead}',teammembers='#{teammembers}',project start date='#{project start date}', project death date='#{project death date}' where projectid=#{projectid}")
+    project_start_date=params['project_start_date']
+    project_death_date=params['project_death_date']
+    pro_up=Project_update.new()
+    pro_up.update(projectid,projectname,projectlead,teammembers,project_start_date,project_death_date)
     redirect "/viewprodata"
 end 
 
 get '/prodelete' do
     projectid=params['id']
-    DB.exec("delete from project where projectid= #{projectid}")
+    pro_del=Project_delete.new()
+    pro_del.delete(projectid)
     redirect "/viewprodata"
 end
+
