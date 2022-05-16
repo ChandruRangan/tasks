@@ -52,6 +52,7 @@
                <th>Project Id</th>
                <th>Project Name</th>
                <th>Project Lead</th>
+               <th>Team Members</th>
                <th>Project Start Date</th>
                <th>Project End Date</th>
                <th>Action</th>
@@ -64,6 +65,7 @@
             <td><%=project[i].project_id%></td>
             <td><%=project[i].projectname%></td>
             <td><%=project[i].projectlead%></td>
+            <td><%=project[i].teammembers%></td>
             <td><%=project[i].project_start_date%></td>
             <td><%=project[i].project_end_date%></td>
             <td><a href="/updatePro?id=<%=project[i].project_id%>" class="btn btn-success">Update</a></td>
