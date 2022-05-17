@@ -18,25 +18,42 @@
   <h1 class="text-center display-4"> Inserting Project Details</h1>
   <div class="container w-50 containetr-fluid my-3">
  
-   <form action="/proinsert" method="post">
+   <form action="/proupdate" method="post">
+   <input type="text" style="display: none;" name="pro_id"value="<%=pro[0]['pro_id']%>">
   <label class="h3" for="pname">Project Name:</label>
-    <input required class="form-control mb-2" type="text" id="pname" placeholder="Enter Project name" name="project_name">
+    <input value="<%=pro[0]["pro_name"]%>" required class="form-control mb-2" type="text" id="pname" placeholder="Enter Project name" name="project_name">
     <label class="h3" for="Prolead">Project Lead:</label>
 
     <select class="custom-select mb-2" name="project_lead" id="Prolead">
-    <option selected>Choose Project Lead</option>
+
       <%emp.each do |i| %>
+        <%if(i["fname"]==pro[0]["pro_lead"])%>
+        <option selected value="<%=i["fname"]%>"><%=i["fname"]%></option>
+        <%next%>
+        <%end%>
         <option value="<%=i["fname"]%>"><%=i["fname"]%></option>
       <%end%>
+     
     </select>
     <label class="h3" for="teammem">Team Member:</label>
 
     <select multiple="multiple"class="custom-select mb-2" name="team_member[]" id="teammem">
-    <option >Choose TeamMembers</option>
-      <%emp.map do |i| %>
-        <option  value="<%=i["fname"]%>"><%=i["fname"]%></option>
-    
-        <%end%>
+  
+    <%pro[0]["team_member"].tr("{}",'').split(',').each do |j|%>
+       
+          <option selected value="<%=j%>"><%=j%></option>
+       
+    <%end%>
+    <%a=[]%>
+    <%emp.each do |i| %>
+          <%a.push(i["fname"])%>
+     <%end%>
+   <%b=a-pro[0]["team_member"].tr("{}",'').split(',')%>
+
+    <%b.each do |i|%>
+        <option value="<%=i%>"><%=i%></option>
+     <%end%>
+        
     </select>
  
 
@@ -44,9 +61,9 @@
    
    
     <label class="h3" for="sdate">Start Date:</label>
-    <input required class="form-control mb-2" type="date" id="sdate" placeholder="Project Start Date" name="sdate">
-    <label class="h3" for="edate">End Date:</label><input required class="form-control mb-2" type="date" id="edate" placeholder="Project End Date " name="edate">
-   <input type="submit" class="btn btn-success" value="submit">
+    <input required value="<%=pro[0]["start_date"]%>" class="form-control mb-2" type="date" id="sdate" placeholder="Project Start Date" name="sdate">
+    <label class="h3" for="edate">End Date:</label><input value="<%=pro[0]["end_date"]%>" required class="form-control mb-2" type="date" id="edate" placeholder="Project End Date " name="edate">
+   <input  type="submit" class="btn btn-success" value="submit">
   </form>
   
 

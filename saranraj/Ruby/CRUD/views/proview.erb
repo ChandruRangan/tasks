@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dsiplay Employee</title>
+    <title>Display Project</title>
     <link
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -14,15 +14,14 @@
    
 </head>
 <body class="container container-fluid">
-    <h1 class="text-center display-4" >Employee Details</h1>
+    <h1 class="text-center display-4" >Project Details</h1>
+    <a class="btn btn-success" href="/">Insert Employee</a>
+    <a href="/proinsert" class="btn btn-info">Insert Project</a>
+    <a href="/viewemp" class="btn btn-success">Employee Table</a>
+    <a href="/viewpro" class="btn btn-info">Home</a>
     <div>
- 
-          <a class="btn btn-success" href="/">Insert Employee</a>
-          <a href="/proinsert" class="btn btn-info">Insert Project</a>
-          <a href="/viewpro" class="btn btn-success"> Project Table</a>
-          <a href="/viewemp v " class="btn btn-info">Home</a>
-        
-        <form method="GET" action="/search">
+     
+      <form method="GET" action="/search">
       <select class="custom-select my-2" name="searchtype">
       <option value="project by employee">Search project by employee </option>
       <option value="project by lead">Search Project by Project Lead </option>
@@ -32,30 +31,31 @@
       <input class="form-control my-2"  type="text" name="search">
       <input class="btn btn-success mb-2" type="submit" value="submit">
       </form>
+
       </div>
     <table class="table table-dark table-hover table-striped table-bordered">
         <thead class="thead-dark">
             <tr class="text-center">
-                <th scope="col">NAME</th>
-                <th scope="col">EMAIL</th>
-                <th scope="col">PHONENO</th>
+                <th scope="col">PROJECT NAME</th>
+                <th scope="col">PROJECT LEAD</th>
+                <th scope="col">TEAM MEMBERS</th>
               
-                <th scope="col">DOJ</th>
-                <th scope="col">DOB</th>
-                <th  scope="col">Action</th>
+                <th scope="col">START DATE</th>
+                <th scope="col">END DATE</th>
+               
             </tr>
         </thead>
         <tbody>
-           <%emp.each do |i|%>
-               <tr scope="row">
-                   <td><%=i["fname"]%></td>
-                   <td><%=i["email"]%></td>
+           <%pro.each do |i|%>
+               <tr class="text-center" scope="row">
+                   <td><%=i["pro_name"]%></td>
+                   <td><%=i["pro_lead"]%></td>
                    
-                   <td><%=i["phoneno"]%></td>
-                   <td><%=i["joining_date"]%></td>
-                   <td><%=i["date_of_birth"]%></td>
-                   <td class="text-center"> <form action="/empdelete?id=<%=i['emp_id']%>" method="POST"><input type="hidden" name="_method" value="DELETE"> <input type="submit"class="btn mb-1 btn-success" value="Delete"></form>
-                    <a href="/empupdate?id=<%=i['emp_id']%>"class="btn btn-primary">Update</a></td>
+                   <td><%=i["team_member"].tr("{}",'')%></td>
+                   <td><%=i["start_date"]%></td>
+                   <td><%=i["end_date"]%></td>
+                   <td class="text-center"> <form action="/prodelete?id=<%=i["pro_id"]%>" method="POST"><input type="hidden" name="_method" value="DELETE"> <input type="submit"class="btn mb-1 btn-success" value="Delete"></form>
+                    <a href="/proupdate?id=<%=i["pro_id"]%>"class="btn btn-primary">Update</a></td>
                     </tr>
                 <%end%>
         </tbody>
