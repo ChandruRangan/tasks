@@ -1,0 +1,47 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+
+      <h2> Update Page!!!!!!</h2><br><br>
+
+      <form action="/pro_update?id=<%=params['id']%>" method="post">
+        <% pro.each do |pval| %>
+        <div class="form-group">
+            <label for="usr">Project Name:</label>
+            <input type="text" class="form-controlgap-sm-0" id="usr" name="pro_name" placeholder="Enter project name.." value="<%=pval['pro_name']%>">
+          </div>
+
+          <div>
+          <lable for="usr"> Project Lead:</lable>
+         <input type="text" class="form-group" name="pro_lead" placeholder= "Enter Project lead" value="<%=pval['pro_lead']%>"><br>
+         Team Members : <select class="form-control" class="selectpicker" name="team_memebers[]" multiple data-selected-text-format="count" value="<%=pval['team_members']%>">
+          </select>
+    </div><br>
+
+    <div class="form-group">
+    <h5> Project Start Date </h5>
+        <input type="date" name="start_date" class="form-control" value="<%=pval['start_date']%>">
+  </div>
+  
+  <div class="form-group">
+   <h5> Project End Date </h5>
+    <input type="date" name="end_date" class="form-control" value="<%=pval['end_date']%>">
+  </div>
+</div>
+<%end%>
+  <div>
+  <button type="submit" class="btn btn-secondary">SUBMIT</button>   
+</div
+        </form>
+        </body>
+</html>

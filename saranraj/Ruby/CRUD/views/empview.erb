@@ -16,12 +16,22 @@
 <body class="container container-fluid">
     <h1 class="text-center display-4" >Employee Details</h1>
     <div>
-        <form method="post" action="/datas" >
-          <input type="text" class="form-control mt-2" placeholder="Search" name="search">
-          <button class="my-3 btn btn-primary" type="submit" value="search">Search</button>
+ 
           <a class="btn btn-success" href="/">Insert Employee</a>
           <a href="/proinsert" class="btn btn-info">Insert Project</a>
-        </form>
+          <a href="/viewpro" class="btn btn-success"> Project Table</a>
+          <a href="/viewemp" class="btn btn-info">Home</a>
+        
+        <form method="GET" action="/search">
+      <select class="custom-select my-2" name="searchtype">
+      <option value="project by employee">Search project by employee </option>
+      <option value="project by lead">Search Project by Project Lead </option>
+      <option value="employee by project">Search Employee by Project  </option>
+      <option value="employee by project lead">Search Employee by Project Lead </option>
+      </select>
+      <input class="form-control my-2"  type="text" name="search">
+      <input class="btn btn-success mb-2" type="submit" value="submit">
+      </form>
       </div>
     <table class="table table-dark table-hover table-striped table-bordered">
         <thead class="thead-dark">

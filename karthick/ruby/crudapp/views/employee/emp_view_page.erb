@@ -1,13 +1,26 @@
 <%# stylesheets and design%>
 <%=erb :style%>
 
-<div class="w3-container">
+<div class="w3-container w3-animate-top">
 <div class="w3-panel w3-card-4 w3-blue w3-round">
     <h1 class="w3-center">CRUD</h1>
   </div>
-  <a href="/emp_insert_page" class="w3-button w3-red w3-center w3-padding-small w3-round w3-card-4"><span class="material-symbols-rounded">person_add</span> Add Employee</a>
-  <a href="/pro_view_page" class="w3-button w3-gray w3-center w3-padding-small w3-round w3-card-4 w3-margin-left"><span class="material-symbols-rounded">person_add</span> View Project</a>
-<input type="text" class="w3-input w3-border w3-margin-top" placeholder="Search..." id="search">
+  <a href="/emp_insert_page" class="w3-button w3-teal w3-center w3-padding-small w3-round w3-card-4"><span class="material-symbols-rounded">person_add</span> Add Employee</a>
+
+<form method="post" action="/search">
+
+<select name="search_by" class="w3-select w3-margin-top w3-round w3-center">
+<option selected disabled>Select Search By</option>
+<option value="project_name">Employe by Project Name</option>
+<option value="project_lead">Project by Project Lead</option>
+<option value="team_members">Project by Employee</option>
+<option value="project_lead_1">Employe by Project Lead</option>
+</select>
+
+<input type="text" class="w3-input w3-border w3-margin-top" name="search_value" placeholder="Search..." id="search">
+<input type="submit" class="w3-button w3-green w3-margin-top w3-round">
+</form>
+
   <table class="w3-table-all w3-card-4  w3-small w3-margin-top">
       <thead>
       <tr class="w3-black">
@@ -43,15 +56,3 @@
       </tbody>
   </table>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-  $("#search").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#table_data tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>

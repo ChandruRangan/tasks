@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+      
+      <form action="/pro_insert"  method="post">
+        
+        <div class="form-group">
+        
+            <label for="usr">Project Name:</label>
+            <input type="text" class="form-controlgap-sm-0" id="usr" name="pro_name" placeholder="Enter project name..">
+          </div>
+
+          <div>
+          <lable for="usr"> Project Lead:</lable>
+          
+        <select class="w3-select" name="pro_lead">
+          <option>projct lead</option>
+         <%values.each do |inval|%>
+         <option value="<%=inval['full_name']%>"><%=inval['full_name']%></option>
+         <%end%>
+         </select> <br><br>
+        <label>Team members</label>
+        <%values.each do |val|%>
+        <input type="checkbox" value="<%=val['full_name']%>">
+        <label class="form-check-label"><%=val['full_name']%></label>
+        <%end%>
+       </div><br>
+       <div class="form-group">
+         <h5> Project Start Date </h5>
+          <input type="date" name="start_date" class="form-control">
+       </div>
+       <div class="form-group">
+          <h5> Project End Date </h5>
+       <input type="date" name="end_date" class="form-control">
+      </div>
+      </div>
+  <div>
+  <button type="submit" class="btn btn-secondary">SUBMIT</button>   
+  <a href="/proview">view</a>
+</div
+</form>
+</body>
+</html>
