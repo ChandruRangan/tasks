@@ -1,18 +1,15 @@
-const express = require('express');
-let router = express.Router();
-const Employee = require('../model/schema')
-router.get('/employee', (req, res) => {
-    res.render("employee/create", {
-        viewtitle: "insert Employee"
-    });
+const express =require ('express');
+const router= express.Router();
+const Employee= require('../model/schema');
+router.get('/employee',(req,res)=>{
+res.render("employee/create",{
+    viewtitle:"Insert Employee"
 });
-router.post('/employee', (req,res) => {
-    if (req.body._id == '')
-    insertRecord(req, res);
-    else
-    updateRecord(req, res);
-    });
-
+});
+router.post('/employee',(req,res)=>{
+    if(req.body._id=='')insertRecord(req, res);
+    else updateRecord(req,res);
+});
 function insertRecord(req, res) {
     const employee = new Employee();
     employee.FullName = req.body.FullName;
@@ -96,4 +93,4 @@ router.get('/employee/delete/:_id', (req, res) => {
     else { console.log('Failed to Delete Course Details: ' + err); }
     });
     }); 
-module.exports = router; 
+module.exports = router;

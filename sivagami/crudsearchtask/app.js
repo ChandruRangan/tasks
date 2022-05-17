@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyparser= require("body-parser");
-const Emproute=  require ('./emp.route');  //import route
-//const router = require("./emp.route");
+const Emproute=  require ('./routes/emproute');  //import route
+const Authroute = require("./routes/auth");
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
 app.set('view engine','ejs');
@@ -12,6 +12,9 @@ const dotenv = require('dotenv');
 
 // Set up Global configuration access
 dotenv.config();
+
+require("dotenv").config();
+
 
 mongoose.connect('mongodb://localhost:27017/CRUDtask',
   {
@@ -37,6 +40,7 @@ db.once("open", function () {
      });
 
      app.use('/',Emproute);
+     app.use('/auth',Authroute);
       
 
 

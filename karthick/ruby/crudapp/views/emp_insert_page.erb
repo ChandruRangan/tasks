@@ -1,0 +1,28 @@
+<%# stylesheets and design%>
+<%=erb :style%>
+
+<div class="w3-container w3-margin-top">
+	<form action="/emp_insert" method="post" class="w3-card-4 w3-padding">
+	<h2 class="w3-center w3-blue">Employee Form</h2>
+		<p><label>Full Name</label>
+		<input type="text" name="fname" class="w3-input w3-border">
+		</p>
+		<p><label>Email Address</label>
+		<input type="email" name="email" class="w3-input w3-border">
+		</p>
+		<p><label>Password</label>
+		<input type="password" name="password" class="w3-input w3-border">
+		</p>
+		<p><label>Phone Number</label>
+		<input type="number" name="phno" class="w3-input w3-border">
+		</p>
+		<p><label>Joining date</label>
+		<input type="date" name="joining_date" class="w3-input w3-border">
+		</p>
+		<p><label>Date of Birth</label>
+		<input type="date" name="dob" class="w3-input w3-border">
+		</p>
+		<input type="submit" class="w3-button w3-green w3-round">
+	</form>
+</div>
+</div>

@@ -14,6 +14,48 @@ const db = knex({
     database: "employee",
 },
 });
+
+app.get("/emplogin",(req,res)=>{
+  res.render("emplogin"); 
+})
+
+/*app.post('/emplogin', async (req, res) => {
+  const User = req.body.email;
+  const Pwd = req.body.password;
+  try {
+      const accessToken = jwt.sign(JSON.stringify(User), process.env.TOKEN_SECRET)
+      if (match) {
+          res.json({accessToken:accessToken});
+      } else {
+          console.log({message:"invalid credentials"});
+      }
+  }
+  catch (e) {
+      console.log(e)
+  }
+});*/
+
+app.get("/prologin",(req,res)=>{
+  res.render("prologin"); 
+})
+
+app.post("/emplogin", (req, res) => {
+  const email = req.body.email;
+  const pwd = req.body.password;
+  db("employee")
+  .insert({
+    email: email,
+    password : pwd,
+  })
+  .then(() => {
+    res.redirect("/emplogin");
+  })
+  .catch((err) => {
+    res.status(400).json({ message: err });
+  });
+});
+
+
 app.get("/", (req, res) => {
   db.select("*").from("project")
     .then((data) => {
@@ -50,12 +92,14 @@ app.post("/insertemp", (req, res) => {
 app.post("/insertpro", (req, res) => {
   const proname = req.body.proname;
   const prolead = req.body.prolead;
+  const tmember = req.body.tmem;
   const sdate = req.body.sdate;
   const edate = req.body.edate;
   db("project")
     .insert({
       projectname: proname,
       projectlead: prolead,
+      teammembers: tmember,
       project_start_date : sdate,
       project_end_date : edate,
     })
@@ -85,7 +129,7 @@ await db("employee")
   .where("employee_id", id)
   .del()
   .then(() => {
-      res.redirect('/');
+      res.redirect('/display');
   }).catch(err=>{
       res.status(400).json(err);
   });
@@ -98,12 +142,13 @@ app.get("/deletePro",async(req,res)=>{
     .where("project_id", id)
     .del()
     .then(() => {
-        res.redirect('/');
+        res.redirect('/display');
     }).catch(err=>{
         res.status(400).json(err);
     });
   });
-app.get("/updateEmp",async(req,res)=>{
+
+   app.get("/updateEmp",async(req,res)=>{
     const  id  = parseInt(req.query.id);
     console.log(id);
      await db("employee")
@@ -121,7 +166,7 @@ app.get("/updateEmp",async(req,res)=>{
     
     });
 
-app.get("/updatePro",async(req,res)=>{
+ app.get("/updatePro",async(req,res)=>{
   const  id  = parseInt(req.query.id);
   console.log(id);
    await db("project")
@@ -160,34 +205,29 @@ app.post("/searchemp", (req, res) => {
     }
   });
 
-// Select Specific Character
-
-app.post("/searchemp", (req, res) => {
-  var input = req.body.input;
-  console.log(input);
-  if(input==''){
-    res.redirect('/display');
-  }
-  else{
-    db("employee")
-    .select("*")
-    .from("employee")
-    .where("employee.fullname")
-    .like("A%",input)
-      .then((data) => {
-        console.log(data)
-        res.render("searchemp",  { employee: data });
-      })
-      .catch((err) => {
-        console.log(err)
-        res.json({ message: err });
-      });
+  //
+  app.post("/searchemp", (req, res) => {
+    var input = req.body.input;
+    console.log(input);
+    if(input==''){
+      res.redirect('/display');
     }
-  });
+    else{
+      db("employee")
+      .select("*")
+      .where("employee.email",input)
+        .then((data) => {
+          console.log(data)
+          res.render("searchemp",  { employee: data });
+        })
+        .catch((err) => {
+          console.log(err)
+          res.json({ message: err });
+        });
+      }
+    });
 
-//
-
-
+    //
 
   app.post("/searchpro", (req, res) => {
   var input = req.body.input;
@@ -211,25 +251,158 @@ app.post("/searchemp", (req, res) => {
   app.listen(port, () => {
   console.log(`Running Server is http://localhost:${port}`);
 });
-app.post('/updatedemp',async(req,res)=>{
+
+ app.post('/updatedemp',async(req,res)=>{
         const {id, fullname,email,password,dob,doj}  =req.body
         console.log(req.body);
      db('employee').where('employee_id',id).update({fullname:fullname,email:email,password
-    :password,joiningdate:doj,date_of_birth:dob}).returning('*').then((data)=>{
+    :password,joiningdate:doj,date_of_birth:dob}).returning('*')
+    .then((data)=>{
       console.log(data);
       res.redirect('/display')
     })
 })
+
 app.post('/updatepro',async(req,res)=>{
   const {id, proname,prolead,sdate,edate}  =req.body
   console.log(req.body);
 db('project').where('project_id',id).update({projectname:proname,projectlead:prolead,
   project_start_date:sdate,project_end_date:edate})
-  .returning('*').then((data)=>{
+  .returning('*')
+  .then((data)=>{
     console.log(data)
 res.redirect('/display')
 })
 })
+ 
 function dteconfig(date){
   return  date.toISOString().replace(/T/, ' ').replace(/\..+/, '').toString().substr(0,10)
 }
+
+
+/*app.post('/emplogin',async(req,res)=>{
+  const {id,email,password}  =req.body
+  console.log(req.body);
+  db('employee').update('employee').set('email',email).where('employee_id',id).returning('*')
+
+  // .update({email:email,password:password}).returning('*')
+ .then((data)=>{
+  console.log(data);
+  res.redirect('/emplogin')
+ })
+})*/
+
+// functions
+
+
+exports.deletefn=(async(req, res) => {
+  const  id  = parseInt(req.query.id);
+  console.log(id);
+  await db("employee")
+    .where("employee_id", id)
+    .del()
+    .then(() => {
+        res.redirect('/display');
+    }).catch(err=>{
+        res.status(400).json(err);
+    });
+});
+
+exports.deletefn=(async(req, res) => {
+  const  id  = parseInt(req.query.id);
+  console.log(id);
+  await db("project")
+    .where("project_id", id)
+    .del()
+    .then(() => {
+        res.redirect('/display');
+    }).catch(err=>{
+        res.status(400).json(err);
+    });
+});
+
+exports.update = async (req, res) => {
+  const id = parseInt(req.query.id);
+  await db
+    .select("*")
+    .from("employee")
+    .where("employee_id", id)
+    .then((data) => {
+        db.select("*")
+      .from("employee")
+      .then(()=>{
+          res.render("updateemp", { data: data, id: id});
+        })
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
+exports.updatedata=(async(req,res)=>{
+    let empid=parseInt(req.query.id);
+    console.log(empid);
+    const fname = req.body.fullname;
+    const email = req.body.email;
+    const pwd = req.body.password;
+    const phno = req.body.phone;
+    const jdate = req.body.doj;
+    const dob = req.body.dob;
+    db('employee')
+    .where('employee_id',empid)
+    .update({
+      fullname: fname,
+      email: email,
+      password : pwd,
+      phone_number : phno,
+      joiningdate : jdate,
+      date_of_birth : dob, 
+    }).then(()=>{
+      res.redirect('/');
+    }).catch(e=>{
+      res.status(400).json(e);
+    })
+  });
+
+  exports.update = async (req, res) => {
+    const id = parseInt(req.query.id);
+    await db
+      .select("*")
+      .from("project")
+      .where("project_id", id)
+      .then((data) => {
+          db.select("*")
+        .from("project")
+        .then(()=>{
+            res.render("updatepro", { data: data, id: id});
+          })
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  };
+  
+  exports.updatedata=(async(req,res)=>{
+      let proid=parseInt(req.query.id);
+      console.log(pid);
+      const proname = req.body.proname;
+      const prolead = req.body.prolead;
+      const tmember = req.body.tmem;
+      const sdate = req.body.sdate;
+      const edate = req.body.edate;
+      db('project')
+      .where('project_id', '=',proid)
+      .update({
+        projectname: proname,
+        projectlead: prolead,
+        teammembers: tmember,
+        project_start_date : sdate,
+        project_end_date : edate,   
+      }).then(()=>{
+        res.redirect('/');
+      }).catch(e=>{
+        res.status(400).json(e);
+      })
+    });
+
+
+
