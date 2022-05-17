@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Employee</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body class="bg-light">
+     <form action="/project_insert" method="post">
+     <div class="form-group"
+      <div class="container-fluid">
+      <div class="container text-center">
+      
+          <p class="text-center">wellcome</p>
+
+            <input type="text" name="project_name" class="form-control" placeholder="project_name"><br>
+            <select class="form-control" name="project_lead">
+                <%pro.each do |val|%>
+                <option value="<%=val['full_name']%>"><%=val['full_name']%></option>
+                <%end%>
+            </select><br>
+            <select class="form-control" name="team_members[]" multiple>
+                <%pro.each do |val|%>
+                <option value="<%=val['full_name']%>"><%=val['full_name']%></option>
+                <%end%>
+            </select><br>
+            
+            <input type="date" name="project_sdate" class="form-control" placeholder="project_sdate"><br>
+            
+            <input type="date" name="project_edate" class="form-control" placeholder="project_edate"><br>
+
+            <input class="btn btn-primary" type="submit" value="Submit">
+
+            </div>
+            </div>
+          </form>
+          <a href="/view" class="btn btn-primary">viewTable</a>
+          <a href="/project_view" class="btn btn-primary">view project</a>
+           
+      
+    
+  </body>
+</html>
