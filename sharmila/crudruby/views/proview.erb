@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+      <form action="/pro_insert" method="post"></form>
+      <div>
+          <table class="table table-border">
+              <thead>
+                  <tr>
+                      <th>pro_name</th>
+                      <th>pro_lead</th>
+                      <th>team_members</th>
+                      <th>start_date</th>
+                      <th>end_date</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <%value.each do |i| %>
+                  <tr>
+                      <td><%=i['pro_name']%></td>
+                      <td><%=i['pro_lead']%></td>
+                      <td><%=i['team_members']%></td>
+                      <td><%=i['start_date']%></td>
+                      <td><%=i['end_date']%></td>
+                      <td><%=i['pro_id']%></td>
+                      <td><a href="/pro_update?id=<%= i['pro_id']%>" class="btn btn-primary">Update</a></td>
+                      <td><a href="/pro_delete?id=<%= i['pro_id']%>" class="btn btn-danger">Delete</a></td>
+                  </tr>
+                  <%end%>
+              </tbody>
+          </table>
+      </div>
+  </body>
+</html>
