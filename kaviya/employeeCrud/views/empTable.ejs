@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -20,8 +21,9 @@
                     <tr>
                         <th>FullName</th>
                         <th>Email</th>
-                        <th>phone Number</th>
-                        <th>join Date</th>
+                        <!-- <th>EmployeeType</th> -->
+                        <th>PhoneNumber</th>
+                        <th>JoinDate</th>
                         <th>DateOfBirth</th>
                     </tr>
                 </thead>
@@ -30,10 +32,15 @@
                         <tr>
                             <td><%=employee[i].fullName%></td>
                             <td><%=employee[i].email%></td>
+                            <!-- <td><%=employee[i].employeeType%></td> -->
                             <td><%=employee[i].phoneNumber%></td>
-                            <td><%=employee[i].joinDate%></td>
-                            <td><%=employee[i].dateofbirth%></td>
-                            <td><a href="/delete?id=<%=employee[i]._id%>">Delete</a></td>
+                            <!-- <td><%=new Date(employee[i].joinDate)%></td> -->
+                            <td><%= `${new Date(employee[i].joinDate).getMonth()+1}-${new Date(employee[i].joinDate).getDate()}-${new Date(employee[i].joinDate).getFullYear()} `%></td>
+                            <td><%= `${new Date(employee[i].dateofbirth).getMonth()+1}-${new Date(employee[i].dateofbirth).getDate()}-${new Date(employee[i].dateofbirth).getFullYear()} `%></td>
+                            <!-- <td><%=employee[i].dateofbirth%></td> -->
+                            <td><a href="/delete?id=<%=employee[i]._id%>" onclick=" confirm('sure! you want to delete the data');">Delete</a></td>
+                            <!-- <td><a href="/update?id=<%=employee[i]._id%>">Update </a></td> -->
+                            <td><a href="/empupdate?id=<%=employee[i]._id%>"><i class='fas fa-pencil-alt'></i></a></td>
                         </tr>    
                     <%}%>
 

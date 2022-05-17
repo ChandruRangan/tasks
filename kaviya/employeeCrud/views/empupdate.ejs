@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
+
+    <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+ <body class="col-5">
+    <h3>Updated Employee Details</h3><br>
+  <form action="/updateemp?id=<%=id%>" method="post">
+    <div>
+      <% for(var i=0;i<employee.length; i++) { %>
+      <div>
+        Fullname: <input type="text" class="form-group"  placeholder="Enter Name" name="fullName"  value="<%=employee[i].fullName%>"><br><br>
+      </div>
+      <div>
+        Email: <input type="email"  class="form-group" id="email" placeholder="Enter Email" name="email"  value="<%=employee[i].email%>"><br><br>
+      </div>
+      <div>
+      Password: <input type="password" class="form-group" id="pwd" placeholder="Enter Password" name="password"  value="<%=employee[i].password %>"><br><br>  
+      </div>
+      <div>
+        Phone Number: <input type="number"  class="form-group" id="ephone" placeholder="Enter PhoneNumber" name="phoneNumber"  value="<%=employee[i].phoneNumber%>"><br><br> 
+      </div>
+      <div>
+        Join Date: <input type="date" id="jdate" name="joinDate" value="<%=`${new Date(employee[i].joinDate).getDate()}/${new Date(employee[i].joinDate).getMonth()+1}/${new Date(employee[i].joinDate).getFullYear()} `%>"><br><br>
+        <p><%=`${new Date(employee[i].joinDate).getDate()}/${new Date(employee[i].joinDate).getMonth()+1}/${new Date(employee[i].joinDate).getFullYear()} `%></p>
+      </div>
+      <div>
+        Date Of Birth: <input type="date" id="dob" name="dateofbirth"  value="<%=`${new Date(employee[i].dateofbirth).getDate()}/${new Date(employee[i].dateofbirth).getMonth()+1}/${new Date(employee[i].dateofbirth).getFullYear()} `%>"><br><br>
+        <p><%=`${new Date(employee[i].dateofbirth).getDate()}/${new Date(employee[i].dateofbirth).getMonth()+1}/${new Date(employee[i].dateofbirth).getFullYear()} `%></p>
+      </div>
+      <!-- <input type="submit">
+        <a href="/views">Enter Project Details</a> -->
+        <!-- <button type="submit" class="btn btn-outline-success">UPDATE</button> -->
+        <!-- <a  href="/empTable" class="btn btn-outline-dark" name="search">UPDATE</a> -->
+        <!-- <a  href="/proTable" class="btn btn-outline-dark">ProjectTable</a> -->
+        <!-- <a href="/project" class="btn btn-outline-info">create project</a> -->
+        <input type="submit" value="submit" class="btn btn-success">
+        <%}%>  
+      </div>
+  </form>    
+ </body>
+</html>

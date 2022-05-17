@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
+</head>
+
+<body>
+          <h1 class="text-center display-4"> Updating Employee Details</h1>
+        <div class="container w-50 containetr-fluid my-3">
+            <form action="/empupdate" method="post">
+                <input type="text" style="display: none;" name="id"value="<%=emp._id%>">
+                <input class="form-control mb-2" type="text" name="Name" value="<%=emp.Name%>" placeholder="Enter name" id="name">
+        <input class="form-control mb-2" type="text" value="<%=emp.mail%>" name="Email" placeholder="Email Address" id="Email">
+        <input class="form-control mb-2"type="password" value="<%=emp.password%>" name="Password" placeholder="Password" id="pswd">
+        <input class="form-control mb-2" type="number" value="<%=emp.phno%>"  name="phonenumber" placeholder="phone number" id="phono">
+        <input class="form-control mb-2" type="date" value="<%=emp.joining%>" name="DOJ"  placeholder="joining date" id="DOJ">
+        <input class="form-control mb-2" type="date" value="<%=emp.dob%>" name="DOB" placeholder="Date of birth "id="DOB">
+        <button class="btn btn-success" type="submit"">submit</button>
+            </form>
+        </div>
+        
+         <div class="container text-center">
+            <a href="/datas" class="btn btn-info">View</a>
+            <a href="/datas" class="btn btn-primary">Cancel</a>
+
+            
+         </div>
+
+      
+    
+    
+   
+    
+</body>
+</html>

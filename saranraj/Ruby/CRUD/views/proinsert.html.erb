@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <style>
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="text-center display-4"> Inserting Project Details</h1>
+  <div class="container w-50 containetr-fluid my-3">
+ 
+   <form action="/proinsert" method="post">
+  <label class="h3" for="pname">Project Name:</label>
+    <input required class="form-control mb-2" type="text" id="pname" placeholder="Enter Project name" name="project_name">
+    <label class="h3" for="Prolead">Project Lead:</label>
+
+    <select class="custom-select mb-2" name="project_lead" id="Prolead">
+    <option selected>Choose Project Lead</option>
+      <%emp.each do |i| %>
+        <option value="<%=i["fname"]%>"><%=i["fname"]%></option>
+      <%end%>
+    </select>
+    <label class="h3" for="teammem">Team Member:</label>
+
+    <select multiple="multiple"class="custom-select mb-2" name="team_member[]" id="teammem">
+    <option >Choose TeamMembers</option>
+      <%emp.map do |i| %>
+        <option  value="<%=i["fname"]%>"><%=i["fname"]%></option>
+    
+        <%end%>
+    </select>
+ 
+
+
+   
+   
+    <label class="h3" for="sdate">Start Date:</label>
+    <input required class="form-control mb-2" type="date" id="sdate" placeholder="Project Start Date" name="sdate">
+    <label class="h3" for="edate">End Date:</label><input required class="form-control mb-2" type="date" id="edate" placeholder="Project End Date " name="edate">
+   <input type="submit" class="btn btn-success" value="submit">
+  </form>
+  
+
+  </div>
+  <div class="container text-center">
+    <a href="" class="btn btn-info">View</a>
+  </div>
+  
+
+</body>
+</html>
+
+

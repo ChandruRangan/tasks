@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Project update table</title>
+</head>
+<body>
+    <!-- <form method="post" action="/updatepro">
+      <div class="form-group">
+        <label for="Pro_id">Pro_id:</label>
+        <input type="ID" class="form-control" value="<%=Project.PROID%>" name="ID">
+      </div>
+        <div class="form-group">
+          <label for="Projectname">Projectname:</label>
+          <input type="Name" class="form-control" value="<%=Project.Projectname%>" name="projectname">
+        </div>
+        <div class="form-group">
+            <label for="Projectlead">projectlead:</label>
+            <input type="projectlead" class="form-control" value="<%=Project.Projectlead%>" name="projectlead">
+          </div>
+          <div class="form-group">
+            <label for="Teammember">Team member</label>
+            <input type="teammember" value="<%=Project.Teammember%>"class="form-control" name="tm">
+          </div>
+          <div class="form-group">
+            <label for="prostartdate" class="control-label">Project start Date</label>
+            <input type="date" value="<%=Project.Projectstartdate%>"name="psd" class="form-control">
+       </div>
+       <div class="form-group">
+             <label for="projectenddate" class="control-label">project end date</label>
+             <input type="date" value="<%=Project.Projectenddate%>" name="ped" class="form-control">
+       </div>
+       <input type="submit" class="btn btn-info">
+      </form> -->
+      <input required class ="form-control mb-2" value ="<%=Project.PROID%>" type ="text" id="proid" placeholder="Project id" name = "proid">
+      <input required class="form-control mb-2" value = "<%=Project.Projectname%>" type="text" id="proname" placeholder="Enter Project name" name="pname">
+  <input required class="form-control mb-2" type="text" value="<%=Project.Projectlead%>" id="prolead" placeholder="Project Lead" name="plead">
+  <ul style="list-style: none;" id="ul">
+     <li> <input required class="membername form-control mb-2" value ="<%=Project.Teammember%>" type="text" placeholder="Project Team Members" name="membername"></li>
+  </ul><button onclick="newmember()" class="btn btn-primary">Add Team Member</button>
+ 
+  <input required class="form-control mb-2" value="<%=Project.Projectstartdate%>" type="date" id="prostartdate" placeholder="Project Start Date" name="Sdate">
+  <input required class="form-control mb-2" value="<%=Project.Projectenddate%>" type="date" id="proenddate" placeholder="Project End Date " name="Edate">
+  <button class="btn btn-success" onclick="submit()">submit</button>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    function newmember(){
+      let ul = document.getElementById('ul');
+      let li = document.createElement('li');
+      let input = document.createElement('input');
+      let name = document.createElement('name');
+      let btn = document.createElement('button');
+      input.setAttribute('required', '');
+      input.className="membername form-control mb-2";
+      input.placeholder="Team Member";
+      input.type="text";
+      btn.innerText="Remove Member";
+      li.appendChild(input);
+      btn.addEventListener('click',(e)=>{
+      e.preventDefault();
+      ul.removeChild(li);
+   })
+   li.appendChild(btn);
+   ul.appendChild(li);
+}
+function submit(){
+let proid = document.getElementById('proid') .value;
+let pname=document.getElementById('proname').value;
+let plead= document.getElementById('prolead').value;
+let sdate= document.getElementById('prostartdate').value;
+let edate= document.getElementById('proenddate').value;
+       let membername=[];
+       let k= document.getElementsByClassName('membername');
+     for(let i=0;i<=k.length-1;i++){
+          membername.push(k[i].value)
+     }
+     
+     $.ajax({
+        type: "POST",
+        url: "/updatepro",
+        dataType: "json",
+        data: {
+          Proid:proid,
+           ProjectName:pname,
+           ProjectLead:plead,
+           TeamMembers:membername,
+           StartDate:sdate,
+           EndDate:edate
+           
+        }   
+    });
+   }
+  </script>
+      <a href="/displaypro" class="btn btn-info">View</a>
+      <a href="/displaypro" class="btn btn-info">Back</a>
+</body>
+</html>

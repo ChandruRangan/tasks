@@ -27,19 +27,19 @@ app.get('/',(req,res)=>{
 app.listen(8000,()=>{
     console.log('the running port is 8000');
 });
-app.post('/insert',(req,res)=>{
+app.post("/insert",(req,res)=>{
     const{product}= req.body;
     const{category}= req.body;
     const{price}= req.body;
     db("product").insert({product_name:product,price:price,category_id:category,created_at:Date(Date.now())})
     .then(()=>{
-        res.redirect('/');
+        res.redirect("/");
     })
     .catch((err)=>{
         res.status(400).json({err})
     });   
 });
-app.get('/add',(req,res)=>{
+app.get("/crud",(req,res)=>{
     db("product")
     .join("category","product.category_id","category.category_id")
     .select("product.product_id","product.product_name","product.price","category.category_name","product.created_at","product.updated_at")
@@ -50,20 +50,4 @@ app.get('/add',(req,res)=>{
         res.status(400).json({err})
     });
 });
-app.get('/',(req,res)=>{
-    const id= req.query.id;
-    db.select("*")
-    .from("product")
-    .where("product_id",id)
-    .then((data)=>{
-        db.select("*")
-        .from("category_table")
-        .then((category)=>{
-            res.render('update');
-            res.render("u1",{data:data,id:id,category:category})
-        })
-    })
-    .catch((err)=>{
-        res.status(400).json(err);
-    });
-});
+

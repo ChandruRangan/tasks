@@ -2,31 +2,76 @@
 <body>
       <div class="container mt-5 jumbotron">
           <h3 class=""> Create Project Details</h3><br>
-          <form action="/project" method="POST">
+         
               <div>
-                <label id="Pname" >Project Name:</label>
+                <label id="" >Project Name:</label>
                 <input type="text" class="form-control" id="Pname" placeholder="Enter project name" name="pro_name"><br><br>
               </div>
             <div>
-              <label id="Lname" >Project Lead:</label>
+              <label id="" >Project Lead:</label>
               <input type="text" class="form-control" id="Lname" placeholder="Enter lead name" name="pro_lead"><br><br>
             </div>
             <div >
-              <label id="Tmembers" >Team Members:</label>
-              <input type="text"  class="form-control" id="Tmembers" placeholder="Enter team members" name="team_mem"><br><br>
+              <label id="" >Team Members:</label>
+            <ul style="list-style: none;" id="ul">
+              <li>  <input type="text" class=" newmem form-control" id="Tmembers" placeholder="Enter team members" name="team_mem"></li>
+            </ul>
+              <button class="btn btn-primary" onclick="newmem()">Add Team Member</button><br><br>
             </div>
             <div >
-              <label id="Ps" >Project Start Date:</label>
-              <input type="date" class="form-control"  placeholder="MM-DD-YYY"  name="Psdate"><br><br>
+              <label id="" >Project Start Date:</label>
+              <input id="Psdate" type="date" class="form-control"  placeholder="MM-DD-YYY"  name="Psdate"><br><br>
             </div>
             <div >
-              <label id="Pe" >Project End Date:</label>
+              <label id="" >Project End Date:</label>
               <input type="date"  class="form-control" id="Pe" placeholder="MM/DD/YYY" name="Pedate"><br><br>
             </div>
-            <input type="submit" class="btn btn-outline-success">
+            <!-- <input type="submit" class="btn btn-outline-success"> -->
+            <button class="btn btn-outline-success" onclick="submit()">submit</button>
             <a  href="/prolist" class="btn btn-outline-info">View</a>
             <a href="/" class="btn btn-outline-secondary">Insert Employee</a>
-          </form>
+    
             
       </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script>
+        function newmem(){
+           let ul  =document.getElementById('ul');
+           let li = document.createElement('li');
+           let input = document.createElement('input');
+           let btn = document.createElement('button');
+           input.className="newmem form-control";
+           btn.innerText="Remove Member";
+           btn.className="btn btn-warning";
+           input.placeholder="Enter Team Member"
+           li.appendChild(input);
+           btn.addEventListener('click',(e)=>{
+             e.preventDefault();
+             ul.removeChild(li);
+           });
+           li.appendChild(btn);
+           ul.appendChild(li);
+        }
+        function submit(){
+          let team_mem=[];
+         let mem= document.getElementsByClassName('newmem');
+         for(let i=0;i<mem.length;i++){
+             team_mem.push(mem[i].value);
+         }
+         console.log(team_mem);
+          $.ajax({ 
+           type: 'POST', 
+            url: '/project', 
+           data: { 
+              pro_name:document.getElementById('Pname').value,
+              pro_lead:document.getElementById('Lname').value,
+              team_mem:team_mem,
+              Psdate:document.getElementById('Psdate').value,
+              Pedate:document.getElementById('Pe').value
+            }, 
+           dataType: 'json',
+  
+})
+        }
+      </script>
     </body>

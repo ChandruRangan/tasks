@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const EmpSchema= new mongoose.Schema({
  
     FullName:{
@@ -11,20 +12,18 @@ const EmpSchema= new mongoose.Schema({
       },
     Password:{
       type:String,
-      default:0,
     } ,
     PhoneNumber:{
       type:Number,
+      // min:10,
+      //  max:10,
       },
     JoiningDate:{
-      type: String
-      // default:Date
-    
-    },
+      type: Date,
+       },
     DateofBirth:{
-      type:String
-      // default:Date,
-    },
+      type:Date,
+      },
     });
     
 const Employee = mongoose.model('Employee', EmpSchema,'employees' );

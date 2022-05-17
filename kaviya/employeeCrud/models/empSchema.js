@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var empSchema = new mongoose.Schema({
   fullName: {
     type: String,
-    required: "Please enter full name!",
+    required:true,
   },
   email: {
     type: String,
@@ -10,15 +10,26 @@ var empSchema = new mongoose.Schema({
   },
   password: {
     type: String,
+    required:true,
+    unique: true,
   },
+  // employeeType:{
+  //   type: String,
+  //   // required:true,
+  //   // TeamLead,
+  //   // TeamMember,
+  // },
   phoneNumber: {
     type: String,
+    required:true,
   },
   joinDate: {
-    type: String,
+    type: Date,
+    required:true,
   },
   dateofbirth: {
-    type: String,
+    type: Date,
+    required:true,
   },
 });
 
@@ -28,5 +39,12 @@ empSchema.path("email").validate((val) => {
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return emailRegex.test(val);
 }, 'Please enter valid e-mail address.');
+ //phone number
+ empSchema.path("phoneNumber").validate((val) => {
+  phoneRegex =
+  /^[\+]?[(]?[0-9]{3}[)]?[0-9]{3}?[0-9]{4,6}$/;
+  return phoneRegex.test(val);
+}, 'Please enter valid phone.');
+
 module.exports = mongoose.model("empdetails", empSchema);
 

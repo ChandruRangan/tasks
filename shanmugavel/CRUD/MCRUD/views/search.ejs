@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dsiplay Employee</title>
+    <%-include('style.ejs')%>
+</head>
+<body class="container text-center">
+    <div>
+        <form method="post"  autocomplete="on"  action="/empsearch" >
+          <input type="text" class="form-control mt-5" placeholder="Search"  onclick="search()" name="search">
+          <div class="autocomplete" >
+            <button  class="btn my-2 btn-primary" type="submit"  value="search">Search</button>
+
+          </div>
+          <a class="btn btn-success" href="/">insert</a>
+          <a href="/datas" class="btn btn-info">view</a>
+        </form>
+      </div>
+    <table class=" table table-striped">
+        <thead class="thead-dark">
+            <tr>        
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>PHONENO</th>
+                <th>PASSWORD</th>
+                <th>DOB</th>
+                <th>DOB</th>
+                <th>ACTION</th>
+            </tr>
+        </thead >
+        <tbody>
+            <%for (i=0;i<emp.length;i++){%>
+               <tr>
+
+                   <td><%=emp[i].Name%></td>
+                   <td><%=emp[i].mail%></td>
+                   <td><%=emp[i].phno%></td>
+                   <td><%=emp[i].password%></td>
+                   <td><%=emp[i].joining%></td>
+                   <td><%=emp[i].dob%></td>
+                   <td><a class=" btn btn-danger" href="/delete?mail=<%=emp[i].mail%>">Delete</a></td>
+                    </tr>
+                   <%}%>
+        </tbody>
+    </table>
+    <script>
+
+    </script>
+</body>
+</html>

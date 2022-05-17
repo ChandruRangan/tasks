@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Employeedetails</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+      <h4>Employee_Table:</h4><br><br>
+      
+    <form action="/insert" method="post">
+        <div class="form-group">
+          <!-- <label for="name">Employee_id</label>
+          <input type="text"  name="id" ><br><br> -->
+           <label for="name">FullName:</label>
+            <input type="text"  placeholder="FullName"  name="FullName"><br><br>
+            <label for="email">EmailAddress:</label>
+            <input type="email" class="form-group" placeholder="Enter email" name="email"><br><br>
+            <label for="name">Password:</label>
+            <input type="password" class="form-group" placeholder="Password" name="pwd"   ><br><br>
+            <label for="name">PhoneNumber:</label>
+            <input type="text" id="ph.no" placeholder="phonenumber" name="phoneno"><br><br>
+            <label for="name">JoiningDate:</label>
+            <input type="date" placeholder="MM/DD/YYYY" name="Joindate"><br><br>
+            <label for="name">D.O.B:</label>
+            <input type="date" placeholder="MM/DD/YYYY" name="DateOfBirth"><br><br>
+              <div class="container text-center">
+                <button type="submit" class="btn btn-success" value="Submit Button">submit</button>
+                <a href="/dis" class="btn btn-outline-info">VIEW</a>
+                <a href="/project" class="btn btn-outline-info">ProjectDetails</a>
+                <a href="/login" class="btn btn-outline-info">LoginEmail</a>
+              </div>
+         </div>  
+    </form>
+  </body>
+</html> 

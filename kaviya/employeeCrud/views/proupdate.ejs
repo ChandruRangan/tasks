@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body class="col-5">
+    <h3>Project Details</h3>
+    <form action="/updatepro?id=<%=id%>" method="post">
+        <div>
+            <div>
+                <% for(var i=0;i<project.length; i++) { %>
+                     ProjectName:<input type="text" class="form-group" id="pname" placeholder="Enter Project Name" name="projectName"  value="<%=project[i].projectName%>"><br><br>
+                <%}%>
+            </div>
+            <div>
+                <% for(var i=0;i<project.length; i++) { %>
+                    ProjectLead:<input type="text" class="form-group" id="lname" placeholder="Enter Name" name="projectLead" value="<%=project[i].projectLead%>"><br><br>
+                <%}%>
+            </div>
+            <div>
+                <% for(var i=0;i<project.length; i++) { %>
+                    TeamMember1:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="teamMember1" value="<%=project[i].teamMember1%>"><br><br>
+                <%}%>    
+            </div>
+            <div>
+                <% for(var i=0;i<project.length; i++) { %>
+                    TeamMember2:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="teamMember2" value="<%=project[i].teamMember2%>"><br><br>
+                <%}%>    
+            </div>
+            <div>
+                <% for(var i=0;i<project.length; i++) { %>
+                    TeamMember3:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="teamMember3" value="<%=project[i].teamMember3%>"><br><br>
+                <%}%>    
+            </div>
+            <div>
+                <% for(var i=0;i<project.length; i++) { %>
+                    Project StartDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="p_StartDate" value="<%=`${new Date(project[i].p_StartDate).getDate()}/${new Date(project[i].p_StartDate).getMonth()+1}/${new Date(project[i].p_StartDate).getFullYear()}`%>"><br><br>
+                    <p><%=`${new Date(project[i].p_StartDate).getDate()}/${new Date(project[i].p_StartDate).getMonth()+1}/${new Date(project[i].p_StartDate).getFullYear()}`%></p>
+                <%}%>
+            </div>
+            <div>
+                <% for(var i=0;i<project.length; i++) { %>
+                    Project EndDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="p_EndDate" value="<%=`${new Date(project[i].p_EndDate).getDate()}-${new Date(project[i].p_EndDate).getMonth()+1}-${new Date(project[i].p_EndDate).getFullYear()}`%>"><br><br>
+                    <p><%=`${new Date(project[i].p_EndDate).getDate()}/${new Date(project[i].p_EndDate).getMonth()+1}/${new Date(project[i].p_EndDate).getFullYear()} `%></p>
+                <%}%>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-success">Update</button>
+        <!-- <a  href="/empTable" class="btn btn-outline-dark">EmployeeTable</a> -->
+        <!-- <a  href="/proTable" class="btn btn-outline-dark">ProjectTable</a> -->
+        <!-- <a href="/" class="btn btn-outline-info">Add Employee</a> -->
+    </form>    
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<%-include("style.ejs");-%>
+<body>
+      <div class="container mt-5 jumbotron">
+          <h3 class=""> <h3> Update Project Details</h3><br>
+
+              <div>
+                <label id="" >Project Name:</label>
+                <input type="text" class="form-control" id="Proname" placeholder="Enter project name" value="<%=proj[0].pro_name%>" name="pro_name"><br><br>
+              </div>
+            <div>
+              <label id="mail" >Project Lead:</label>
+              <input type="text" class="form-control" id="Leadname" placeholder="Enter email" value="<%=proj[0].pro_lead%>" name="pro_lead"><br><br>
+            </div>
+            <div> <input type="text" id="team" style="display:none;" value="<%=proj[0].team_mem%>"></div>
+            <div >
+              <label id="" >Team member:</label>
+            
+              <ul style="list-style: none;" id="ul">
+               
+                 
+              </ul>
+              <button class="btn btn-primary" onclick="newmember()">Add Team Member</button>
+            </div>
+            <div >
+              <label id="" >Project Start Date:</label>
+              <input type="date" class="form-control" id="prodate" placeholder="Phone number" value="<%=proj[0].Psdate%>" name="Psdate"><br><br>
+            </div>
+            <div >
+              <label id="" >Project End Date:</label>
+              <input type="date"  class="form-control" id="endate" value="<%=proj[0].Pedate%>"  placeholder="MM/DD/YYY" name="Pedate"><br><br>
+            </div>
+            <button type="submit" class="btn btn-outline-success" onclick="submit()">submit</button>
+            <a  href="/prolist" class="btn btn-outline-info">View</a>
+            <a href="/project" class="btn btn-outline-Secondary">Create Project</a>
+         
+            <input type="text" id="id" style="display: none;" value="<%=id%>">
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script>
+        let team=  document.getElementById('team').value;
+        let k=team.split(',');
+        k.forEach(element => {
+              newmember1(element)
+        });
+        function newmember1(val){
+            let ul = document.getElementById('ul');
+            let li = document.createElement('li');
+            let input = document.createElement('input');
+            let btn = document.createElement('button');
+            input.className = "newmember form-control";
+            input.value=val;
+            btn.innerText = "Remove Member";
+            btn.className = "btn btn-warning";
+            li.appendChild(input);
+            btn.addEventListener('click', (e) => {
+              e.preventDefault();
+              ul.removeChild(li);
+            });
+            li.appendChild(btn);
+            ul.appendChild(li);
+          }
+        
+        function newmember(){
+          let ul = document.getElementById('ul');
+          let li = document.createElement('li');
+          let input = document.createElement('input');
+          let btn = document.createElement('button');
+          input.className = "newmember form-control";
+          btn.innerText = "Remove Member";
+          btn.className = "btn btn-warning";
+          li.appendChild(input);
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            ul.removeChild(li);      
+          });
+          li.appendChild(btn);
+          ul.appendChild(li);
+        }
+          function submit(){
+            console.log(document.getElementById('id').value)
+            let team_mem = [];
+            let mem = document.getElementsByClassName('newmember');
+            for(let i=0;i<mem.length;i++){
+              team_mem.push(mem[i].value);
+            }
+            console.log(team_mem);
+            $.ajax({
+              type:'patch',
+              url:'/updata',
+              data:{
+                pro_name:document.getElementById('Proname').value,
+                pro_lead:document.getElementById('Leadname').value,
+                team_mem:team_mem,
+                Psdate:document.getElementById('prodate').value,
+                Pedate:document.getElementById('endate').value  ,
+                id:document.getElementById('id').value
+              },
+              dataType:'json',
+
+            
+            })
+          }
+        
+      </script>
+
+    </body>

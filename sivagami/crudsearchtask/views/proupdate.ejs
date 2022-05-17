@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Project</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <h5>Project_Table:</h5>
+
+    <form action="/updated?id=<%=project[0].id%>" method="POST">
+        <div class="form-group">
+            <label for="name">ProjectName:</label>
+            <input type="text"  placeholder="ProjectName"  name="ProjectName" value="<%=project[0].ProjectName%>"><br><br>
+            <label for="name">ProjectLead:</label>
+            <input type="text"  placeholder="ProjectLead"  name="ProjectLead" value="<%=project[0].ProjectLead%>"><br><br>
+            <label for="name">TeamMembers:</label>
+            <input type="text"  placeholder="TeamMembers"  name="TeamMembers" value="<%=project[0].TeamMembers%>"><br><br>
+            <label for="name">ProjectstartDate:</label>
+            <input type="text" placeholder="MM/DD/YYYY" name="ProjectstartDate"  value="<%=project[0].ProjectstartDate%>"><br><br>
+            <label for="name">ProjectEndDate:</label>
+            <input type="text" placeholder="MM/DD/YYYY" name="ProjectEndDate" value="<%=project[0].ProjectEndDate%>"><br><br>
+        </div> 
+            <div class="container text-center">
+              <button type="submit" class="btn btn-info" value="Submit Button">Update</button>
+              <a href="/prodis" class="btn btn-outline-info">VIEW</a> 
+              <a href="/project" class="btn btn-primary">Back</a>
+            </div>
+        </form>
+      </body>
+</html>

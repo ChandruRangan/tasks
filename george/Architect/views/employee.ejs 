@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+      <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  
+</head>
+</head>
+</head>
+    <title>employee table</title>
+</head><body>
+  <form method = "post" action="'/insert1">
+  <input type="text" placeholder="Enter name" id="name">
+  <input type="text" placeholder="Email Address" id="Email">
+  <input type="password" placeholder="Password" id="pswd">
+  <input type="text" placeholder="phone number" id="phono">
+  <input type="text" placeholder="joining date" id="DOJ">
+  <input type="text" placeholder="Date of birth "id="DOB">
+  <button onclick="submit()">submit</button>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+      function submit(){
+          console.log("hi")
+          let name=document.getElementById("name").value;
+          let email=document.getElementById("Email").value;
+          let pwd=document.getElementById("pswd").value;
+          let phone=document.getElementById("phono").value;
+          let doj=document.getElementById("DOJ").value;
+          let dob=document.getElementById("DOB").value;
+    $.ajax({
+      type: "POST",
+      url: "/empinsert",
+      dataType: "json",
+      data: {
+          Full_name:name ,
+          Email_Address:email ,
+          Password:pwd,
+          Phone_Number:phone,
+          Joining_Date:doj,
+          DOB:dob,
+          
+      },
+      success: function (data) {
+         console.log('Success');
+      },
+  });
+      }
+  </script>
+</body>
+
+<!-- <body>
+    <form method="post" action="/insert">
+        <div class="form-group">
+          <label for="fullname">fullname:</label>
+          <input type="Name" class="form-control" id="fullname">
+        </div>
+        <div class="form-group">
+            <label for="Emailaddress">Email address:</label>
+            <input type="email" class="form-control" id="email">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+          </div>
+          <div class="form-group">
+            <label for="phoneno">Phoneno:</label>
+            <input type="phonenumber" class="form-control" id="phno">
+          </div>
+          <div class="form-group">
+            <label for="doj" class="control-label">Joining Date</label>
+            <input type="date" name="doj" id="doj" class="form-control">
+       </div>
+       <div class="form-group">
+             <label for="dob" class="control-label">Date Of Birth</label>
+             <input type="date" name="dob" id="dob" class="form-control">
+       </div>
+        
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+</body> -->
+</html>
