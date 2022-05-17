@@ -20,20 +20,22 @@ app.get('/pro', async (req, res) => {
 app.post('/datas', emp.empsearch);
 app.get('/delete', emp.empdel);
 app.get('/empupdate', emp.empupdate);                 //fr find
-app.post('/empupdate', emp.empupdating)                 //fr updt
+app.post('/empupdate', emp.empupdating) ;                //fr updt
+
+
+
+
 app.post('/insertpro', pro.insertpro);
 app.get('/prodisp', pro.prodisp)
 
 app.get('/deletepro', pro.prodel)
 
+app.get("/prosearch",pro.prosrc)
+
 app.get('/proupdate', pro.proupdate);
 app.post('/proupdate', pro.proupdating);
 
-app.post('/prosearch', pro.prosearch);
-
-
-
-module.exports = app;
+// app.post('/proupdate', pro.prosrc);
 
 
 
@@ -48,19 +50,7 @@ module.exports = app;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    module.exports = app;
 
 
 

@@ -69,6 +69,9 @@
       let sdate = document.getElementById('sdate').value;
       let edate = document.getElementById('edate').value;
       let memname = [];
+
+      if(sdate<=edate)
+      { 
       let k = document.getElementsByClassName('memname');
       for (let i = 0; i <= k.length - 1; i++) {
         memname.push(k[i].value)
@@ -84,9 +87,14 @@
           StartDate: sdate,
           EndDate: edate,
           TeamMembers: memname
+        
         }
       });
     }
+    else{
+      alert('enter valid date')
+    }
+  }
   </script>
 
 
