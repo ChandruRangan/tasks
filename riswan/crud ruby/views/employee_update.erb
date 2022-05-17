@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Employee</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+      
+    <body class="bg-danger">
+        <form action="/emp_updatenext?emp_id=<%=params['id']%>" method="post">
+        <div class="class">
+            <div class="form-group">
+              <div class="container text-center">
+              <h1>Update</h1>
+              <% valdata.each do |val| %>
+               Full Name <input type="text" class="form-control"  name="fullname" id="entry" value="<%= val['fullname']%>" placeholder="Enter full name">
+
+               
+               <br>Email <input type="text" class="form-control"  name="email" id="entry" value="<%= val['email']%>" placeholder="Enter email">
+               
+
+               
+               <br>Password <input type="password" class="form-control"  name="password" id="entry" value="<%= val['password']%>"  placeholder="Enter password">
+               
+
+               
+               <br>Phone number <input type="text" class="form-control"  name="phoneno" id="entry" value="<%= val['phoneno']%>" placeholder="Enter phone number">
+              
+
+               
+               <br>Joining Date <input type="date" class="form-control"  name="joiningdate" id="entry" value="<%= val['joiningdate']%>" placeholder="Enter joining date">
+               
+
+               
+               <br>Date of birth <input type="date" class="form-control"  name="dob" id="entry" value="<%= val['dob']%>" placeholder="Enter Date of Birth">
+               <%end%>
+               
+               <br><br><button type="submit" id="">Submit</button>
+               
+               </form>
+               <a href="/view" class="btn btn-success">Back</a>
+              </div>
+            </div>
+        </div>
+        </div>
+  </body>
+</html>

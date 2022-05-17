@@ -1,0 +1,51 @@
+<h3>{{viewtitle}}</h3>
+<form action="/project" method="post" autocomplete="off">
+  <input type="hidden" name="_id" value="{{project.id}}">
+  <div class="form-group">
+    <label> ProjectName</label>
+    <input  required type="text" class="form-control" name="ProjectName" placeholder="ProjectName">
+  </div>
+  <div class="form-group">
+    <label>ProjectLead </label>
+    <input  required type="text" class="form-control" name="ProjectLead" placeholder="Enter your ProjectLead ">
+  </div>
+         <div >
+              <label id="" >Team Members:</label>
+            <ul style="list-style: none;" id="ul">
+              <li>  <input required type="text" class=" newmem form-control" id="Tmembers" placeholder="Enter team members" name="team_mem"></li>
+            </ul>
+              <button type="button" class="btn btn-primary" onclick="newmem()">Add Team Member</button><br><br>
+            </div>
+            <div >
+    <div class="form-row">
+      <label>ProjectStartdate</label>
+      <input type="date" name="ProjectStartdate" class="form-control" placeholder="Enter ProjectStartdate ">
+    </div>
+    <div class="form-row">
+      <label>ProjectEnddate</label>
+      <input type="date" name="ProjectEnddate" id="ped" class="form-control" placeholder="Projectenddate">
+    </div>
+    <div class="form-group" id="a">
+      <button type="submit" class="btn btn-info" class="fa fa-database">SUBMIT</button>
+      <a class="btn btn-secondary" href="/project/projectdisplay"><i class="fa fa-list-alt"></i>view All</a>
+    </div>
+<script>
+    function newmem(){
+           let ul  =document.getElementById('ul');
+           let li = document.createElement('li');
+           let input = document.createElement('input');
+           let btn = document.createElement('button');
+           input.className="newmem form-control";
+           btn.innerText="Remove Member";
+           btn.className="btn btn-warning";
+           input.placeholder="Enter Team Member"
+           li.appendChild(input);
+           btn.addEventListener('click',(e)=>{
+             e.preventDefault();
+             ul.removeChild(li);
+           });
+           li.appendChild(btn);
+           ul.appendChild(li);
+        }
+</script>
+</form>

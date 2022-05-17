@@ -6,7 +6,8 @@ app.set('view engine', 'ejs');
 app.use(bodyparser.json());
 const db = require('./models/Dbconfig')
 const EmployeeRoute = require('./controller/Employee.controller');
-const ProjectRoute = require('./controller/project.controller')
+const ProjectRoute = require('./controller/project.controller');
+require('dotenv').config();
 
 app.use('/', EmployeeRoute);
 app.use('/', ProjectRoute);

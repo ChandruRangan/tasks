@@ -4,7 +4,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
-
     <!-- Bootstrap CSS -->
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
@@ -13,27 +12,35 @@
   <form action="http://localhost:3444/insert" method="POST">
     <div>
       <div>
-        Fullname: <input type="text" class="form-group"  placeholder="Enter Name" name="ename"><br><br>
+        Fullname: <input type="text" class="form-group"  placeholder="Enter Name" name="ename" required="required"><br><br>
       </div>
       <div>
-        Email: <input type="email"  class="form-group" id="email" placeholder="Enter Email" name="email"><br><br>
+        Email: <input type="email"  class="form-group" id="email" placeholder="Enter Email" name="email" required="required"><br><br>
+      </div>
+      <!-- <div>            
+         Employee Type:<input type="text"  class="form-group" id="type" placeholder="Enter Type" name="type"><br><br> 
+         <select class="form-group" name="etype" value="Select Type">
+
+          <option selected>Select Type</option>
+          <option value="">TeamLead</option>
+          <option value="">TeamMember</option>
+        </select><br><br>
+
+      </div> -->
+      <div>
+        Password: <input type="password" class="form-group" id="pwd" placeholder="Enter Password" name="pwd" required="required"><br><br>
       </div>
       <div>
-        Password: <input type="password" class="form-group" id="pwd" placeholder="Enter Password" name="pwd"><br><br>
+        Phone Number: <input type="number"  class="form-group" id="ephone" placeholder="Enter PhoneNumber" name="phone" required="required"><br><br>
       </div>
       <div>
-        Phone Number: <input type="number"  class="form-group" id="ephone" placeholder="Enter PhoneNumber" name="phone"><br><br>
+        Join Date: <input type="date" class="form-group" id="jdate" placeholder="MM/DD/YYYY" name="jdate" required="required"><br><br>
       </div>
       <div>
-        Join Date: <input type="date" id="jdate" name="jdate"><br><br>
+        DateOfBirth:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="dob" required="required"><br><br>
       </div>
-      <div>
-        DateOfBirth:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="dob"><br><br>
-        <!-- Date Of Birth: <input type="date" id="birthDate" name="birthDate"><br><br> -->
-      </div>
-      <!-- <input type="submit">
-      <a href="/views">Enter Project Details</a> -->
       <button type="submit" class="btn btn-outline-success">SUMBIT</button>
+      <a  href="/login" class="btn btn-outline-dark">Login</a>
       <a  href="/empTable" class="btn btn-outline-dark">EmployeeTable</a>
       <!-- <a  href="/proTable" class="btn btn-outline-dark">ProjectTable</a> -->
       <a href="/project" class="btn btn-outline-info">create project</a>
@@ -41,33 +48,3 @@
   </form>    
  </body>
 </html>
-
-<!-- <head>
-  <title>employeeCrud</title>
-</head>
-<body>
-  <form action="http://localhost:2000/insert" method="POST">
-    <div>
-      <div>
-        Fullname: <input type="text"  placeholder="Enter Name" name="ename"><br><br>
-      </div>
-      <div>
-        Email: <input type="email" placeholder="Enter Name" name="email"><br><br>
-      </div>
-      <div>
-        Password: <input type="password" id="email" placeholder="Enter Email" name="pwd"><br><br>
-      </div>
-      <div>
-        Phone Number: <input type="number" id="ephone" placeholder="Enter PhoneNumber" name="phone"><br><br>
-      </div>
-      <div>
-        Join Date: <input type="date" id="jdate" placeholder="MM/DD/YYYY" name="jdate"><br><br>
-      </div>
-      <div>
-        Date Of Birth: <input type="date" id="dob" placeholder="MM/DD/YYYY" name"><br><br>
-      </div>
-      <input type="submit">
-      <a href="/views">Enter Project Details</a>
-    </div>
-  </form>
-</body>  -->

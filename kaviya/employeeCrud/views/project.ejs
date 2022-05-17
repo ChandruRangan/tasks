@@ -16,16 +16,45 @@
                 ProjectName:<input type="text" class="form-group" id="pname" placeholder="Enter Project Name" name="pname"><br><br>
             </div>
             <div>
-                ProjectLead:<input type="text" class="form-group" id="lname" placeholder="Enter Name" name="lname"><br><br>
+                ProjectLead:<select class="form-group" name="lname">
+                    <option>Enter Project Lead</option>
+                    <% for(var i=0; i<employee.length; i++){%>
+                        <option value="<%= employee[i].fullName%>"><%=employee[i].fullName%></option>
+
+                    <%}%>
+                </select>
+
+                <!-- <input type="text" class="form-group" id="lname" placeholder="Enter Name" name="lname"><br><br> -->
             </div>
             <div>
-                TeamMember1:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="tmname1"><br><br>
+                TeamMember1:<select class="form-group" name="tmname1">
+                    <option>Enter Employee Name</option>
+                    <% for(var i=0; i<employee.length; i++){%>
+                        <option value="<%= employee[i].fullName%>"><%=employee[i].fullName%></option>
+
+                    <%}%>
+                </select>
+                <!-- <input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="tmname1"><br><br> -->
             </div>
             <div>
-                TeamMember2:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="tmname2"><br><br>
+                TeamMember2:<select class="form-group" name="tmname2">
+                    <option>Enter Employee Name</option>
+                    <% for(var i=0; i<employee.length; i++){%>
+                        <option value="<%= employee[i].fullName%>"><%=employee[i].fullName%></option>
+
+                    <%}%>
+                </select>    
+                <!-- <input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="tmname2"><br><br> -->
             </div>
             <div>
-                TeamMember3:<input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="tmname3"><br><br>
+                TeamMember3:<select class="form-group" name="tmname3">
+                    <option>Enter Employee Name</option>
+                    <% for(var i=0; i<employee.length; i++){%>
+                        <option value="<%= employee[i].fullName%>"><%=employee[i].fullName%></option>
+
+                    <%}%>
+                </select>    
+                <!-- <input type="text" class="form-group" id="tmname1" placeholder="Team Members" name="tmname3"><br><br> -->
             </div>
             <div>
                 Project StartDate:<input type="date" class="form-group" id="date" placeholder="MM/DD/YYYY" name="sdate"><br><br>
@@ -41,29 +70,3 @@
     </form>    
   </body>
 </html>
-<!-- <head>
-    <title>projectdetails</title>
-</head>
-<body>
-    <h3>Project Details</h3>
-    <form action="http://localhost:2000/insert" method="POST">
-        <div>
-            <div>
-                ProjectName:<input type="text" id="pname" placeholder="Enter Project Name" name="pname"><br><br>
-            </div>
-            <div>
-                ProjectLead:<input type="text" id="lname" placeholder="Enter Name" name="lname"><br><br>
-            </div>
-            <div>
-                TeamMembers:<input type="text" id="tmname" placeholder="Enter Project Name" name="tmname"><br><br>
-            </div>
-            <div>
-                Project StartDate:<input type="date" id="date" placeholder="MM/DD/YYYY"><br><br>
-            </div>
-            <div>
-                Project EndDate:<input type="date" id="date" placeholder="MM/DD/YYYY"><br><br>
-            </div>
-        </div>
-
-    </form>
-</body> -->

@@ -11,12 +11,12 @@
   </head>
   <body>
     <div>
-    <form action="/search" method="get">
+    <form action="/search" method="post">
 
       <div class="input-group mb-3">
-        <input type="text" name="search" class="form-control" placeholder="Search" value="data">
+        <input type="text" name="search" class="form-control" placeholder="Search">
         <div class="input-group-append">
-          <button class="btn btn-success" type="submit"   >Search</button>
+          <button class="btn btn-success" type="submit" value="search"  >Search</button>
         </div>
       </div>
       </form>
@@ -31,7 +31,7 @@
                   
                      <th>FullName</th>
                      <th>Email</th>
-                     <th>Password</th>
+                     <!-- <th>Password</th> -->
                      <th>Phone.no</th>
                      <th>JoinDate</th>
                      <th>DOB</th>
@@ -42,12 +42,12 @@
                             <tr>
                                 <td><%=employee[i].FullName%></td>
                                 <td><%=employee[i].Email%></td>
-                                <td><%=employee[i].Password%></td>
+                                <!-- <td><%=employee[i].Password%></td> -->
                                 <td><%=employee[i].PhoneNumber%></td>
                                 <td><%=employee[i].JoiningDate%></td>
                                 <td><%=employee[i].DateofBirth%></td>
                                 <td><a href="/update?id=<%=employee[i]._id%>" class="btn btn-info">Update</a></td> 
-                                <td><a href="/delete?id=<%=employee[i]._id%>" class="btn btn-danger">Delete</a></td>
+                                <td><a href="/delete?id=<%=employee[i]._id%>" class="btn btn-danger" onclick=" confirm('Are you sure you want to delete this item?');">Delete</a></td>
                             </tr>
                          <%}%>
                         </tbody>
