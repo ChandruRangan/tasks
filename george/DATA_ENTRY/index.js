@@ -1,0 +1,12 @@
+const db = require('../DATA_ENTRY/Database/db');
+const fs = require('fs');
+const csvtojson = require('csvtojson');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const router = require('./Routes/routes');
+ app.use(bodyParser.urlencoded({extended:false}));
+ app.use(bodyParser.json());
+app.use('/api/posts/add',router);
+app.use('/api/posts/add1',router);
+app.listen(9001);

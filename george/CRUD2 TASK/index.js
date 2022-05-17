@@ -5,10 +5,14 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.use(bodyparser.json());
 const cookieParser = require("cookie-parser");
-const cors = require("cors");
-app.use(cors())
+//const cors = require("cors");
+//app.use(cors())
+const jwt = require("jsonwebtoken");
+createToken();
 const db = require('../CRUD2 TASK/config/database')
+const dotenv = require('dotenv');
 require("dotenv").config();
+process.env.TOKEN_SECRET;
 app.use(express.json())
 const EmployeeRoute = require('../CRUD2 TASK/Routes/EmployeeRoute')
 app.use('/api',EmployeeRoute);
