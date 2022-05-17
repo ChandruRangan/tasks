@@ -19,11 +19,10 @@
             <label for="name">ProjectLead:</label>
             <input type="text"  placeholder="ProjectLead"  name="PL"><br><br>
            
-            TeamMembers:
-<select class="form-group" name="TM" multiple >
+            TeamMembers:<select class="form-group" name="TM" multiple >
               <option selected>Enter Employee Name</option>
               <% for(var i = 0; i <employee.length; i++){ %>
-              <option  value="<%=employee[i].FullName%>",  value="<%=employee[i].FullName%>"><%=employee[i].FullName%></option>
+              <option  value="<%=employee[i].id%>"><%=employee[i].FullName%></option>
              <%}%>
              </select><br><br>
            

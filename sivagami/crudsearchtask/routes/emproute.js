@@ -1,12 +1,15 @@
 const express = require("express");
 const { Db } = require("mongodb");
 const { userInfo } = require("os");
-const { Employee } = require("./model/EmpModel");  //import EmpModel
-const { Project } = require("./model/ProjectModel");  //import ProjectModel
+const { Employee } = require("../model/EmpModel");  //import EmpModel
+const { Project } = require("../model/ProjectModel");  //import ProjectModel
 const app = express();
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt")
+
+require("dotenv").config();
+
 
 module.exports = router;
 
@@ -25,7 +28,7 @@ router.get("/", function (req, res) {
 router.post("/insert", (req, res) => {
   insertdata(req, res);
 });
-function insertdata(req, res) {
+      async function insertdata(req, res) {
   console.log('inside func')
   const employee = new Employee();
   // const date=new Date(req.body.Joindate);
@@ -33,13 +36,16 @@ function insertdata(req, res) {
   // console.log(req.body.Joindate);
   //console.log(Joindate);
   
-  
-  const dateb = new Date(req.body.DateOfBirth);
+  // const encryptedPassword = await bcrypt.hash(req.body.pwd, 10);
+    const dateb = new Date(req.body.DateOfBirth);
   const DateOfBirth = (dateb.getMonth() + 1) + '/' + dateb.getDate() + '/' + dateb.getFullYear();
   //  console.log(DateOfBirth);
   employee.FullName = req.body.FullName;
   employee.Email = req.body.email;
-  employee.Password = req.body.pwd;
+  const salt= await bcrypt.genSalt(10);
+  const encryptedPassword =  await bcrypt.hash(req.body.pwd,salt);
+  employee.Password =encryptedPassword ;
+   console.log(encryptedPassword)
   employee.PhoneNumber = req.body.phoneno;
   employee.JoiningDate = req.body.Joindate;
   employee.DateofBirth = req.body.DateOfBirth;
@@ -54,39 +60,39 @@ function insertdata(req, res) {
 };
 
 //display employeetable
-//  router.get('/dis',(req,res)=>{
+ router.get('/dis',(req,res)=>{
 
-//   Employee.find((err,empdetails)=>{
-//       if(!err){
-//        res.render("Emptable",{employee:empdetails});
-//       }
-//       else{
-//        console.log(err);
-//       }
-//     });
-//    });
-
-router.get('/dis', (req, res) => {
   Employee.find((err,empdetails)=>{
-          if(!err){
-           res.render("Emptable",{employee:empdetails});
-          }
-          else{
-           console.log(err);
-          }
-        });
+      if(!err){
+       res.render("Emptable",{employee:empdetails});
+      }
+      else{
+       console.log(err);
+      }
+    });
+   });
+
+// router.get('/dis', (req, res) => {
+//   Employee.find((err,empdetails)=>{
+//           if(!err){
+//            res.render("Emptable",{employee:empdetails});
+//           }
+//           else{
+//            console.log(err);
+//           }
+//         });
        
 
-  let a = Employee.aggregate([{
-    "$project": {
-      "Joindate": { "$dateToString": { "format": "%m-%d-%y", "date": "$JoiningDate" } }
+//   let a = Employee.aggregate([{
+//     "$project": {
+//       "Joindate": { "$dateToString": { "format": "%m-%d-%y", "date": "$JoiningDate" } }
      
-    }
+//     }
     
-  },])
+//   },])
   // console.log('Joindate')
   // console.log(a)
-})
+//})
 
 
 //search API for Employee
@@ -128,14 +134,49 @@ router.get('/update', (req, res) => {
   });
 });
 
+// router.post("/update", (req, res) => {
+//   console.log('INSERT', req.body);
+//   updatedata(req, res);
+// });
+
+// function updatedata(req, res) {
+//   console.log('inside fn');
+//   console.log(req.query.id);
+//   Employee.updateOne({ _id: req.query.id }, req.body, (err, doc) => {
+//     console.log('inside fn');
+//     if (!err) {
+//       console.log('update')
+//       res.redirect("/dis"), {
+//         employee: doc
+//       }
+//     }
+//     else
+//       console.log(err, 'error in update'), { employee: req.body}
+//   });
+// }
+
+
 router.post("/update", (req, res) => {
   console.log('INSERT', req.body);
   updatedata(req, res);
 });
 
-function updatedata(req, res) {
+async function updatedata(req, res) {
   console.log('inside fn');
   console.log(req.query.id);
+  if(req.query.id===req.params._id||req.body.FullName){
+     console.log(req.params._id);
+    if( req.body.pwd){
+      console.log(req.body.pwd);
+      try{
+        const salt= await bcrypt.genSalt(10);
+        const encryptedPassword =  await bcrypt.hash(req.body.pwd,salt);
+
+      }catch(err){
+        return res.status(500).json(err);
+      }
+    }
+  try{
   Employee.updateOne({ _id: req.query.id }, req.body, (err, doc) => {
     console.log('inside fn');
     if (!err) {
@@ -148,7 +189,13 @@ function updatedata(req, res) {
       console.log(err, 'error in update'), { employee: req.body}
   });
 }
-
+  catch(err){
+    return res.status(500).json(err);
+  }}
+else{
+  return res.status(403).json("you can update only your account!");
+}
+}
 
 //delete Employee API
 
@@ -328,6 +375,20 @@ router.get('/proupdate', (req, res) => {
   });
 });
 
+
+// router.get('/proupdate', (req, res) => {
+//   const id = req.query.id;
+//   Employee.find((err,empdetails)=>{
+
+//   Project.find({ _id: id }, (err, docs) => {
+//     if (!err) {
+//       res.render("proupdate", { project: docs, id: id ,employee:empdetails});
+//     }
+//   });
+// });
+// });
+
+
 router.post("/updated", (req, res) => {
   console.log('INSERT', req.body);
   Projectupdate(req, res);
@@ -360,7 +421,6 @@ router.get("/prodelete", (req, res) => {
     console.log('delete')
     if (!err) {
       res.redirect('/prodis');
-      alert('Hello World!');
     }
     else {
       console.log('cannot delete' + err);
@@ -400,16 +460,6 @@ router.post('/prosearch', async (req, res) => {
   
 });
 
-// router.post("/login",async(req,res)=>{
-//   try{
-//     const emp=await Employee.findOne({Email:req.body.email});
-//     !emp && res.status(404).json("Employee not found");
-
-//     const validPassword=await bcrypt.compare(req.body.Password);
-
-//   }
-// })
-
 
 //search 
 
@@ -427,125 +477,260 @@ router.post('/prosearch', async (req, res) => {
 // })
 
 
+//JWT  REGISTER---insert
+
+// router.post("/register", async (req, res) => {
+
+//       const salt= await bcrypt.genSalt(10);
+
+//     const encryptedPassword =  await bcrypt.hash(req.body.pwd,salt);
+
+// })
+   
+//JWT LOGIN
+
+router.get("/login",(req,res)=>{
+  res.render("login",{title:'loginpage'});
+});
+
+// router.post("/login", async (req, res) => {
+
+//   try {
+//     // Get user input
+//     const { email, pwd } = req.body;
+
+//     const user = await Employee.findOne({Email:req.body.email });
+//     console.log(user);
+//     const passwd = await Employee.findOne({Email: req.body.email}, {"Password":1});
+//     console.log(passwd);
+
+//     // Validate user input
+//     if (!(user && passwd)) {
+//       res.status(400).send("All input is required");
+//     }
+
+//      // Validate if user exist in our database
+  
+//    if (user && (await bcrypt.compare(pwd, user.Password))) {
+//       // Create token
+
+
+//       // let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
+//  // const jwtSecretKey = process.env.JWT_SECRET_KEY;
+// //console.log(process.env.JWT_SECRET_KEY)
+//       const token = jwt.sign(
+//         { user_id: user._id, email},
+//         "secret",
+//         {
+//           expiresIn: "2h",
+//         }
+//       );
+//       console.log(token)
+
+//      //  const token = jwt.sign(user,passwd, jwtSecretKey,{expiresIn:"2h",});
+
+//       // save user token
+//     user.token = token;
+
+//     // user
+//     // res.status(200).json(user);
+//     res.redirect("/");
+//   }
+//   else res.status(400).send("Invalid Credentials");
+// } catch (err) {
+//   console.log(err);
+// }
+// });
+
+router.post("/login", async (req, res) => {
+
+  try {
+    // Get user input
+    const { email, pwd } = req.body;
+
+    // const user = await Employee.findOne({Email:req.body.email });
+    // console.log(user);
+    const user= await Employee.findOne({Email: req.body.email}, {"Password":1});
+    console.log(user);
+
+    // Validate user input
+    if (!( user)) {
+      res.status(400).send("All input is required");
+    }
+
+     // Validate if user exist in our database
+  
+   if ( await bcrypt.compare(pwd, user.Password)) {
+      // Create token
+
+
+      // let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
+ // const jwtSecretKey = process.env.JWT_SECRET_KEY;
+//console.log(process.env.JWT_SECRET_KEY)
+      const token = jwt.sign(
+        { user_id: user._id, email},
+        "secret",
+        {
+          expiresIn: "2h",
+        }
+      );
+      console.log(token);
+
+     //  const token = jwt.sign(user,passwd, jwtSecretKey,{expiresIn:"2h",});
+
+      // save user token
+    user.token = token;
+
+    // user
+    // res.status(200).json(user);
+    res.redirect("/");
+  }
+  else res.status(400).send("Invalid Credentials");
+} catch (err) {
+  console.log(err);
+}
+});
+
+
+
+
+//JWT generate TOKEN
+
+router.post("/user/generateToken",async (req, res) => {
+  // Validate User Here
+  // Then generate JWT Token
+
+  let jwtSecretKey = process.env.JWT_SECRET_KEY;
+  const data = {
+     Password:encryptedPassword,
+     Email:req.body.email,
+   }
+
+  const token = jwt.sign(data, jwtSecretKey,{expiresIn:"2h",});
+//  user.token=token;
+  res.send(token);
+});
+
+// router.get("/user/validateToken", (req, res) => {
+//   // Tokens are generally passed in the header of the request
+//   // Due to security reasons.
+
+//   let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
+//   let jwtSecretKey = process.env.JWT_SECRET_KEY;
+
+//   try {
+//     const token = req.header(tokenHeaderKey);
+
+//     const verified = jwt.verify(token, jwtSecretKey);
+//     if(verified){
+//       return res.send("Successfully Verified");
+//     }else{
+//       // Access Denied
+//       return res.status(401).send(error);
+//     }
+//   } catch (error) {
+//     // Access Denied
+//     return res.status(401).send(error);
+//   }
+// });
+
+
+// //JWT TOKEN EMPLOYEE
+
+// router.post("/register", async (req, res) => {
+//   try {
+//     // Get user input
+//     const {  email, password } = req.body;
+
+//     //Encrypt user password
+
+
+//     const salt= await bcrypt.genSalt(10);
+
+//     const encryptedPassword =  await bcrypt.hash(req.body.pwd,salt);
+   
+//     // const encryptedPassword = await bcrypt.hash(password, 10);
+
+//     // Create user in our database
+//     const user = await Employee.create({
+//     //   Email: email.toLowerCase(), // sanitize: convert email to lowercase
+//     //   Password: encryptedPassword,
+//     // });
+
+
+    
+
+//     Password:encryptedPassword,
+//      Email:req.body.email,
+
+//   });
+
+//     // Create token
+//     const token = jwt.sign(
+//       { Employee_id: Employee._id, email },
+//       process.env.TOKEN_KEY,
+//       {
+//         expiresIn: "2h",
+//       }
+//     );
+//     // save user token
+//     Employee.token = token;
+
+//     // return new user
+//     res.status(201).json(Employee);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
+
+// router.post("/login", async (req, res) => {
+//   try {
+//     // Get user input
+//     const { email, password } = req.body;
+
+
+//     // Validate user input
+//     if (!(email && password)) {
+//       res.status(400).send("All input is required");
+//     }
+//     // Validate if user exist in our database
+//     const user = await Employee.findOne({ email });
+
+//     if (Employee && (await bcrypt.compare(password, user.password))) {
+//       // Create token
+//       const token = jwt.sign(
+//         { Employee_id: Employee._id, email },
+//         process.env.TOKEN_KEY,
+//         {
+//           expiresIn: "2h",
+//         }
+//       );
+
+//       // save user token
+//       Employee.token = token;
+
+//       // user
+//       res.status(200).json(Employee);
+//     }
+//     res.status(400).send("Invalid Credentials");
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
+
+
+
+// const auth = require("./middleware/auth");
+
+// router.post("/welcome", auth, (req, res) => {
+// res.status(200).send("Welcome 🙌 ");
+// });
+
+
+    
+
+
  
-
-    //JWT TOKEN
-
-    router.post("/user/generateToken", (req, res) => {
-      // Validate User Here
-      // Then generate JWT Token
-      // encryptedPassword =  bcrypt.hash(password, 10);
-      let jwtSecretKey = process.env.JWT_SECRET_KEY;
-      let data = {
-        // Email:Email.toLowerCase(),
-        // Password:encryptedPassword,
-
-        time: Date(),
-        userId: 12,
-      }
-    
-      const token = jwt.sign(data, jwtSecretKey,{expiresIn:"2h",});
-    // user.token=token;
-      res.send(token);
-    });
-
-    router.get("/user/validateToken", (req, res) => {
-      // Tokens are generally passed in the header of the request
-      // Due to security reasons.
-    
-      let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
-      let jwtSecretKey = process.env.JWT_SECRET_KEY;
-    
-      try {
-        const token = req.header(tokenHeaderKey);
-    
-        const verified = jwt.verify(token, jwtSecretKey);
-        if(verified){
-          return res.send("Successfully Verified");
-        }else{
-          // Access Denied
-          return res.status(401).send(error);
-        }
-      } catch (error) {
-        // Access Denied
-        return res.status(401).send(error);
-      }
-    });
-
-
-    //JWT TOKEN EMPLOYEE
-
-    router.post("/register", async (req, res) => {
-      try {
-        // Get user input
-        const {  email, password } = req.body;
-    
-        //Encrypt user password
-        encryptedPassword = await bcrypt.hash(password, 10);
-    
-        // Create user in our database
-        const employee = await Employee.create({
-          Email: email.toLowerCase(), // sanitize: convert email to lowercase
-          Password: encryptedPassword,
-        });
-    
-        // Create token
-        const token = jwt.sign(
-          { Employee_id: Employee._id, email },
-          process.env.TOKEN_KEY,
-          {
-            expiresIn: "2h",
-          }
-        );
-        // save user token
-        Employee.token = token;
-    
-        // return new user
-        res.status(201).json(Employee);
-      } catch (err) {
-        console.log(err);
-      }
-    });
-    
-    router.post("/login", async (req, res) => {
-      try {
-        // Get user input
-        const { email, password } = req.body;
-    
-        // Validate user input
-        if (!(email && password)) {
-          res.status(400).send("All input is required");
-        }
-        // Validate if user exist in our database
-        const employee = await Employee.findOne({ email });
-    
-        if (Employee && (await bcrypt.compare(password, user.password))) {
-          // Create token
-          const token = jwt.sign(
-            { Employee_id: Employee._id, email },
-            process.env.TOKEN_KEY,
-            {
-              expiresIn: "2h",
-            }
-          );
-    
-          // save user token
-          Employee.token = token;
-    
-          // user
-          res.status(200).json(Employee);
-        }
-        res.status(400).send("Invalid Credentials");
-      } catch (err) {
-        console.log(err);
-      }
-    });
-    
-    
-    
-
-
-
 
 
 
