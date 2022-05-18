@@ -29,7 +29,7 @@ post "/dash" do
    end
 end
 
-#Employee CRUD API-----------------------------
+#-----------------------Employee CRUD API-----------------------
 get "/emp_view_page" do 
    erb :"employee/emp_view_page", :locals =>{values: Select.employee_select}
 end
@@ -77,9 +77,9 @@ get "/emp_delete" do
    redirect "/emp_view_page"
 end
 
-#----------------------------------------------
+#------------------------End------------------------
 
-#Employee CRUD API-----------------------------
+#-------------------------Employee CRUD API-------------------------
 get "/pro_view_page" do
    erb :"project/pro_view_page", :locals =>{values: Select.project_select}
 end
@@ -126,8 +126,9 @@ get "/pro_delete" do
    Delete.pro_delete_by_id(id)
    redirect "/pro_view_page"
 end
-#----------------------------------------------
+#----------------------End------------------------
 
+#-----------------Search Api-------------------
 post "/search" do 
    search_by=params['search_by']
    search_value=params['search_value']
@@ -135,16 +136,34 @@ post "/search" do
    case search_by
    when 'project_name'
       values=Select.projects_by_employee(search_by,search_value)
-      erb :"employee/emp_view_page", :locals =>{values: values}
+      if(values.ntuples!=0)
+         erb :"employee/emp_view_page", :locals =>{values: values}
+      else
+         "<script>alert('No recordes for #{search_value}');</script>"   
+      end
    when 'project_lead'
       values=Select.projects_by_project_lead(search_by,search_value)
-      erb :"project/pro_view_page", :locals =>{values: values}
+      if(values.ntuples!=0)
+         erb :"project/pro_view_page", :locals =>{values: values}
+      else
+         "<script>alert('No recordes for #{search_value}');</script>"   
+      end
    when 'team_members'
       values=Select.employee_by_projects(search_by,search_value)
-      erb :"project/pro_view_page", :locals =>{values: values}
+      if(values.ntuples!=0)
+         erb :"project/pro_view_page", :locals =>{values: values}
+      else
+         "<script>alert('No recordes for #{search_value}');</script>"   
+      end
    when 'project_lead_1'
       values=Select.employee_by_project_lead('project_lead',search_value)
-      erb :"employee/emp_view_page", :locals =>{values: values}   
-   end
-   
+      if(values.ntuples!=0)
+         erb :"employee/emp_view_page", :locals =>{values: values}  
+      else
+         "<script>alert('No recordes for #{search_value}');</script>"   
+      end
+   else
+      "<script>alert('Please select the search');</script>" 
+   end   
 end
+#------------------------End-----------------------------

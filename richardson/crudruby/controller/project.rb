@@ -22,13 +22,13 @@ class Project
         $rich.exec("delete from project where project_id= #{id}")
     end
     def self.emp_search_name(project_name)
-        $rich.exec("select employees.employee_id, employees.full_name, employees.email, employees.phone_number, employees.join_date, employees.date_of_birth from employees inner join project on employees.full_name = any(project.team_members) where project.project_name= '#{project_name}'")  
+        $rich.exec("select employees.employee_id, employees.full_name, employees.email, employees.phone_number, employees.join_date, employees.date_of_birth from employees inner join project on employees.full_name = any(project.team_members) where project.project_name like '%#{project_name}%' or project.project_name like '#{project_name}%' or project.project_name like '%#{project_name}'")  
     end
     def self.tl_search(project_lead)
-        $rich.exec("select * from project where project_lead = '#{project_lead}'")
+        $rich.exec("select * from project where project_lead like '%#{project_lead}' or project_lead like '%#{project_lead}%' or project_lead like '#{project_lead}%' ")
     end
     def self.tl_emp_search(project_lead)
-        $rich.exec(" select employees.employee_id, employees.full_name, employees.email, employees.phone_number, employees.join_date, employees.date_of_birth from employees inner join project on employees.full_name = any(project.team_members) where project.project_lead= '#{project_lead}'")
+        $rich.exec(" select employees.employee_id, employees.full_name, employees.email, employees.phone_number, employees.join_date, employees.date_of_birth from employees inner join project on employees.full_name = any(project.team_members) where project.project_lead like '%#{project_lead}' or project.project_lead like '%#{project_lead}%' or project.project_lead like '%#{project_lead}%'")
     end
 
 end
