@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 const Employee = require('../models/emp.model');
+
 const db = require('../models/Dbconfig')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const alert = require('alert');
 const bcryptjs = require('bcryptjs');
+const { authendicate } = require('./../helper/jwt')
 
 router.get('/login', (req, res) => {
     res.render('login',{
@@ -15,24 +17,26 @@ router.get('/login', (req, res) => {
 })
 
 router.post('/login', async(req, res) => {
-    const user = await Employee.findOne({email: req.body.email});
-   
-    const pwd = await Employee.findOne({email: req.body.email}, {"password":1})
-    
-
-    try{
-        const match = await bcryptjs.compare(req.body.pwd, pwd.password);
-        
-        const accessToken = jwt.sign(JSON.stringify(user), process.env.TOKEN_SECRET)
-        if(match){
-            
-            res.json({accessToken: accessToken});
-        }else{
-            res.json({message:"Invalid Credentials"});
+    let response = { message: "Invalid Credentials"};
+    try {
+        const { email, pwd } = req.body;
+        console.log(req.body, email, pwd);
+        const user = await Employee.findOne({email});
+        if(!user) {
+            throw new Error('user not found')
         }
-    }catch(e){
-        console.log(e)
+        const password = user?.password || null;
+        const match = await bcryptjs.compare(pwd, password);
+        if(match){
+            const accessToken = jwt.sign(JSON.stringify(user), process.env.TOKEN_SECRET);
+            console.log('accessToken -> ', accessToken);
+            response = {accessToken: accessToken, message: 'user sign in success'}
+        }
     }
+    catch(err) {
+        response.error = err.message;
+    }
+    res.json(response);
 });
 
 router.get('/', (req, res, ) => {
@@ -53,11 +57,12 @@ router.post('/insert', async(req, res, ) => {
     employee.phonenumber = req.body.phonenumber;
     employee.joiningdate = jdate;
     employee.dateofbirth = dobdate;
-    employee.save((err) => {
+    employee.save((err, data) => {
         if (!err) {
-            alert("Employee Created succesfully")
+            // alert("Employee Created succesfully")
             console.log("Record inserted");
-            res.redirect("/");
+            // res.redirect("/");
+            res.json(data);
         }
         else {
             console.log('Error during insertion: ' + err);
@@ -89,18 +94,36 @@ router.post('/updatedata',  (req, res, ) => {
         }
     })
 })
-router.get('/list',  (req, res, ) => {
+// router.get('/list', authendicate, (req, res ) => {
+//     console.log('req.user: ', req.user);
+//     Employee.find((err, docs) => {
+//         if (!err) {
+//             res.json(docs);
+//             // res.render("list", {
+//             //     emp: docs
+//             // });
+//         }
+//         else
+//             console.log('Error in retrieving emp list: ' + err)
+//     })
+// });
+router.get('/list', authendicate, (req, res ) => {
+    console.log('req.user: ', req.user);
+    console.log('req.authorization', req.authorization)
     Employee.find((err, docs) => {
         if (!err) {
+            // res.json(docs);
             res.render("list", {
-                emp: docs
+                emp: docs,
+                authorization: req.authorization,
             });
         }
         else
             console.log('Error in retrieving emp list: ' + err)
     })
 });
-router.post('/search', (req, res, ) => {
+
+router.post('/search', authendicate, (req, res, ) => {
     Employee.find({
         $or:[
             {full_name:{$regex:req.body.search}},
@@ -113,16 +136,38 @@ router.post('/search', (req, res, ) => {
                 console.log(err);
             }
             else {
-                res.render("list", { emp: data });
+                res.render("list", { emp: data, authorization: req.authorization });
             
             }
         })
 })
+
+
+router.post('/api/search', authendicate, (req, res, ) => {
+    Employee.find({
+        $or:[
+            {full_name:{$regex:req.body.search}},
+            {email:{$regex:req.body.search}},
+            {phonenumber:{$regex:req.body.search}}
+        ]
+    },
+        function (err, data) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.json(data);
+                // res.render("list", { emp: data, authorization: req.authorization });
+            
+            }
+        })
+})
+
 router.get("/delete",  (req, res, ) => {
     Employee.findByIdAndDelete({ _id: req.query.id }, (e) => {
         if (!e) {
             res.redirect("/list");
-            alert("Employee deleted successfully")
+             alert("Employee deleted successfully")
         }
         else {
             res.send(e);

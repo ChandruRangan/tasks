@@ -1,0 +1,66 @@
+<head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>    
+      <div class="container mt-5">
+          <h3>Employees</h3>
+
+          <form action="/project_updatedata?id=<%=params['id']%>" autocomplete="off" method="post">
+            <div class="form-group">
+              <div class="form-group">
+              <%project_up.each do |data|%>
+                <input type="text" class="form-control" placeholder="project_name" name="project_name" value="<%=data['project_name']%>">
+                <%end%>
+              </div>
+              <div class="form-group">
+              <select class="form-control" name="project_lead">
+              <%project_up.each do |row|%>
+                  <option value="<%=row['project_lead']%>"selected><%=row['project_lead']%></option>
+              <%end%>
+                <%pro.each do |val|%>
+                <option value="<%=val['full_name']%>"><%=val['full_name']%></option>
+                <%end%>
+
+              </select><br>
+              </div>
+              <div class="form-group">
+              <select class="form-control" name="team_members[]" multiple>
+              <%project_up.each do |row|%>
+                  <% p member = row['team_members'].tr("{""}","").split(",")%>
+                  <% member.each do |e|%>
+                  <option value="<%=e%>"selected><%=e%></option>
+                  <%end%>
+                  <% other = []%>
+                  <%pro.each do |val|%>
+                    <% other.push val['full_name']%>
+                    <% other = other - member %>
+                    <%end%>
+                    <% other.each do |x| %>
+                    <option value="<%=x%>"><%=x%></option>
+                    <%end%>
+                    <%end%>
+                    
+              </select>
+              </div>
+              <div class="form-group">
+              <%project_up.each do |data|%>
+                <input type="date" class="form-control" placeholder="project_sdate" name="project_sdate" value="<%=data['project_sdate']%>">
+                <%end%>
+              </div>
+              <div class="form-group">
+              <%project_up.each do |data|%>
+                <input type="date" class="form-control" placeholder="project_edate" name="project_edate" value="<%=data['project_edate']%>">
+                <%end%>
+              </div>
+            <input type="submit" class="btn btn-primary" value="update">
+            <a href="/view" class="btn btn-primary">back</a>
+
+            
+          </form>
+      </div>
+  </body>
