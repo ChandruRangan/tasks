@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Search</title>
+    <form action="/emp_search"  method="post">
+        <div class="form-group">
+            <input type="text" name="project_name" placeholder="employee_by_project">
+                <input type="submit" class="btn btn-dark mt-2" >
+            </div> 
+        </form>
+        <form action="/tl_search"  method="post">
+        <div class="form-group">
+            <input type="text" name="project_lead" placeholder="project_by_teamlead">
+                <input type="submit" class="btn btn-dark mt-2">
+            </div> 
+        </form>
+        </form>
+        <form action="/tl_emp_search"  method="post">
+        <div class="form-group">
+            <input type="text" name="project_lead" placeholder="employee_by_project_lead">
+                <input type="submit" class="btn btn-dark mt-2" placeholder="Search">
+            </div> 
+        </form>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Pjoject name</th>
+            <th>project lead</th>
+            <th>Team members</th>
+            <th>project sdate</th>
+            <th>Project edate</th>
+        </tr>
+    </thead>
+    <tbody>
+    <%project.each do |val|%>
+        <tr>
+        <td><%=val['project_name']%></td>
+        <td><%=val['project_lead']%></td>
+        <td><%=val['team_members']%></td>
+        <td><%=val['project_sdate']%></td>
+        <td><%=val['project_edate']%></td>
+        <td><a href="/project_update?id=<%=val['project_id']%>" class="btn btn-outline-success">Update</a></td>
+        <td><a href="/project_delete?id=<%=val['project_id']%>" class="btn btn-outline-danger">Delete</a></td>
+        </tr> 
+        <%end%>
+    </tbody>
+
+</table>
+<a href="/" class="btn btn-primary">Addemployee</a>
+<a href="/project" class="btn btn-primary">Addproject</a>
+<a href="/view" class="btn btn-primary">viewemployee</a>

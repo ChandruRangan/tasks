@@ -50,36 +50,31 @@ app.post('/register', async (req, res) => {
 //     })
 
 // }
-app.get('/login',authenticateToken,(req, res) => {
+app.get('/login',(req, res) => {
     res.render('login');
 })
+function generateAccessToken(username){
+    return
+}
 app.post('/login', async (req, res) => {
     const User = await client.db('Architectdb').collection('Emp').findOne({ Email: req.body.email });
     const Pwd = await client.db('Architectdb').collection('Emp').findOne({Email: req.body.email},{Password:1})
     try {
         const match = await bcrypt.compare(req.body.pwd, Pwd.Password)
-        const accessToken = jwt.sign(JSON.stringify(User), process.env.TOKEN_SECRET)
-        if (match) {
-            res.json({accessToken:accessToken});
-        } else {
-            console.log({message:"invalid credentials"});
+        if(match){
+        const Token = jwt.sign((User), process.env.TOKEN_SECRET)
+        console.log(Token);
+        const userVerify = jwt.verify(Token,process.env.TOKEN_SECRET)
+        console.log(userVerify);
+        res.redirect('/display');
+        }else{
+            console.log('password error')
         }
     }
     catch (e) {
         console.log(e)
     }
 })
-const authenticateToken = (req,res,next)=>{
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-    if(!token) return res.sendStatus(401);
-    jwt.verify(token,process.env.TOKEN_SECRET,(err,User)=>{
-        if(err) return res.sendStatus(403);
-        req.User= User;
-        next();
-    })
-
-}
 app.post('/insert1', async (req, res) => {
     const { Proid, ProjectName, ProjectLead, TeamMembers, StartDate, EndDate } = req.body;
     await client.db('Architectdb').collection('Project').insertOne({ PROID: Proid, Projectname: ProjectName, Projectlead: ProjectLead, Teammember: TeamMembers, Projectstartdate: StartDate, Projectenddate: EndDate })
@@ -191,4 +186,4 @@ app.get('/updatepro', async (req, res) => {
             res.render('updateproject', { Project: data })
         })
 })
-app.listen(3007)
+app.listen(6769)

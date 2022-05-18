@@ -12,6 +12,6 @@ require('dotenv').config();
 app.use('/', EmployeeRoute);
 app.use('/', ProjectRoute);
 
-app.listen(4000, () => {
-    console.log(`The running port is http://localhost:4000`)
+app.listen(8080, () => {
+    console.log(`The running port is http://localhost:8080`)
 });
