@@ -4,8 +4,8 @@ const StudentSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    dob:{
-        type: Date,
+    Dob:{
+        type: String,
         required: true
     }
 });
