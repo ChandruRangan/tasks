@@ -4,35 +4,20 @@
     <title>Search</title>
     <form action="/emp_search"  method="post">
         <div class="form-group">
-            <select class="form-control" name="project_name">
-            
-                <%project.each do |val|%>
-                    <option value="<%=val['project_name']%>"><%=val['project_name']%></option>
-                <%end%>
-                </select>
-                <input type="submit" class="btn btn-dark mt-2" placeholder="Search">
+            <input type="text" name="project_name" placeholder="employee_by_project">
+                <input type="submit" class="btn btn-dark mt-2" >
             </div> 
         </form>
         <form action="/tl_search"  method="post">
         <div class="form-group">
-            <select class="form-control" name="project_lead">
-                    
-                <%project.each do |val|%>
-                    <option value="<%=val['project_lead']%>"><%=val['project_lead']%></option>
-                <%end%>
-                </select>
-                <input type="submit" class="btn btn-dark mt-2" placeholder="Search">
+            <input type="text" name="project_lead" placeholder="project_by_teamlead">
+                <input type="submit" class="btn btn-dark mt-2">
             </div> 
         </form>
         </form>
         <form action="/tl_emp_search"  method="post">
         <div class="form-group">
-            <select class="form-control" name="project_lead">
-                    
-                <%project.each do |val|%>
-                    <option value="<%=val['project_lead']%>"><%=val['project_lead']%></option>
-                <%end%>
-                </select>
+            <input type="text" name="project_lead" placeholder="employee_by_project_lead">
                 <input type="submit" class="btn btn-dark mt-2" placeholder="Search">
             </div> 
         </form>

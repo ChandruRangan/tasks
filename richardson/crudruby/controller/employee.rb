@@ -18,7 +18,6 @@ class Employee
         $rich.exec("delete from employees where employee_id= #{id}")
     end
     def self.pro_search(full_name)
-        $rich.exec("select project.project_name,project.project_lead,project.team_members,project.project_sdate,project.project_edate from employees inner join project on employees.full_name = any(project.team_members) where employees.full_name='#{full_name}'")
-       
+        $rich.exec("select project.project_name,project.project_lead,project.team_members,project.project_sdate,project.project_edate from employees inner join project on employees.full_name = any(project.team_members) where employees.full_name like '%#{full_name}' or employees.full_name like '%#{full_name}%' or employees.full_name like '#{full_name}%'") 
     end
 end

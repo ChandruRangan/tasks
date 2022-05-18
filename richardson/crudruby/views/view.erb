@@ -4,11 +4,7 @@
     <title>Search</title>
     <form action="/pro_search"  method="post">
         <div class="form-group">
-            <select class="form-control" name="full_name">
-                <%emp.each do |val|%>
-                    <option value="<%=val['full_name']%>"><%=val['full_name']%></option>
-                <%end%>
-                </select>
+            <input type="text" name="full_name" placeholder="project_by_employee">
                 <input type="submit" class="btn btn-dark mt-2">
             </div> 
         </form>
