@@ -1,0 +1,7 @@
+modules Employee
+
+    def insert(full_name,email_address,password,phone_no,joining_date,dob)
+
+        empval=DB.exec("INSERT INTO employee(full_name,email_address,password,phone_no,joining_date,dob) VALUES('#{full_name}','#{email_address}','#{password}','#{phone_no}','#{joining_date}','#{dob}')")
+    end
+end
