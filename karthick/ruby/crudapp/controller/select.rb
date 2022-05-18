@@ -14,16 +14,16 @@ class Select
         values=DB::DBCON.exec("select * from project where pro_id=#{id}")
     end
     def self.employee_by_project_lead(search_by,search_value)
-        values=DB::DBCON.exec("select * from employee as e inner join project as p on e.full_name=any(p.team_members) where p.#{search_by}='#{search_value}'")
+        values=DB::DBCON.exec("select * from employee as e inner join project as p on e.full_name=any(p.team_members) where p.#{search_by} like '%#{search_value}%'")
     end
     def self.employee_by_projects(search_by,search_value)
-        values=DB::DBCON.exec("select * from project where '#{search_value}'=any(#{search_by})")
+        values=DB::DBCON.exec("select * from project where array_to_string(#{search_by},'') like '%#{search_value}%'")
     end
     def self.projects_by_project_lead(search_by,search_value)
-        values=DB::DBCON.exec("select * from project where #{search_by}='#{search_value}'")
+        values=DB::DBCON.exec("select * from project where #{search_by} like '%#{search_value}%'")
     end
     def self.projects_by_employee(search_by,search_value) 
-        values=DB::DBCON.exec("select * from employee as e inner join project as p on e.full_name=any(p.team_members) where p.#{search_by}='#{search_value}'")
+        values=DB::DBCON.exec("select * from employee as e inner join project as p on e.full_name=any(p.team_members) where p.#{search_by} like '%#{search_value}%'")
     end 
     def self.auth(email,password)
         values=DB::DBCON.exec("select * from employee where email_address='#{email}' and password='#{password}'")
