@@ -17,7 +17,13 @@
               <div class="container text-center">
               <h1>Project</h1>
                Project Name <input type="text" class="form-control"  name="projectname" id="entry"  placeholder="Enter project name">
-               <br>Project Lead <input type="text" class="form-control"  name="projectlead" id="entry"  placeholder="Enter Project Lead">
+               <br>Project Lead <select type="text" class="form-control"  name="projectlead" id="entry"  placeholder="Enter Project Lead">
+               <option>Enter Lead Name</option>
+               <% pro.each do |valu| %>
+                <option><%= valu['fullname']%></option>
+                <%end%>
+               </select>
+
                Team members<select class="form-control" class="selectpicker" name="teammembers[]" multiple data-selected-text-format="count">
                <% pro.each do |valu| %>
                 <option><%= valu['fullname']%></option>
@@ -25,7 +31,7 @@
                </select>
                <br>Project Start Date <input type="date" class="form-control"  name="projectstartdate" id="entry">
                <br>Project End Date <input type="date" class="form-control"  name="projectdeathdate" id="entry">
-               <br><br><button type="submit">Submit</button>
+               <br><br><button type="submit"class="btn btn-dark" >Submit</button>
                </form>
                <a href="/viewprodata" class="btn btn-success">view</a>
               </div>
