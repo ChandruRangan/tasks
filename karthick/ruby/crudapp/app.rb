@@ -9,10 +9,17 @@ require "./config/dbconfig"
 
 include Validatable
 
+enable :sessions
+
 set :port=>5000
 
 get "/" do
    erb :login
+end
+
+get "/logout" do
+   session.clear
+   redirect "/"
 end
 
 post "/dash" do
@@ -25,9 +32,25 @@ post "/dash" do
       "Faild to login.Your Email address or Password is incorrect"
    elsif(email==result[0]['email_address']&&password==result[0]['password'])  
       un=result[0]['full_name']
+      role=Select.find_role(un)
+      if(role.ntuples==0)
+         session[:user]=un
+         session[:role]='employee'
+      else
+         session[:user]=un
+         session[:role]='tl'
+      end
       erb :"/dashboard/dash", :locals=>{un:un}
    end
 end
+
+get "/emp_details" do
+   emp_name=session[:user]
+   emp=Select.emp_details(emp_name)
+   pro=Select.employee_by_projects('team_members',emp_name)
+   erb :emp_details, :locals =>{emp:emp,pro:pro}
+end
+
 
 #-----------------------Employee CRUD API-----------------------
 get "/emp_view_page" do 
@@ -46,7 +69,7 @@ post "/emp_insert" do
    joining_date=params['joining_date']
    dob=params['dob']
    Insert.employee_insert(fullname,email,password,phno,joining_date,dob)
-   redirect "/emp_view_page"
+   redirect "/"
 end
 
 get "/emp_update_page" do

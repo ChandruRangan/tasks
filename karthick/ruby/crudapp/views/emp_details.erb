@@ -2,30 +2,10 @@
 <%=erb :style%>
 
 <div class="w3-container w3-animate-top">
-<div class="w3-panel w3-card-4 w3-blue w3-round">
-<a href="/logout" class="w3-button w3-red w3-round w3-right w3-margin-top" 
+<a href="/logout" class="w3-button w3-red w3-round w3-right w3-margin"
 onclick="return confirm('Are you sure to Logout')">Logout</a>
-    <h1 class="w3-center">CRUD</h1>
-  </div>
-  <a href="/emp_insert_page" class="w3-button w3-teal w3-center w3-padding-small w3-round w3-card-4"><span class="material-symbols-rounded">person_add</span> Add Employee</a>
-
-<form method="post" action="/search">
-
-<select name="search_by" class="w3-select w3-margin-top w3-round w3-center">
-<option selected disabled>Select Search By</option>
-<option value="project_name">Employe by Project Name</option>
-<option value="project_lead">Project by Project Lead</option>
-<option value="team_members">Project by Employee</option>
-<%if session[:role]=='tl'%>
-<option value="project_lead_1">Employe by Project Lead</option>
-<%end%>
-</select>
-
-<input type="text" class="w3-input w3-border w3-margin-top" name="search_value" placeholder="Search..." id="search">
-<input type="submit" class="w3-button w3-green w3-margin-top w3-round">
-</form>
-
-  <table class="w3-table-all w3-card-4  w3-small w3-margin-top">
+<h2 class="w3-container w3-blue w3-center"><%=session[:user].capitalize%> Details</h2>
+<table class="w3-table-all w3-card-4  w3-small w3-margin-top">
       <thead>
       <tr class="w3-black">
           <th>Full Name</th>
@@ -37,7 +17,7 @@ onclick="return confirm('Are you sure to Logout')">Logout</a>
       </tr>
       </thead>
       <tbody id="table_data">
-      <%values.each do |val|%>
+      <%emp.each do |val|%>
       <tr>
       <td><%=val['full_name']%></td>
       <td><%=val['email_address']%></td>
@@ -59,4 +39,27 @@ onclick="return confirm('Are you sure to Logout')">Logout</a>
       <% end %>
       </tbody>
   </table>
-</div>
+  <h2 class="w3-container w3-blue w3-center">Working Project Details</h2>
+  <table class="w3-table-all w3-card-4  w3-small w3-margin-top">
+      <thead>
+      <tr class="w3-black">
+          <th>Project Name</th>
+          <th>Project Lead</th>
+          <th>Team Members</th>
+          <th>Project Start Date</th>
+          <th>Project End Date</th>
+      </tr>
+      </thead>
+      <tbody id="table_data">
+      <%pro.each do |val|%>
+      <tr>
+      <td><%=val['project_name']%></td>
+      <td><%=val['project_lead']%></td>
+      <td><%=val['team_members'].tr("{""}","")%></td>
+      <td><%=val['project_s_date']%></td>
+      <td><%=val['project_e_date']%></td>
+      </tr>
+      <% end %>
+      </tbody>
+  </table>
+  </div>

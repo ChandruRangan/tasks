@@ -1,8 +1,9 @@
 <%# stylesheets and design%>
 <%=erb :style%>
-
 <div class="w3-container w3-animate-top">
 <div class="w3-panel w3-card-4 w3-blue w3-round">
+<a href="/logout" class="w3-button w3-red w3-round w3-right w3-margin-top"
+onclick="return confirm('Are you sure to Logout')">Logout</a>
     <h1 class="w3-center">CRUD</h1>
   </div>
 <a href="/pro_insert_page" class="w3-button w3-teal w3-center w3-padding-small w3-round w3-card-4"><span class="material-symbols-rounded">person_add</span> Add Project</a>
@@ -14,7 +15,9 @@
 <option value="project_name">Employe by Project Name</option>
 <option value="project_lead">Project by Project Lead</option>
 <option value="team_members">Project by Employee</option>
+<%if session[:role]=='tl'%>
 <option value="project_lead_1">Employe by Project Lead</option>
+<%end%>
 </select>
 
 <input type="text" class="w3-input w3-border w3-margin-top" name="search_value" placeholder="Search..." id="search">

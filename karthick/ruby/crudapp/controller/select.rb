@@ -28,5 +28,11 @@ class Select
     def self.auth(email,password)
         values=DB::DBCON.exec("select * from employee where email_address='#{email}' and password='#{password}'")
     end
+    def self.find_role(value)
+        values=DB::DBCON.exec("select * from project where project_lead='#{value}'")
+    end
+    def self.emp_details(emp_name)
+        values=DB::DBCON.exec("select * from employee where full_name='#{emp_name}'")
+    end
 end
 
