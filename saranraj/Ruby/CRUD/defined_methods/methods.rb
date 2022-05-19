@@ -19,5 +19,15 @@ module METHODS
         a.push(param["edate"])
         return a 
     end
+    def str_to_arr(str)
+      return  str.tr('{}',"").split(',')
+    end
+    def hash_to_arr(hash)
+        a=[]
+        hash.each do |i|
+            a.push(i["team_member"])
+        end
+        return a
+    end
     
 end

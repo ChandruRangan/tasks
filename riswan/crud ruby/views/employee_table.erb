@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Search</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body class="bg-secondary"> 
+        <form action="/view" method="get">
+        <input class="form"  type="text" name="search" placeholder="Search" >
+        <button class="btn btn-dark" type="submit">Search</button>
+        </form>
+        <div>
+          <br> <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Fullname</th>
+                <th>Email</th>
+                <th>Phoneno</th>
+                <th>Joiningdate</th>
+                <th>DateofBirth</th>
+                <%data.each do |row| %>
+                <tr>
+                  <td><%= row['fullname']%></td>
+                  <td><%= row['email']%></td>
+                  <td><%= row['phoneno']%></td>
+                  <td><%= row['joiningdate']%></td>
+                  <td><%= row['dob']%></td>
+                  <td><a href="/emp_update?id=<%=row['emp_id']%>" class="btn btn-dark">Update</a></td>
+                  <td><a href="/delete?id=<%=row['emp_id']%>" class="btn btn-dark">Delete</a></td>
+                </tr>
+               <% end %>
+                
+              </tr>
+            </thead>
+            <tbody id="content">
+           
+            </tbody>
+            </table>
+            </body>
+</html>

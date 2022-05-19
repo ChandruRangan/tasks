@@ -4,6 +4,7 @@ const db = require('../models/Dbconfig')
 const Project = require('../models/pro.model');
 const router = express.Router();
 const alert = require('alert')
+const { authendicate } = require('./../helper/jwt')
 
 router.get('/project', (req, res) => {
     res.render('project', {
@@ -22,7 +23,7 @@ router.post('/project', (req, res) => {
     console.log(project.team_mem);
     project.Psdate = startdate;
     project.Pedate = enddate;
-    project.save((err) => {
+    project.save((err, data) => {
         if (!err) {
             alert("Project Created Successfully");
             res.redirect("/project");
@@ -59,11 +60,12 @@ router.patch('/updata', (req, res) => {
     })
 })
 
-router.get('/prolist', (req, res) => {
+router.get('/prolist', authendicate, (req, res) => {
     Project.find((err, docs) => {
         if (!err) {
             res.render("prolist", {
-                proj: docs
+                proj: docs,
+                authorization: req.authorization,
             })
         }
         else

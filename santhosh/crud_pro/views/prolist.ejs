@@ -1,7 +1,7 @@
 <%-include("style.ejs")-%>
 
 <div>
-    <form method="post" action="/searche">
+    <form method="post" action="/searche?authorization=<%=authorization%>">
         <div class="container-fluid mt-3">
             <input type="text" class="form-control" placeholder="Search" name="searche">
             <button  type="submit" class=" mt-2 btn btn-outline-info" value="search">Search</button>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Search</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body class="bg-secondary"> 
+        <form action="/find" method="post">
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="searchproemp" value="p_b_e" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">project by employee</label><br>
+        <input class="form-check-input" type="radio" name="searchproemp" value="e_b_p" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">employee by project</label><br>
+        <input class="form-check-input" type="radio" name="searchproemp" value="p_b_p" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">project by projectlead</label><br>
+        <input class="form-check-input" type="radio" name="searchproemp" value="pl_b_e" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">employee by projectlead</label>
+        </div>
+        <div class="container text-center">
+        <input class="form"  type="text" name="search" placeholder="Search" >
+        <button class="btn btn-dark" type="submit">Search</button>
+        </div>
+       </form>
+        </div>
+        <div>
+          <br> <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Project Name</th>
+                <th>Project Lead</th>
+                <th>Team Members</th>
+                <th>Project Start Date</th>
+                <th>Project Death Date</th>
+                <% projdata.each do |row| %>
+             </tr>
+                <tr>
+                  <td><%= row['projectname']%></td>
+                  <td><%= row['projectlead']%></td>
+                  <td><%= row['teammembers']%></td>
+                  <td><%= row['project_start_date']%></td>
+                  <td><%= row['project_death_date']%></td>
+                  <td><a href="/pro_update?id=<%=row['projectid']%>" class="btn btn-dark">Update</a></td>
+                  <td><a href="/prodelete?id=<%=row['projectid']%>" class="btn btn-dark">Delete</a></td>
+                </tr>
+               <% end %>
+              </tr>
+            </thead>
+            </tbody>
+            </table>
+            <a href="/project" class="btn btn-success">Back</a>
+            </body>
+</html>

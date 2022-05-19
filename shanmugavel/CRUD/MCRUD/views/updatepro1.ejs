@@ -8,18 +8,44 @@
     <%-include('style.ejs')%>
 </head>
 <body>
-
+<input type="text" id="id" value="<%=pro._id%>">
     
       <input required class="form-control mb-2" value = "<%=pro.ProjectName%>" type="text" id="proname" placeholder="Enter Project name" name="pname">
   <input required class="form-control mb-2" type="text" value="<%=pro.ProjectLead%>" id="prolead" placeholder="Project Lead" name="plead">
+  <div> <input type="text" id="team" style="display:none;" value="<%=pro.TeamMembers%>"></div>
   <ul style="list-style: none;" id="ul">
-     <li> <input required class="membername form-control mb-2" value ="<%=pro.TeamMember%>" type="text" placeholder="Project Team Members" name="membername"></li>
+
   </ul><button onclick="newmember()" class="btn btn-primary">Add Team Member</button>
   <input required class="form-control mb-2" value="<%=pro.StartDate%>" type="date" id="prostartdate" placeholder="Project Start Date" name="Sdate">
   <input required class="form-control mb-2" value="<%=pro.EndDate%>" type="date" id="proenddate" placeholder="Project End Date " name="Edate">
   <button class="btn btn-success" onclick="submit()">submit</button>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script>
+    let team=  document.getElementById('team').value;
+        let k=team.split(',');
+        k.forEach(element => {
+              newmember1(element)
+        });
+    function newmember1(val){
+      let ul = document.getElementById('ul');
+      let li = document.createElement('li');
+      let input = document.createElement('input');
+      let name = document.createElement('name');
+      let btn = document.createElement('button');
+      input.setAttribute('required', '');
+      input.className="membername form-control mb-2";
+      input.placeholder="Team Member";
+      input.type="text";
+      input.value=val;
+      btn.innerText="Remove Member";
+      li.appendChild(input);
+      btn.addEventListener('click',(e)=>{
+      e.preventDefault();
+      ul.removeChild(li);
+   })
+   li.appendChild(btn);
+   ul.appendChild(li);
+    }
     function newmember(){
       let ul = document.getElementById('ul');
       let li = document.createElement('li');
@@ -40,6 +66,7 @@
    ul.appendChild(li);
 }
 function submit(){
+  let id=document.getElementById('id').value;
 
 let pname=document.getElementById('proname').value;
 let plead= document.getElementById('prolead').value;
@@ -55,6 +82,7 @@ let edate= document.getElementById('proenddate').value;
         url: "/proupdate",
         dataType: "json",
         data: {
+          id:id,
          
            ProjectName:pname,
            ProjectLead:plead,
@@ -70,5 +98,4 @@ let edate= document.getElementById('proenddate').value;
 </body>
 </html>
 
-</body>
-</html>
+

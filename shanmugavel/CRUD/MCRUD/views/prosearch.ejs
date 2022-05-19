@@ -9,12 +9,12 @@
 </head>
 <body class="container text-center">
     <div>
-        <form method="post"    action="/prosearch" >
-          <input type="text" class="form-control mt-5" placeholder="Search"  value="search" name="search">
-          <div  >
+        <form method="get"    action="/prosearch" >
+          <input type="text" class="form-control mt-5" placeholder="Search"  name="search">
+          
             <button  class="btn my-2 btn-primary" type="submit"  value="search">Search</button>
 
-          </div>
+          
           <a class="btn btn-success" href="/prodisp">insert</a>
           <a href="/prodisp" class="btn btn-info">view</a>
         </form>

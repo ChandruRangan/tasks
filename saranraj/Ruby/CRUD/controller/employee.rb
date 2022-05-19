@@ -14,13 +14,13 @@ class Empcontroller < Dbconnection
   def listout()
     return  @conn.exec('select * from Employee')
   end
-  def deleteemp(id)
+  def delete(id)
     @conn.exec("delete from Employee where emp_id=#{id}")
   end
-  def getemp(id)
+  def get(id)
     return @conn.exec("select * from Employee where emp_id=#{id}")
   end
-  def updateemp(val,id)
+  def update(val,id)
     @conn.exec_prepared('updateemp',val.push(id))
   end
   

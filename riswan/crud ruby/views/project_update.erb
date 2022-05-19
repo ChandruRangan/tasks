@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Employee</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+      
+    <body class="bg-danger">
+        <form action="/pro_updatenext?projectid=<%=params['id']%>" method="post">
+        <div class="class">
+            <div class="form-group">
+              <div class="container text-center">
+              <h1>Update</h1>
+              <% pupdate.each do |val| %>
+               Project Name <input type="text" class="form-control"  name="projectname" id="entry" value="<%= val['projectname']%>" placeholder="Enter project name">
+
+               
+               <br>Project Lead <input type="text" class="form-control"  name="projectlead" id="entry" value="<%= val['projectlead']%>" placeholder="Enter project lead">
+               
+
+               
+               <br>Team Members <select class="form-control" class="selectpicker"  name="teammembers[]" id="entry" value="<%= val['teammembers']%>" multiple data-selected-text-format="count">
+                <%ris= val['teammembers'].tr("{""}","").split(",") %>
+                <% ris.each do |row| %>
+                  <option value="<%=row%>"selected><%=row%></option>
+                  <% end %>
+                  <% ris1 = []%>
+                  <% prodat.each do |valu|%>    
+                  <% ris1.append(valu['fullname'])%>
+                  <% ris1=ris1-ris%>
+                  <% end %>
+                  <% ris1.each do |ris2|%>
+                     <% p ris2%>
+                  <option val="<%=ris2%>"><%=ris2%></option>
+                  <%end%>
+                  
+                </select>
+                  
+               <br>Project Start Date <input type="text" class="form-control"  name="project_start_date" id="entry" value="<%= val['project_start_date']%>" placeholder="Enter project start date">
+              
+               
+               <br>Project Death Date <input type="text" class="form-control"  name="project_death_date" id="entry" value="<%= val['project_death_date']%>" placeholder="Enter project end date">
+               
+
+               <%end%>
+               
+               <br><br><button type="submit" class="btn btn-dark">Update</button>
+               
+               </form>
+               <a href="/viewprodata" class="btn btn-success">Back</a>
+              </div>
+            </div>
+        </div>
+        </div>
+  </body>
+</html>

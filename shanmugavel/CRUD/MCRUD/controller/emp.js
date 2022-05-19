@@ -14,9 +14,9 @@ exports.empinsert = async (req, res) => {
             console.log(err);
         });
 }
-exports.insert=async(req,res)=>{
-    res.render('insert')
-}
+// exports.insert=async(req,res)=>{
+//     res.render('insert')
+// }
 
 exports.empdisp = async (req, res) => {
     await client.collection('emp').find().toArray()
