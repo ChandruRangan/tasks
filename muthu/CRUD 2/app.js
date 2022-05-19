@@ -19,22 +19,6 @@ app.get("/emplogin",(req,res)=>{
   res.render("emplogin"); 
 })
 
-/*app.post('/emplogin', async (req, res) => {
-  const User = req.body.email;
-  const Pwd = req.body.password;
-  try {
-      const accessToken = jwt.sign(JSON.stringify(User), process.env.TOKEN_SECRET)
-      if (match) {
-          res.json({accessToken:accessToken});
-      } else {
-          console.log({message:"invalid credentials"});
-      }
-  }
-  catch (e) {
-      console.log(e)
-  }
-});*/
-
 app.get("/prologin",(req,res)=>{
   res.render("prologin"); 
 })
@@ -184,7 +168,7 @@ app.get("/deletePro",async(req,res)=>{
   
   });
 
-app.post("/searchemp", (req, res) => {
+ app.post("/searchemp", (req, res) => {
   var input = req.body.input;
   console.log(input);
   if(input==''){
@@ -205,7 +189,7 @@ app.post("/searchemp", (req, res) => {
     }
   });
 
-  //
+
   app.post("/searchemp", (req, res) => {
     var input = req.body.input;
     console.log(input);
@@ -227,7 +211,7 @@ app.post("/searchemp", (req, res) => {
       }
     });
 
-    //
+  
 
   app.post("/searchpro", (req, res) => {
   var input = req.body.input;
@@ -279,21 +263,7 @@ function dteconfig(date){
   return  date.toISOString().replace(/T/, ' ').replace(/\..+/, '').toString().substr(0,10)
 }
 
-
-/*app.post('/emplogin',async(req,res)=>{
-  const {id,email,password}  =req.body
-  console.log(req.body);
-  db('employee').update('employee').set('email',email).where('employee_id',id).returning('*')
-
-  // .update({email:email,password:password}).returning('*')
- .then((data)=>{
-  console.log(data);
-  res.redirect('/emplogin')
- })
-})*/
-
 // functions
-
 
 exports.deletefn=(async(req, res) => {
   const  id  = parseInt(req.query.id);
