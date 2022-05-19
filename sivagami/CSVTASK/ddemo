@@ -1,0 +1,343 @@
+ // data.insertMany(csvData).then(function () {
+                // console.log("data inserted")
+                // res.json({success: 'success'});
+          
+// fs.writeFileSync("output.json",JSON.stringify(Data))
+//         });
+
+
+// fs.createReadStream("./datainput/test_case2/friends.csv").pipe(parser)
+// fs.createReadStream("/home/agira/Desktop/test.csv").pipe(parser)
+// .on("data", (data) => {
+//     result.push(data);
+//   })
+// //   .on("end", () => {
+//     //  console.log(result);
+// //   });
+
+
+//  router.get('./datainput/test.csv',(req,res)=>{
+//    const result=[];
+//    if(!result){
+//      return res.status(404)
+//      .json({error:'name and age is not found'});
+//    }
+//    return res.json(result);
+//   });     
+
+
+
+
+csv
+  .fromString(CSV_STRING, { headers: ['column_1', 'column_2'], renameHeaders: true, discardUnmappedColumns: true }) // I give arbitrary names to the first two columns - use whatever make sense
+  // .fromString(CSV_STRING, { headers: ['column_1', undefined, 'column_3'], discardUnmappedColumns: true }) // I could use undefined if I wanted to say skip column 2 and just want 1 and 3
+  .on('data', function (data) {
+    // console.log([data.column_1, data.column_2])
+    filtered.push([data.column_1, data.column_2]) // or you can push to an array
+  })
+  .on('end', function () {
+    console.log('done')
+    console.log(filtered)
+  })
+
+
+
+router.post('/sivi',(req,res)=>{
+  csv.fromString(csvdata,{headers:['name','age'],renameHeaders: true, discardUnmappedColumns: true })
+  .on('result',function(result){
+    filtered.push([data.name, data.age])
+  })
+  .on('end', function () {
+    console.log('done')
+    console.log(filtered)
+  })
+
+  csv
+  .fromString(CSV_STRING, { headers: ['column_1', 'column_2'], renameHeaders: true, discardUnmappedColumns: true }) // I give arbitrary names to the first two columns - use whatever make sense
+  // .fromString(CSV_STRING, { headers: ['column_1', undefined, 'column_3'], discardUnmappedColumns: true }) // I could use undefined if I wanted to say skip column 2 and just want 1 and 3
+  .on('data', function (data) {
+    // console.log([data.column_1, data.column_2])
+    filtered.push([data.column_1, data.column_2]) // or you can push to an array
+  })
+  .on('end', function () {
+    console.log('done')
+    console.log(filtered)
+  })
+
+
+
+router.post('/sivi',(req,res)=>{
+  csv.fromString(csvdata,{headers:['name','age'],renameHeaders: true, discardUnmappedColumns: true })
+  .on('result',function(result){
+    filtered.push([data.name, data.age])
+  })
+  .on('end', function () {
+    console.log('done')
+    console.log(filtered)
+  })
+
+
+  csvtojson()
+        .fromFile("/home/agira/Desktop/test.csv")
+        .then(result => {
+            // console.log(result);
+        });
+           
+        
+//  router.post('/',(req,res)=>{
+  
+  csvtojson()
+        .fromFile("/home/agira/Desktop/test.csv")
+        .then(result => {
+ for(let i=0; i<result.length;i++){
+  const csvdata={
+             name:result[i]['Name'],
+             age:result[i]['Age']
+  };
+  var Data=[];
+  Data.push(csvdata);
+// console.log(Data)
+let filters=Data.filter((val)=>{
+ return  val.age>50;
+     console.log(filters);
+})
+ }});
+
+
+
+ csvtojson()
+ .fromFile("/home/agira/Desktop/test.csv")
+ .then(result => {
+   // console.log(result)
+for(let i=0; i<result.length;i++){
+const csvdata={
+      name:result[i]["Name"],
+      age:result[i]["Age"]
+};
+let Data = [];
+Data.push(csvdata);
+console.log(Data)
+let filters=Data.filter((val)=>{
+return  val.age>50;
+console.log(filters);
+})
+}});
+
+  
+//  router.get('./datainput/test.csv',(req,res)=>{
+//    const result=[];
+//    if(!result){
+//      return res.status(404)
+//      .json({error:'name and age is not found'});
+//    }
+//    return res.json(result);
+//   });
+//  router.get('./datainput/test.csv',(req,res)=>{
+//    const result=[];
+//    if(!result){
+//      return res.status(404)
+//      .json({error:'name and age is not found'});
+//    }
+//    return res.json(result);
+//   });
+
+  
+
+ // result.newColumn = newColumnValue;
+ console.log(`${result[i]['First_name']}, ${result[i]['Last_name']}`)
+ result.fullname=(`${result[i]['First_name']}, ${result[i]['Last_name']}`)
+//  const jsonString = JSON.stringify(result.fullname);
+  //  console.log(result);
+  //  fs.writeFile("/home/agira/Desktop/test1.csv", result.fullname);
+  // fresult.push(result.fullname);
+  //  fs.appendFile("/home/agira/Desktop/test1.csv", result.fullname+'\n', (err) => {
+     fs.appendFile("out.json",result.fullname+'\n',(err)=>{
+    if (err)
+      console.log(err);
+    else {
+      console.log("File written successfully\n");
+    }
+  });
+};
+})
+
+
+
+router.post("/csvdata",(req,res)=>{
+  const fresult=[];
+CSVfile.find((err,result)=> {
+  if(!err){
+    
+    console.log("Success");
+    res.send({fresult:result});
+      
+  }else{
+    console.log("There was an error");
+      console.log(err);
+     }
+   })
+  })
+
+
+
+  //  for(let i=0;i<fresult.length;i++){
+     //              csvfile.Name=fresult[i].Name;
+              //            csvfile.Age=fresult[i].Age;
+              //            csvfile.DateofBirth=fresult[i].DateofBirth;
+              //            csvfile.First_name=fresult[i].First_name;
+              //            csvfile.Last_name=fresult[i].Last_name;
+              //  }
+
+            //    csvfile.insertMany(fresult).then(function(){
+            //     console.log("Data inserted")  // Success
+            // }).catch(function(error){
+            //     console.log(error)      // Failure
+            // });
+
+            //          csvfile.save((err,data)=>{
+                //            console.log(data)
+                //            if(!err){
+                //              res.send({csvfile:data});
+                //              console.log(csvfile)
+                //             // res.send(fresult);
+                //            console.log("Success");
+                //            }
+                //            else
+                //            console.log(err);
+                //          })
+                   // const fresult=[];
+                   router.post("/csvdata",(req,res)=>{
+                  
+                    const csvfile= new CSVfile();
+                           csvfile.Name=fresult.Name;
+                           csvfile.Age=fresult.Age;
+                           csvfile.DateofBirth=fresult.DateofBirth;
+                           csvfile.First_name=fresult.First_name;
+                           csvfile.Last_name=fresult.Last_name;
+                           csvfile.save((err)=>{
+                             if(!err){
+                             res.send(fresult);
+                             console.log("Success");
+                             }
+                             else
+                             console.log(err);
+                           })
+                  })
+                  router.get("/csv",(req,res)=>{
+                    // const fresult=[];
+                  CSVfile.find((err,result)=> {
+                    if(!err){
+                      
+                      console.log("Success");
+                      res.send({fresult:result});
+                        
+                    }else{
+                      console.log("There was an error");
+                        console.log(err);
+                       }
+                     })
+                    })
+
+                    // fs.writeFileSync("output.json",JSON.stringify(Data))
+//         });
+
+
+
+//  router.post('/',(req,res)=>{
+//  for(let i=0; i<result.length;i++){
+//    if(parseInt(result[i].Age)<50){
+//       // res.send(result[i]);
+//     // console.log(result[i])
+//    }
+//   //  else if(parseInt(result[i].age)>18){
+//   //    console.log(result[i])
+//   //  }
+//  }
+// }) 
+// const fresult=[]; 
+// csvtojson()
+//         .fromFile("/home/agira/Desktop/test.csv")
+//         .then(result => {
+//  router.post('/',(req,res)=>{      
+//          for(var i=0;i<result.length;i++){
+//            var csvData={
+//              name:result[i]['Name'],
+//              age:result[i]['Age']
+//             };
+//           fresult.push(csvData);
+
+//           var file= fresult.filter((values)=>{
+//             return values.age<50;
+//           });
+//          } 
+//           console.log(file)
+//           res.send(file);
+            
+//         });
+      // });
+
+
+// router.post('/',(req,res)=>{      
+//   for(var i=0;i<result.length;i++){
+//      if(result[i]['Age']<50){    
+     
+//    fresult.push(result[i]);
+
+//   } 
+//  }
+//    console.log(fresult)
+//    res.send(fresult);
+     
+//  });     
+      
+//  router.post('/',(req,res)=>{   
+//    console.log(req.query.filter)   
+//           for(var i=0;i<result.length;i++){
+           
+//           const data={
+//             fullname:result[i]['First_name']+","+result[i]['Last_name']
+//           }
+//           fresult.push(data);
+//         }
+//           console.log(fresult)
+//            res.send(fresult);
+        
+//       });
+
+
+      // router.post('/',(req,res)=>{      
+      //   for(var i=0;i<result.length;i++){
+      //     var Data={
+      //                   //  name:result[i]['Name'],
+      //                    dob:result[i]['DateofBirth']
+      //                   };
+      //     // var dateStr = JSON.parse(Data);  
+      //     //         console.log(dateStr);
+          
+      //     var date = new Date(parseInt(Data.substr(6)));  
+      //               console.log(date);
+      //               fresult.push(Data);
+      //   }
+      //   console.log(fresult)
+      //   res.send(fresult);
+      //    });
+
+      // router.post('/',(req,res)=>{      
+      //             for(var i=0;i<result.length;i++){
+      //          if(result[i]['Age']>=18){
+      //             // result.newColumn = newColumnValue;
+      //            result[i].eligible_for_voting="T" ;
+      //             // console.log(result[i]);
+      //             }
+      //             else
+      //             {
+      //               result[i].eligible_for_voting="F";
+      //               //  console.log(result[i]);
+      //             }
+      //              fresult.push(result[i]);
+      //              }
+      //              console.log(fresult);
+      //              res.send(fresult);
+      //         });
+                
+  

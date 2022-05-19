@@ -7,10 +7,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body class="bg-secondary"> 
-        <form action="/viewprodata" method="get">
+        <form action="/find" method="post">
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="searchproemp" value="p_b_e" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">project by employee</label><br>
+        <input class="form-check-input" type="radio" name="searchproemp" value="e_b_p" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">employee by project</label><br>
+        <input class="form-check-input" type="radio" name="searchproemp" value="p_b_p" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">project by projectlead</label><br>
+        <input class="form-check-input" type="radio" name="searchproemp" value="pl_b_e" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">employee by projectlead</label>
+        </div>
+        <div class="container text-center">
         <input class="form"  type="text" name="search" placeholder="Search" >
         <button class="btn btn-dark" type="submit">Search</button>
-        </form>
+        </div>
+       </form>
+        </div>
         <div>
           <br> <table class="table table-bordered">
             <thead>

@@ -11,6 +11,11 @@ require './project_updates.rb'
 require './pro_data.rb'
 require './Project_data.rb'
 require './project_delete.rb'
+require './projectupdata.rb'
+require './project_by_employee_search.rb'
+require './employee_by_project_search.rb'
+require './project_by_projectlead.rb'
+require './projectlead_by_employee.rb'
 
 get '/' do
     erb :crudemp
@@ -27,6 +32,7 @@ end
 get '/viewprodata' do
     erb :projectview, :locals=>{projdata:Proj_data.viewdata}
 end
+
 
 post '/emp_insert' do
     fullname=params['fullname']
@@ -82,19 +88,19 @@ end
 
 get '/pro_update' do
     projectid=params['id']
-    erb :project_update, :locals=>{pupdate:Projectupdate.proup(projectid)}
+    erb :project_update, :locals=>{pupdate:Projectupdate.proup(projectid),prodat:Project.fullnam}
 end
 
 post '/pro_updatenext' do
     projectid=params['projectid']
     projectname=params['projectname']
     projectlead=params['projectlead']
-    teammembers=params['teammembers']
+    team_members=params['teammembers']
     project_start_date=params['project_start_date']
     project_death_date=params['project_death_date']
     pro_up=Project_update.new()
-    pro_up.update(projectid,projectname,projectlead,teammembers,project_start_date,project_death_date)
-    redirect "/viewprodata"
+    pro_up.update(projectid,projectname,projectlead,team_members,project_start_date,project_death_date)
+    redirect "/pro_updatenext"
 end 
 
 get '/prodelete' do
@@ -103,4 +109,20 @@ get '/prodelete' do
     pro_del.delete(projectid)
     redirect "/viewprodata"
 end
-
+ 
+post '/find' do
+    search=params['search']
+    searchproemp=params['searchproemp']
+    
+    case searchproemp
+        
+    when "p_b_e"
+        erb :projectview, :locals=>{projdata:Pro_emp_search.search(search)}
+    when "e_b_p"
+        erb :employee_table, :locals=>{data:Emp_pro_search.search(search)}
+    when "p_b_p"
+        erb :projectview, :locals=>{projdata:Pro_prolead_search.search(search)}
+    when "pl_b_e"
+        erb :employee_table, :locals=>{data:Prolead_by_emp.search(search)}
+    end
+end
