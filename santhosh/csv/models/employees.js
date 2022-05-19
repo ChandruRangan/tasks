@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 let employeesschema = new mongoose.Schema({
     first_name: {
-        type: String
+        type: String,
+       
     },
     last_name: {
-        type:String
+        type: String
     }
 
 })
-module.exports = mongoose.model('employees', employeesschema);
+var CSV=mongoose.model('CSV', employeesschema,'employees');
+module.exports = {CSV}

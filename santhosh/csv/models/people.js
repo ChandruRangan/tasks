@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 let peopleschema = new mongoose.Schema({
-    name:{
-        type: String
+    name: {
+        type: String,
+        unique:true
     },
-    age:{
+    age: {
         type: Number
     },
-    eligibility_for_voting:{
+    eligibility_for_voting: {
         type: String
 
     }
 })
-module.exports = mongoose.model('people', peopleschema)
+var People = mongoose.model('People', peopleschema, 'people')
+module.exports = {People}
