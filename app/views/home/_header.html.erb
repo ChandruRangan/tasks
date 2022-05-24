@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+<div class="container-fluid">
+<%= link_to 'Posts',root_path, class:"fs-5 navbar-brand text-whit" %>
+ 
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+      <%=  link_to 'Create Post',new_post_path, class:"btn btn-warning my-2 mx-2" %>
+      </li>
+      <%if(!user_signed_in?)%>
+      <li class="nav-item">
+       
+        <%= link_to 'Sign up',new_user_registration_path, class:"btn btn-outline-danger my-2 mx-2" %>
+        
+      </li>
+      <%end%>
+      <%if(!user_signed_in?)%>
+      <li class="nav-item">
+      <%= link_to 'Sign in',new_user_session_path, class:"btn btn-outline-success mx-2 my-2" %>
+      </li>
+      <%else%>
+      <li class="nav-item">
+      <%= button_to "Sign out", destroy_user_session_path, :method => "delete",class:"nav-link btn btn-info" %>
+      </li>
+      <li class="nav-item">
+      <%= link_to 'Edit Profile',edit_user_registration_path, class:"btn btn-outline-success mx-2 my-2" %>
+      </li>
+      <%end%>
+      </ul>
+      <%if(user_signed_in?)%>
+
+      <ul class="navbar-nav ml-auto"> <li class="nav-item mx-2">Signed in as <strong><%=current_user.name%></strong>
+      Email:  <strong><%= current_user.email%></strong></li></br>
+       <li class="nav-item"></li>
+       </ul>
+
+      <%end%>
+     
+     
+    
+    </ul>
+  
+  </div>
+</div>
+</nav>

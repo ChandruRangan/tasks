@@ -1,0 +1,19 @@
+<div id="<%= dom_id post %>">
+
+  <p>
+    <strong>Post:</strong>
+    <%= post.post %>
+  </p>
+  <p>
+  Posted by
+  <%=  User.find_by_id(post.user_id).name%>
+ 
+</p>
+<div><% Comment.where(:post_id => post.id).each do |i|%> 
+    <p>"<%=i.comment%>"    commented by  <strong><%=User.find_by_id(i.user_id).name%></strong>
+   <%  %>
+    </p>
+<%end%></div>
+<p><%= render 'comment/new', post_val: post.id %>
+</p>
+</div>

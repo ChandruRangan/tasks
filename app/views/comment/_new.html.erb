@@ -1,0 +1,17 @@
+<%= form_with model: Comment.new do |form| %>
+   
+  
+    <div>
+      <%= form.label :comment, style: "display: block" %>
+     
+      
+      <%= form.text_field :comment %>
+   
+      <%= form.text_field :user_id, id: :user_id,type: :hidden,  value:current_user.id %>
+      <%= form.text_field :post_id, id: :post_id, type: :hidden,  value: post_val %>
+    </div>
+  
+    <div>
+      <%= form.submit "comment" %>
+    </div>
+  <% end %>
