@@ -1,0 +1,41 @@
+input{
+    outline: none;
+}
+.post{
+   
+ 
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    min-width: 400px;
+    
+    width: 70vw;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   
+}
+.post-par{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.input{
+    outline: none;
+    width: 130%;
+    border-radius: 5px;
+    border: 1px solid rgb(133, 130, 130);
+    background-color: rgb(220, 220, 220);
+}
+.center{
+    
+}
+.input-post{
+    outline: none;
+    width: 50vw;
+    height: 40vh;
+    border-radius: 5px;
+    border: 1px solid rgb(133, 130, 130);
+    background-color: rgb(220, 220, 220);
+}

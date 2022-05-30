@@ -1,15 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Posts</h1>
 
-<div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
+
+<div class=" post-par" id="posts">
+  <% @post.each do |post| %>
+  <div class="post-p"> <%= render post %>
+      <%= link_to "Show this post", post, class:"btn btn-info" %>  
+   </div>
   <% end %>
+<%= will_paginate @post,renderer: BootstrapPagination::Rails %>
 </div>
 
-</div>
+
 

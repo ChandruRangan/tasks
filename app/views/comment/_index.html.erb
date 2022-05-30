@@ -1,0 +1,3 @@
+<% Comment.where(:post_id => post).each do |i|%> 
+    <p>"<%=i.comment%>"    commented by  <strong><%=User.find_by_id(i.user_id).name%></strong></p>
+<%end%>

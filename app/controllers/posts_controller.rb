@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-  before_action :check_user?,only: %i[update edit destroy]
+  # before_action :check_user?,only: %i[update edit destroy]
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @post = Post.paginate(:page=>params[:page],per_page:5)
+
+
   
   end
 
@@ -28,6 +30,10 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        # user =Hash.new(:name => "saran",:email => "sraj67487@gmail.com")
+      
+        UserMailer.with(user: User.find_by(id: current_user.id)).welcome_email.deliver_later
+        
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else

@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.save
+    CommentMailer.with(comment: @comment).comment_mail.deliver_later
     redirect_to root_path
   end
 

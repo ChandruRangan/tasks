@@ -15,12 +15,12 @@
     <%= form.label :post, style: "display: block" %>
    
     
-    <%= form.text_field :post %>
+    <%= form.rich_text_area :post, class:"input-post"%>
 
     <%= form.text_field :user_id, id: :post_user_id,type: :hidden,  value:current_user.id %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "create post", class:"btn btn-info px-2 py-2 mt-5" %>
   </div>
 <% end %>

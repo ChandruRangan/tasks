@@ -1,19 +1,21 @@
-<div id="<%= dom_id post %>">
+<div  class=" post mt-5 pt-5 " id="<%= dom_id post %>">
 
-  <p>
-    <strong>Post:</strong>
-    <%= post.post %>
-  </p>
-  <p>
-  Posted by
-  <%=  User.find_by_id(post.user_id).name%>
+
+    
+
  
-</p>
-<div><% Comment.where(:post_id => post.id).each do |i|%> 
-    <p>"<%=i.comment%>"    commented by  <strong><%=User.find_by_id(i.user_id).name%></strong>
-   <%  %>
-    </p>
-<%end%></div>
-<p><%= render 'comment/new', post_val: post.id %>
+ <p class="display-4 fw-bolder text-info " ><%=  User.find_by(id: post.user_id).name%></p> 
+
+
+    
+   <p class="display-3"> <%= post.post %></p>
+
+    Posted on<span class="display-5 text-success">
+ <%= post.created_at%>
+  
+ 
+</span>
+<div class="display-6"><%= render 'comment/index', post: post.id %></div>
+<p class="text-center"><%= render 'comment/new', post_val: post.id %>
 </p>
 </div>
